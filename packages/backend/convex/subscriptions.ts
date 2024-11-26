@@ -99,7 +99,6 @@ export const getProOnboardingCheckoutUrl = action({
       customerEmail: user.email,
       productPriceId: price.polarId,
       successUrl: `${env.SITE_URL}/settings/billing`,
-      subscriptionId: user.subscription?.polarId,
     });
     return checkout.url;
   },
