@@ -24,7 +24,7 @@ const createCheckout = async ({
   subscriptionId?: string;
 }) => {
   const polar = new Polar({
-    server: "sandbox",
+    server: "production",
     accessToken: env.POLAR_ACCESS_TOKEN,
   });
   const result = await polar.checkouts.create({

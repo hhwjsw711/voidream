@@ -51,7 +51,7 @@ export default internalAction(async (ctx) => {
    * Stripe Products.
    */
   const polar = new Polar({
-    server: "sandbox",
+    server: "production",
     accessToken: env.POLAR_ACCESS_TOKEN,
   });
   const products = await polar.products.list({

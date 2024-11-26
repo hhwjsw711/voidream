@@ -192,7 +192,7 @@ export default function BillingSettings() {
           </p>
 
           <a
-            href={`https://sandbox.polar.sh/purchases/subscriptions/${user.subscription?.polarId}`}
+            href={`https://polar.sh/purchases/subscriptions/${user.subscription?.polarId}`}
             target="_blank"
             rel="noreferrer"
           >
