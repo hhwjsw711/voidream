@@ -18,8 +18,7 @@ export function FooterCTA() {
       </span>
       <p className="text-[#878787] mt-6">
         A platform where creators thrive, rights are protected, and artistic
-        value is <br />
-        truly recognized.
+        value is truly recognized.
       </p>
 
       <div className="mt-10 md:mb-8">
