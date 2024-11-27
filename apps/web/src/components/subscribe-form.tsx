@@ -12,7 +12,10 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" className="ml-auto rounded-full">
+    <Button
+      type="submit"
+      className="absolute right-2 h-7 bg-primary top-2 px-4 font-medium text-sm z-10 text-primary-foreground"
+    >
       {pending ? <Icons.Loader className="size-4" /> : "Subscribe"}
     </Button>
   );
@@ -50,7 +53,6 @@ export function SubscribeForm({ group, placeholder, className }: Props) {
           </div>
         ) : (
           <form
-            className="flex flex-col gap-4"
             action={async (formData) => {
               setSubmitted(true);
               await subscribe({
@@ -63,18 +65,20 @@ export function SubscribeForm({ group, placeholder, className }: Props) {
               }, 5000);
             }}
           >
-            <Input
-              placeholder={placeholder}
-              type="email"
-              name="email"
-              id="email"
-              autoComplete="email"
-              aria-label="Email address"
-              required
-              className={className}
-            />
+            <fieldset className="relative">
+              <Input
+                placeholder={placeholder}
+                type="email"
+                name="email"
+                id="email"
+                autoComplete="email"
+                aria-label="Email address"
+                required
+                className={className}
+              />
 
-            <SubmitButton />
+              <SubmitButton />
+            </fieldset>
           </form>
         )}
       </div>

@@ -14,11 +14,12 @@ export function FooterCTA() {
   return (
     <div className="border border-border md:container text-center px-10 py-14 mx-4 md:mx-auto md:px-24 md:py-20 mb-32 mt-24 flex items-center flex-col bg-[#F2F1EF] dark:bg-[#121212]">
       <span className="text-6xl	md:text-8xl font-medium text-primary dark:text-white">
-        Stress free by midday.
+        Empowering true artistry.
       </span>
       <p className="text-[#878787] mt-6">
-        Invoicing, Time tracking, File reconciliation, Storage, Financial
-        Overview & your own <br /> Assistant.
+        A platform where creators thrive, rights are protected, and artistic
+        value is <br />
+        truly recognized.
       </p>
 
       <div className="mt-10 md:mb-8">

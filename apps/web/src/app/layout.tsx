@@ -18,9 +18,9 @@ const DepartureMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://voidream.com"),
-  title: "Voidream | Run your business smarter",
+  title: "Voidream | Where Culture Thrives, Brilliance Follows",
   description:
-    "Voidream provides you with greater insight into your business and automates the boring tasks, allowing you to focus on what you love to do instead.",
+    "Voidream empowers creators by providing a platform where tool makers and artists collaborate, ensuring authentic artistic expression and fair compensation for creative work.",
 };
 
 export default function RootLayout({
