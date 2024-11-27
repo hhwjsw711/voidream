@@ -21,5 +21,8 @@ export default {
         },
       },
     },
+    container: {
+      center: true,
+    },
   },
 } satisfies Config;

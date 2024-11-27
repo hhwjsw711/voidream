@@ -1,5 +1,6 @@
 import "@v1/ui/globals.css";
 import { Footer } from "@/components/footer";
+import { FooterCTA } from "@/components/footer-cta";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Provider as AnalyticsProvider } from "@v1/analytics/client";
@@ -43,7 +44,10 @@ export default function RootLayout({
         >
           <ConvexClientProvider>
             <Header />
-            {children}
+            <main className="container mx-auto px-4 overflow-hidden md:overflow-visible">
+              {children}
+            </main>
+            <FooterCTA />
             <Footer />
           </ConvexClientProvider>
 
