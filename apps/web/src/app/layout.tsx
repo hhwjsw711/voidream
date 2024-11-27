@@ -1,6 +1,7 @@
 import "@v1/ui/globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Provider as AnalyticsProvider } from "@v1/analytics/client";
 import { cn } from "@v1/ui/utils";
 import { GeistMono } from "geist/font/mono";
@@ -15,10 +16,10 @@ const DepartureMono = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://v1-convex.vercel.app"),
-  title: "Create v1",
+  metadataBase: new URL("https://voidream.com"),
+  title: "Voidream | Run your business smarter",
   description:
-    "A free, open-source starter kit for your next project, built with insights from Midday.",
+    "Voidream provides you with greater insight into your business and automates the boring tasks, allowing you to focus on what you love to do instead.",
 };
 
 export default function RootLayout({
@@ -31,16 +32,23 @@ export default function RootLayout({
       <body
         className={cn(
           `${DepartureMono.variable} ${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased dark",
+          "bg-[#fbfbfb] dark:bg-[#0C0C0C] overflow-x-hidden antialiased",
         )}
       >
-        <ConvexClientProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ConvexClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ConvexClientProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ConvexClientProvider>
 
-        <AnalyticsProvider />
+          <AnalyticsProvider />
+        </ThemeProvider>
       </body>
     </html>
   );
