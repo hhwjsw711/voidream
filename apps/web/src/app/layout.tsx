@@ -47,7 +47,7 @@ export default function RootLayout({
             <main className="container mx-auto px-4 overflow-hidden md:overflow-visible">
               {children}
             </main>
-            <FooterCTA />
+            {/* <FooterCTA /> */}
             <Footer />
           </ConvexClientProvider>
 
