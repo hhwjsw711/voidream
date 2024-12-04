@@ -1,5 +1,6 @@
 "use client";
 
+import { useScopedI18n } from "@/locales/client";
 import { Avatar } from "@v1/ui/avatar";
 import { AvatarImageNext } from "@v1/ui/avatar";
 import { Button } from "@v1/ui/button";
@@ -13,192 +14,6 @@ import {
 import { Icons } from "@v1/ui/icons";
 import { useRef, useState } from "react";
 import { type Story, StoryCard } from "./story-card";
-
-const stories = [
-  {
-    id: 1,
-    title: "“We are now saving 1-2 man-days each month.”",
-    description:
-      "Due to improved invoice reconciliation, we are now saving 1-2 man-days each month, and we have a better understanding of our finances thanks to dashboards.",
-    name: "Paweł Michalski ",
-    company: "VC leaders",
-    country: "Poland",
-    src: "/stories/pawel.jpeg",
-    content: [
-      {
-        type: "heading",
-        content:
-          "VCLeaders is an educational platform for venture capitalists that helps them build better VC firms.  ",
-      },
-      {
-        type: "question",
-        content:
-          "What specific challenges were you facing in managing your business operations before using Midday?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "We are a small, remote-first team. Each month, we face challenges when reconciling our invoices. We often struggle to track down missing invoices and ensure all payments are accounted for correctly. This manual process takes more than a full day of someone's time and can take even longer if we overlook anything. Not to mention, we didn’t have any time to categorize and analyze our spending properly.",
-      },
-      {
-        type: "question",
-        content:
-          "How has Midday impacted your workflow or productivity since you started using it? Can you share specific examples or metrics?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Due to improved invoice reconciliation, we are now saving 1-2 man-days each month, and we have a better understanding of our finances thanks to dashboards.",
-      },
-      {
-        type: "question",
-        content:
-          "What features or aspects of Midday AI do you find most valuable, and why?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "This tool provides me with a clear overview of my finances, including accounts payable. The user interface is also clean, and the user experience is fantastic. Now, I can easily track all the invoices I receive and issue each month.",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title:
-      "“Without Midday I would’ve sold my company and lost loads of money”",
-    name: "Guy Solan",
-    company: "Thetis Medical",
-    country: "United Kingdom",
-    src: "/stories/guy.jpeg",
-    video: "/video.mp4",
-    content: [
-      {
-        type: "paragraph",
-        content:
-          "”Without Midday I would’ve sold my company and lost loads of money. I never had the time to learn Quickbooks or Xero so had no idea what the company cash was doing without ringing up my accountant.”",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "“It has completely transformed how I manage my day-to-day tasks”",
-    description:
-      "From generating invoices to tracking projects and having all the information centralized in one place, the change has been remarkable.",
-    name: "Facu Montanaro",
-    company: "Kundo Studio",
-    country: "Argentina",
-    src: "/stories/facu.jpeg",
-    content: [
-      {
-        type: "heading",
-        content:
-          "At Kundo, I work alongside a talented team to empower clients in achieving successful fundraising, launching impactful products, and driving growth through design and meaningful experiences.",
-      },
-      {
-        type: "paragraph",
-        content:
-          "I’m Facu Montanaro, a freelance visual designer from Argentina, focused on crafting beautiful websites and interfaces. I collaborate with startups, founders, and companies to help them thrive.",
-      },
-      {
-        type: "question",
-        content:
-          "What specific challenges were you facing in managing your business operations before using Midday?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Above all, I struggled to find a way to manage everything in one place to make the workflow easier, faster, and simpler. At the same time, none of the tools I had tried seemed to address the core issue, which was finding a direct, straightforward, and user-friendly solution.",
-      },
-      {
-        type: "question",
-        content:
-          "How has Midday impacted your workflow or productivity since you started using it? Can you share specific examples or metrics?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "I can’t share specific metrics yet, but it has completely transformed how I manage my day-to-day tasks. From generating invoices to tracking projects and having all the information centralized in one place, the change has been remarkable.",
-      },
-      {
-        type: "question",
-        content:
-          "What features or aspects of Midday AI do you find most valuable, and why?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Invoices, Proposals, and Track—these three features have been game-changers for me. They’ve significantly improved my daily operations. I’m looking forward to seeing some of the features I suggested implemented, like adding collaborators, but having Midday integrated into my workflow as one of my go-to apps has already been a great experience.",
-      },
-    ],
-  },
-  {
-    id: 4,
-    title:
-      "“I prefer to have one tool for finances, similar to what Deel is for HR”",
-    description:
-      "Midday helped me find a compromise with my tax advisor: I'm not using one of his supported clunky tools but an actually UX-friendly tool and can provide him with acceptable .csv. That's a big one!",
-    name: "Richard Poelderl",
-    company: "Conduct.bln",
-    country: "Germany",
-    src: "/stories/richard.jpeg",
-    content: [
-      {
-        type: "heading",
-        content:
-          "Businesses typically hire me because they want to focus their product development resources on the product rather than marketing. I can offer the growth/marketing with engineering as I understand both worlds",
-      },
-      {
-        type: "question",
-        content:
-          "What specific challenges were you facing in managing your business operations before using Midday?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "My preferred accounting app (that let's me submit my tax reports) didn't support my bank. And the account app's data exports required additional formatting.",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Moreover, I moved from the invoicing feature of my business bank to Midday. Not really a big challenge, but Midday makes that just a bit easier (and I prefer to have one tool for finances, similar to what Deel is for HR).",
-      },
-      {
-        type: "question",
-        content:
-          "How has Midday impacted your workflow or productivity since you started using it? Can you share specific examples or metrics?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "The invoice feature took a bit of work to setup as I used one of the earlier versions. But it's nice that it let's me edit almost any field (except for the number formats — I'm sure when you read this, that's included as well).",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Also, it helped me find a compromise with my tax advisor: I'm not using one of his supported clunky tools but an actually UX-friendly tool and can provide him with acceptable .csv formats so that he imports the data into his accounting software. That's a big one! It's not perfect for my tax advisor, but it makes my life much easier.",
-      },
-      {
-        type: "question",
-        content:
-          "What features or aspects of Midday AI do you find most valuable, and why?",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Invoicing - to issue invoices for clients who can't pay 4+ figure sums with a credit card.",
-      },
-      {
-        type: "paragraph",
-        content: "CSV Exports - to share with tax advisor.",
-      },
-      {
-        type: "paragraph",
-        content:
-          "Bank sync - to get an overview of my subscriptions for accounting.",
-      },
-    ],
-  },
-];
 
 function Video({ src }: { src: string }) {
   const playerRef = useRef<HTMLVideoElement>(null);
@@ -257,14 +72,150 @@ function Video({ src }: { src: string }) {
 }
 
 export default function SectionStories() {
+  const t = useScopedI18n("website.stories");
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+
+  const stories = [
+    {
+      id: 1,
+      title: t("story1.title"),
+      description: t("story1.description"),
+      name: "Paweł Michalski ",
+      company: "VC leaders",
+      country: "Poland",
+      src: "/stories/pawel.jpeg",
+      content: [
+        {
+          type: "heading",
+          content: t("story1.heading"),
+        },
+        {
+          type: "question",
+          content: t("story1.question1"),
+        },
+        {
+          type: "paragraph",
+          content: t("story1.answer1"),
+        },
+        {
+          type: "question",
+          content: t("story1.question2"),
+        },
+        {
+          type: "paragraph",
+          content: t("story1.answer2"),
+        },
+        {
+          type: "question",
+          content: t("story1.question3"),
+        },
+        {
+          type: "paragraph",
+          content: t("story1.answer3"),
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: t("story2.title"),
+      name: "Guy Solan",
+      company: "Thetis Medical",
+      country: "United Kingdom",
+      src: "/stories/guy.jpeg",
+      video: "/video.mp4",
+      content: [
+        {
+          type: "paragraph",
+          content: t("story2.description"),
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: t("story3.title"),
+      description: t("story3.description"),
+      name: "Facu Montanaro",
+      company: "Kundo Studio",
+      country: "Argentina",
+      src: "/stories/facu.jpeg",
+      content: [
+        {
+          type: "heading",
+          content: t("story3.heading"),
+        },
+        {
+          type: "question",
+          content: t("story3.question1"),
+        },
+        {
+          type: "paragraph",
+          content: t("story3.answer1"),
+        },
+        {
+          type: "question",
+          content: t("story3.question2"),
+        },
+        {
+          type: "paragraph",
+          content: t("story3.answer2"),
+        },
+        {
+          type: "question",
+          content: t("story3.question3"),
+        },
+        {
+          type: "paragraph",
+          content: t("story3.answer3"),
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: t("story4.title"),
+      description: t("story4.description"),
+      name: "Richard Poelderl",
+      company: "Conduct.bln",
+      country: "Germany",
+      src: "/stories/richard.jpeg",
+      content: [
+        {
+          type: "heading",
+          content: t("story4.heading"),
+        },
+        {
+          type: "question",
+          content: t("story4.question1"),
+        },
+        {
+          type: "paragraph",
+          content: t("story4.answer1"),
+        },
+        {
+          type: "question",
+          content: t("story4.question2"),
+        },
+        {
+          type: "paragraph",
+          content: t("story4.answer2"),
+        },
+        {
+          type: "paragraph",
+          content: t("story4.question3"),
+        },
+        {
+          type: "question",
+          content: t("story4.answer3"),
+        },
+      ],
+    },
+  ];
 
   return (
     <Dialog>
       <div className="relative mt-20 pb-20">
         <div className="w-full h-full flex items-center flex-col z-10 relative">
           <h2 className="text-[56px] text-center font-medium mt-12">
-            What our users say
+            {t("title")}
           </h2>
           <div className="flex mt-20 -space-x-4">
             {stories.map((story, index) => (
