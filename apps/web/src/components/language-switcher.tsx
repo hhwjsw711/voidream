@@ -15,8 +15,8 @@ export function LanguageSwitcher() {
 
   const langs = [
     { text: "English", value: "en" },
-    { text: "French", value: "fr" },
-    { text: "Spanish", value: "es" },
+    { text: "Français", value: "fr" },
+    { text: "Español", value: "es" },
     { text: "中文", value: "zh" },
   ];
   const formatLanguage = (lng: string) => {
@@ -25,18 +25,20 @@ export function LanguageSwitcher() {
 
   return (
     <Select value={locale} onValueChange={changeLocale}>
-      <SelectTrigger className="h-6 rounded border-primary/20 bg-secondary !px-2 hover:border-primary/40">
-        <div className="flex items-start gap-2">
-          <Languages className="h-[14px] w-[14px]" />
-          <span className="text-xs font-medium">{formatLanguage(locale)}</span>
+      <SelectTrigger className="h-8 w-[140px] rounded-md border-primary/20 bg-secondary px-3 hover:border-primary/40 hover:bg-accent">
+        <div className="flex items-center gap-2">
+          <Languages className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium truncate">
+            {formatLanguage(locale)}
+          </span>
         </div>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="min-w-[140px]">
         {langs.map(({ text, value }) => (
           <SelectItem
             key={value}
             value={value}
-            className="text-sm font-medium text-primary/60"
+            className="text-sm font-medium text-primary/60 hover:bg-accent hover:text-accent-foreground cursor-pointer"
           >
             {text}
           </SelectItem>
