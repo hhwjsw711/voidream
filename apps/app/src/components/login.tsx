@@ -1,5 +1,6 @@
 import { getI18n } from "@/locales/server";
 import Link from "next/link";
+import { GithubSignin } from "./github-signin";
 import { GoogleSignin } from "./google-signin";
 
 export default async function Login() {
@@ -12,7 +13,7 @@ export default async function Login() {
         <p className="text-secondary">{t("login.description")}</p>
         <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto mt-4">
           <div className="w-full sm:w-auto">
-            <GoogleSignin />
+            <GithubSignin />
           </div>
           <div className="w-full sm:w-auto">
             <GoogleSignin />
