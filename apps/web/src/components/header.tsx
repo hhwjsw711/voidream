@@ -1,79 +1,48 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@v1/ui/dialog";
-import Image from "next/image";
+import { useI18n } from "@/locales/client";
+import { Logo } from "@v1/ui/logo";
+import { cn } from "@v1/ui/utils";
 import Link from "next/link";
-import { SubscribeForm } from "./subscribe-form";
+import { usePathname } from "next/navigation";
+import { ChangeLanguage } from "./change-language";
 
 export function Header() {
+  const t = useI18n();
+  const pathname = usePathname();
+
+  const links = [
+    { href: "/pricing", label: t("header.pricing") },
+    {
+      href: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+      label: t("header.signIn"),
+    },
+  ];
+
   return (
-    <header className="absolute top-0 w-full flex items-center justify-between p-4 z-10">
-      <span className="hidden md:block text-sm font-medium">convex-v1.run</span>
+    <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg">
+      <div className="flex items-center justify-between container mx-auto py-4">
+        <Link href="/" className="block">
+          <Logo />
+        </Link>
 
-      <Link href="/">
-        <Image
-          src="/logo.png"
-          alt="V1 logo"
-          width={60}
-          quality={100}
-          height={60}
-          className="md:absolute md:left-1/2 md:top-5 md:-translate-x-1/2"
-        />
-      </Link>
+        <div className="flex items-center gap-6 text-sm">
+          <ChangeLanguage />
 
-      <nav className="md:mt-2">
-        <ul className="flex items-center gap-4">
-          <li>
-            <a
-              href={process.env.NEXT_PUBLIC_APP_URL}
-              className="text-sm px-4 py-2 bg-primary text-secondary rounded-full font-medium"
+          {links.map((link) => (
+            <Link
+              href={link.href!}
+              className={cn(
+                "text-secondary hover:text-primary transition-colors hidden md:block",
+                pathname?.endsWith(link.href) && "text-primary",
+              )}
+              key={link.href}
             >
-              Sign in
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://github.com/get-convex/v1"
-              className="text-sm px-4 py-2 bg-primary text-secondary rounded-full font-medium"
-            >
-              Github
-            </a>
-          </li>
-          <li>
-            <Dialog>
-              <DialogTrigger
-                className="text-sm px-4 py-2 bg-secondary text-primary rounded-full font-medium cursor-pointer"
-                asChild
-              >
-                <span>Get updates</span>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Stay updated</DialogTitle>
-                  <DialogDescription>
-                    Subscribe to our newsletter to get the latest news and
-                    updates.
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className="flex flex-col gap-4">
-                  <SubscribeForm
-                    group="v1-newsletter"
-                    placeholder="Email address"
-                  />
-                </div>
-              </DialogContent>
-            </Dialog>
-          </li>
-        </ul>
-      </nav>
-    </header>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
-import "@v1/ui/globals.css";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
+import "../globals.css";
+import { I18nProviderClient } from "@/locales/client";
 import { Provider as AnalyticsProvider } from "@v1/analytics/client";
 import { cn } from "@v1/ui/utils";
 import { GeistMono } from "geist/font/mono";
@@ -10,37 +9,40 @@ import localFont from "next/font/local";
 import { ConvexClientProvider } from "./convex-client-provider";
 
 const DepartureMono = localFont({
-  src: "../fonts/DepartureMono-Regular.woff2",
+  src: "../../fonts/DepartureMono-Regular.woff2",
   variable: "--font-departure-mono",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://v1-convex.vercel.app"),
-  title: "Create v1",
+  title: "Voidream",
   description:
-    "A free, open-source starter kit for your next project, built with insights from Midday.",
+    "Transform your ideas into captivating content without needing a subscription. Pay only for the videos you create.",
 };
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang={params.locale}
+      className="dark bg-noise bg-background"
+      suppressHydrationWarning
+    >
       <body
         className={cn(
           `${DepartureMono.variable} ${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased dark",
+          "antialiased",
         )}
       >
-        <ConvexClientProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ConvexClientProvider>
+        <I18nProviderClient locale={params.locale}>
+          <ConvexClientProvider>{children}</ConvexClientProvider>
 
-        <AnalyticsProvider />
+          <AnalyticsProvider />
+        </I18nProviderClient>
       </body>
     </html>
   );
