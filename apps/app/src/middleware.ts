@@ -5,7 +5,6 @@ import {
   nextjsMiddlewareRedirect,
 } from "@convex-dev/auth/nextjs/server";
 import { createI18nMiddleware } from "next-international/middleware";
-import { type NextRequest, NextResponse } from "next/server";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: [
@@ -33,27 +32,19 @@ const I18nMiddleware = createI18nMiddleware({
 
 const isSignInPage = createRouteMatcher(["/login"]);
 
-export async function middleware(request: NextRequest) {
-  const i18nResponse = await I18nMiddleware(request);
-
-  if (isSignInPage(request)) {
-    if (!isAuthenticatedNextjs()) {
-      return i18nResponse;
-    }
-    if (isAuthenticatedNextjs()) {
-      return nextjsMiddlewareRedirect(request, "/");
-    }
+export default convexAuthNextjsMiddleware((request) => {
+  if (isSignInPage(request) && isAuthenticatedNextjs()) {
+    return nextjsMiddlewareRedirect(request, "/");
   }
-
-  if (!isAuthenticatedNextjs()) {
+  if (!isSignInPage(request) && !isAuthenticatedNextjs()) {
     const url = request.nextUrl.pathname;
     if (!url.includes("/login")) {
       return nextjsMiddlewareRedirect(request, "/login");
     }
   }
 
-  return i18nResponse;
-}
+  return I18nMiddleware(request);
+});
 
 export const config = {
   matcher: [

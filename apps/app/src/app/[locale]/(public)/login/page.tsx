@@ -1,5 +1,5 @@
 import { ChangeLanguage } from "@/components/change-language";
-import { GoogleSignin } from "@/components/google-signin";
+import Login from "@/components/login";
 import { StackedCode } from "@/components/stacked-code";
 import { getI18n } from "@/locales/server";
 import { Logo } from "@v1/ui/logo";
@@ -21,7 +21,7 @@ export default async function Page() {
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       <div className="absolute top-6 left-6 mt-[1px] z-10">
-        <Link href="/">
+        <Link href="https://voidream.com">
           <Logo />
         </Link>
       </div>
@@ -44,7 +44,7 @@ export default async function Page() {
           <ChangeLanguage />
         </div>
 
-        <GoogleSignin />
+        <Login />
       </div>
     </div>
   );
