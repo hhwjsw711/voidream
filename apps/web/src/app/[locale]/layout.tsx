@@ -39,11 +39,13 @@ export default function RootLayout({
           "antialiased",
         )}
       >
-        <I18nProviderClient locale={params.locale}>
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+        <ConvexClientProvider>
+          <I18nProviderClient locale={params.locale}>
+            {children}
+          </I18nProviderClient>
+        </ConvexClientProvider>
 
-          <AnalyticsProvider />
-        </I18nProviderClient>
+        <AnalyticsProvider />
       </body>
     </html>
   );
