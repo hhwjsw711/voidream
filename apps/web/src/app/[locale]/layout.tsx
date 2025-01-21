@@ -14,6 +14,7 @@ const DepartureMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://voidream.com"),
   title: "Voidream",
   description:
     "Transform your ideas into captivating content without needing a subscription. Pay only for the videos you create.",
