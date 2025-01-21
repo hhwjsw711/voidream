@@ -14,7 +14,7 @@ export function Header() {
   const links = [
     { href: "/pricing", label: t("header.pricing") },
     {
-      href: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+      href: "https://app.voidream.com",
       label: t("header.signIn"),
     },
   ];
