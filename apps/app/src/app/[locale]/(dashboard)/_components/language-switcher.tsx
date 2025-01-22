@@ -15,8 +15,22 @@ export function LanguageSwitcher() {
 
   const langs = [
     { text: "English", value: "en" },
-    { text: "French", value: "fr" },
-    { text: "Spanish", value: "es" },
+    { text: "Français", value: "fr" },
+    { text: "Español", value: "es" },
+    { text: "Svenska", value: "sv" },
+    { text: "Deutsch", value: "de" },
+    { text: "Suomi", value: "fi" },
+    { text: "Português", value: "pt" },
+    { text: "日本語", value: "ja" },
+    { text: "中文", value: "zh" },
+    { text: "한국어", value: "ko" },
+    { text: "Norsk", value: "no" },
+    { text: "Italiano", value: "it" },
+    { text: "العربية", value: "ar" },
+    { text: "Nederlands", value: "nl" },
+    { text: "Polski", value: "pl" },
+    { text: "Türkçe", value: "tr" },
+    { text: "Tiếng Việt", value: "vi" },
   ];
   const formatLanguage = (lng: string) => {
     return langs.find((lang) => lang.value === lng)?.text;

@@ -1,20 +1,27 @@
-import { Header } from "@/app/[locale]/(dashboard)/_components/header";
 import { getScopedI18n } from "@/locales/server";
+import { Plus } from "lucide-react";
+import { StepIndicator } from "./_components/step-indicator";
 
 export const metadata = {
-  title: "Home",
+  title: "Dashboard | Voidream",
 };
-
-import { buttonVariants } from "@v1/ui/button";
-import { cn } from "@v1/ui/utils";
-import { ExternalLink, Plus } from "lucide-react";
 
 export default async function Page() {
   const t = await getScopedI18n("dashboard");
+  const steps = [
+    { number: 1, text: "Select Mode" },
+    { number: 2, text: "Prompt" },
+    { number: 3, text: "Refine" },
+  ];
+  const currentStep = 2;
 
   return (
     <>
-      <Header title={t("title")} description={t("description")} />
+      <StepIndicator
+        steps={steps}
+        currentStep={currentStep}
+        className="mt-16"
+      />
       <div className="flex h-full w-full bg-secondary px-6 py-8 dark:bg-black">
         <div className="z-10 mx-auto flex h-full w-full max-w-screen-xl gap-12">
           <div className="flex w-full flex-col rounded-lg border border-border bg-card dark:bg-black">
@@ -44,25 +51,7 @@ export default async function Page() {
                     <p className="text-center text-base font-normal text-primary/60">
                       {t("description")}
                     </p>
-                    <span className="hidden select-none items-center rounded-full bg-green-500/5 px-3 py-1 text-xs font-medium tracking-tight text-green-700 ring-1 ring-inset ring-green-600/20 backdrop-blur-md dark:bg-green-900/40 dark:text-green-100 md:flex">
-                      {t("bodyTip")}
-                    </span>
                   </div>
-                </div>
-                <div className="z-10 flex items-center justify-center">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href="https://github.com/get-convex/v1/tree/main/docs"
-                    className={cn(
-                      `${buttonVariants({ variant: "ghost", size: "sm" })} gap-2`,
-                    )}
-                  >
-                    <span className="text-sm font-medium text-primary/60 group-hover:text-primary">
-                      {t("documentationLink")}
-                    </span>
-                    <ExternalLink className="h-4 w-4 stroke-[1.5px] text-primary/60 group-hover:text-primary" />
-                  </a>
                 </div>
                 <div className="base-grid absolute h-full w-full opacity-40" />
                 <div className="absolute bottom-0 h-full w-full bg-gradient-to-t from-[hsl(var(--card))] to-transparent" />
