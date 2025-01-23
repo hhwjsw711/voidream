@@ -11,9 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "convex": "^1.18.2",
     "convex-helpers": "^0.1.63",
+    "jimp": "^1.6.0",
     "openai": "^4.61.1",
+    "replicate": "^1.0.1",
     "standardwebhooks": "^1.0.0"
   }
 }

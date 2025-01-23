@@ -1,5 +1,6 @@
 import { convexAuthNextjsToken } from "@convex-dev/auth/nextjs/server";
 import { api } from "@v1/backend/convex/_generated/api";
+import { Toaster } from "@v1/ui/toaster";
 import { preloadQuery } from "convex/nextjs";
 import { Navigation } from "./_components/navigation";
 
@@ -15,6 +16,7 @@ export default async function Layout({
     <div className="flex min-h-[100vh] w-full flex-col bg-secondary dark:bg-black">
       <Navigation preloadedUser={preloadedUser} />
       {children}
+      <Toaster />
     </div>
   );
 }
