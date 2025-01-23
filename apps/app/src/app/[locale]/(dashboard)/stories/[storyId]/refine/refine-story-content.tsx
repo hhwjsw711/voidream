@@ -15,6 +15,7 @@ import { Input } from "@v1/ui/input";
 import { toast } from "@v1/ui/use-toast";
 import { cn } from "@v1/ui/utils";
 import { useMutation, useQuery } from "convex/react";
+import { Monitor, Smartphone } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -22,6 +23,12 @@ enum DialogType {
   None = 0,
   Refine = 1,
   GenerateSegments = 2,
+}
+
+interface VideoInfo {
+  length: string;
+  wordCount: number;
+  characterCount: number;
 }
 
 function debounce<T extends (...args: any[]) => any>(
@@ -48,55 +55,79 @@ function debounce<T extends (...args: any[]) => any>(
   return debounced as T & { cancel: () => void };
 }
 
-function countWordsAndCharacters(text: string): {
-  wordCount: number;
-  characterCount: number;
-} {
-  const words = text.match(/[\u4e00-\u9fa5]|\b[a-z0-9']+\b/gi) || [];
-  const characterCount = text.trim().length;
-  return { wordCount: words.length, characterCount };
+export function countWordsAndCharacters(text: string) {
+  // 匹配英文单词（包括带撇号的单词、数字）
+  const englishWords =
+    text.match(/\b[A-Za-z0-9]+(?:[''][A-Za-z0-9]+)*\b/g) || [];
+
+  // 匹配中文字符
+  const chineseChars = text.match(/[\u4e00-\u9fa5]/g) || [];
+
+  // 计算字符数（包含字母、数字、标点符号，但不包含空格和换行符）
+  const cleanText = text.replace(/\s+/g, ""); // 只移除空白字符（空格、换行符、制表符等）
+
+  return {
+    wordCount: englishWords.length + chineseChars.length,
+    characterCount: cleanText.length,
+    englishWords,
+    chineseChars,
+  };
 }
 
-function estimateVideoLength(text: string): {
-  length: string;
-  wordCount: number;
-  characterCount: number;
-} {
-  const { wordCount, characterCount } = countWordsAndCharacters(text);
+export function estimateVideoLength(text: string): VideoInfo {
+  const { wordCount, characterCount, englishWords, chineseChars } =
+    countWordsAndCharacters(text);
 
-  const wordsPerMinute: { [key: string]: number } = {
+  const SPEEDS = {
     en: 150,
     zh: 200,
-    default: 150,
   };
 
-  function detectLanguage(word: string): string {
-    if (/[\u4e00-\u9fa5]/.test(word)) return "zh";
-    return "en";
-  }
+  const englishTime = englishWords.length / SPEEDS.en;
+  const chineseTime = chineseChars.length / SPEEDS.zh;
+  const totalMinutes = englishTime + chineseTime;
 
-  let totalTime = 0;
-  const words = text.match(/[\u4e00-\u9fa5]|\b[a-z0-9']+\b/gi) || [];
-  words.forEach((word) => {
-    const lang = detectLanguage(word);
-    totalTime += 1 / wordsPerMinute[lang];
-  });
+  return {
+    ...formatDuration(totalMinutes, wordCount),
+    characterCount,
+  };
+}
 
-  const minutes = totalTime;
-
-  let length: string;
+function formatDuration(minutes: number, wordCount: number) {
   if (minutes < 1) {
     const seconds = Math.round(minutes * 60);
-    length = `${seconds} second${seconds !== 1 ? "s" : ""}`;
-  } else if (minutes < 60) {
-    length = `${minutes.toFixed(1)} minute${minutes !== 1 ? "s" : ""}`;
-  } else {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = Math.round(minutes % 60);
-    length = `${hours} hour${hours !== 1 ? "s" : ""} ${remainingMinutes} minute${remainingMinutes !== 1 ? "s" : ""}`;
+    return {
+      length: `${seconds} second${seconds !== 1 ? "s" : ""}`,
+      wordCount,
+    };
   }
 
-  return { length, wordCount, characterCount };
+  if (minutes < 60) {
+    const roundedMinutes = Number(minutes.toFixed(1));
+    return {
+      length: `${roundedMinutes} minute${roundedMinutes !== 1 ? "s" : ""}`,
+      wordCount,
+    };
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = Math.round(minutes % 60);
+  return {
+    length: `${hours} hour${hours !== 1 ? "s" : ""} ${remainingMinutes} minute${
+      remainingMinutes !== 1 ? "s" : ""
+    }`,
+    wordCount,
+  };
+}
+
+export function calculateSegmentCredits(text: string): number {
+  const { characterCount } = countWordsAndCharacters(text);
+
+  // 每 15 个字符消耗 1 积分
+  const CHARS_PER_CREDIT = 15;
+
+  // 向上取整，确保最少 1 积分
+  return Math.max(Math.ceil(characterCount / CHARS_PER_CREDIT), 1);
 }
 
 export function RefineStoryContent() {
@@ -130,17 +161,19 @@ export function RefineStoryContent() {
       });
 
       toast({
-        title: "开始优化故事",
-        description: "正在根据您的指令优化故事内容，请稍候...",
+        title: "Starting Story Refinement",
+        description:
+          "Optimizing story content based on your instructions, please wait...",
       });
 
       setOpenDialog(DialogType.None);
-      setInstructions(""); // 清空输入
+      setInstructions("");
     } catch (error) {
-      console.error("优化失败:", error);
+      console.error("Refinement failed:", error);
       toast({
-        title: "优化失败",
-        description: error instanceof Error ? error.message : "请稍后重试",
+        title: "Refinement Failed",
+        description:
+          error instanceof Error ? error.message : "Please try again later",
         variant: "destructive",
       });
     } finally {
@@ -180,13 +213,13 @@ export function RefineStoryContent() {
     lastStatus.current = story?.status;
   }, [story?.status, story?.script]);
 
-  const {
-    length: estimatedVideoLength,
-    wordCount,
-    characterCount,
-  } = estimateVideoLength(story?.script || "");
+  const videoInfo = story?.script
+    ? estimateVideoLength(story.script)
+    : { length: "0 seconds", wordCount: 0, characterCount: 0 };
 
-  const estimatedCredits = Math.ceil(wordCount / 100);
+  const estimatedCredits = story?.script
+    ? calculateSegmentCredits(story.script)
+    : 1;
 
   const handleGenerateSegments = useCallback(async () => {
     if (!story) return;
@@ -237,9 +270,9 @@ export function RefineStoryContent() {
         </div>
         <div className="flex justify-between text-sm text-gray-600 mb-4">
           <span>
-            {wordCount} words / {characterCount} characters
+            {videoInfo.wordCount} words / {videoInfo.characterCount} characters
           </span>
-          <span>Estimated video length: {estimatedVideoLength}</span>
+          <span>Estimated video length: {videoInfo.length}</span>
         </div>
         {isUnsaved && (
           <p className="text-sm text-gray-500 mt-2">Unsaved changes</p>
@@ -316,7 +349,7 @@ export function RefineStoryContent() {
           {openDialog === DialogType.GenerateSegments && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-md font-bold text-gray-900 mb-8">
+                <DialogTitle className="text-md font-bold text-gray-900 mb-4">
                   Choose Video Orientation
                 </DialogTitle>
                 <DialogDescription className="text-gray-900 space-y-2">
@@ -337,25 +370,27 @@ export function RefineStoryContent() {
               <div className="flex justify-between space-x-4 mt-4">
                 <Button
                   className={cn(
-                    "flex-1 px-4 py-2 rounded transition-colors",
+                    "flex-1 px-4 py-2 rounded transition-colors flex items-center justify-center gap-3",
                     isVertical
                       ? "text-white bg-blue-600 hover:bg-blue-700"
                       : "text-gray-900 bg-gray-200 hover:bg-gray-300",
                   )}
                   onClick={() => setIsVertical(true)}
                 >
-                  Vertical
+                  <Smartphone className="h-5 w-5" />
+                  <span>Vertical</span>
                 </Button>
                 <Button
                   className={cn(
-                    "flex-1 px-4 py-2 rounded transition-colors",
+                    "flex-1 px-4 py-2 rounded transition-colors flex items-center justify-center gap-3",
                     isVertical
                       ? "text-gray-900 bg-gray-200 hover:bg-gray-300"
                       : "text-white bg-blue-600 hover:bg-blue-700",
                   )}
                   onClick={() => setIsVertical(false)}
                 >
-                  Horizontal
+                  <Monitor className="h-5 w-5" />
+                  <span>Horizontal</span>
                 </Button>
               </div>
               <DialogFooter className="mt-8">

@@ -86,7 +86,7 @@ The topic of the script should match a title called: ${form.getValues("title")}`
               onClick={fillYTShortTemplate}
               className="text-sm bg-gray-100"
             >
-              短视频（60秒）
+              YT Short (60 seconds)
             </Button>
           </div>
         </h3>

@@ -141,11 +141,20 @@ export const generateSegmentsMutation = mutation({
       const story = accessObj.story;
       console.log(`Story found: ${story.title}`);
 
+      const CHARS_PER_CREDIT = 15;
+      const characterCount = story.script.length;
+      const requiredCredits = Math.max(
+        Math.ceil(characterCount / CHARS_PER_CREDIT),
+        1,
+      );
+
       console.log(`Updating story with isVertical: ${isVertical}`);
       await ctx.db.patch(storyId, { isVertical });
 
-      console.log("Consuming credits");
-      await consumeCreditsHelper(ctx, accessObj.userId, 1);
+      console.log(
+        `Consuming ${requiredCredits} credits for ${characterCount} characters`,
+      );
+      await consumeCreditsHelper(ctx, accessObj.userId, requiredCredits);
 
       console.log("Scheduling generateSegmentsAction");
       await ctx.scheduler.runAfter(
@@ -260,8 +269,9 @@ export const refineStoryMutation = mutation({
       if (!accessObj) throw new Error("You don't have access to this story");
       console.log("Story owner verified");
 
-      console.log("Consuming credits");
+      console.log("Consuming credits - userId:", accessObj.userId);
       await consumeCreditsHelper(ctx, accessObj.userId, 1);
+      console.log("Credits consumed successfully");
 
       console.log("Updating story status to processing");
       await ctx.db.patch(storyId, { status: "processing" });
@@ -299,23 +309,28 @@ export const refineStoryAction = internalAction({
 
     try {
       console.log("Calling Gemini API");
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-      const prompt = `你是一个专业的故事编辑。请根据以下指令优化故事，直接返回优化后的内容，不要添加任何前缀或说明。保持故事的核心信息和风格不变。
+      const prompt = `You are a professional story editor. Please optimize the following story with these requirements:
+1. Keep it within 130 words
+2. Maintain 5 short paragraphs
+3. Ensure a catchy hook/intro
+4. Keep the clear main learning point
+5. Include actionable advice
+6. Return only the optimized content without any additional text
 
-原始故事：
+Original Story:
 ${story.script}
 
-优化指令：
+Optimization Instructions:
 ${instructions}
 
-请直接返回优化后的故事内容，不要添加任何标题、说明或其他文字。`;
+Return only the optimized content without any titles or explanations.`;
 
       const result = await model.generateContent(prompt);
       const refinedScript = result.response.text();
       console.log("Successfully generated refined story");
 
-      // 更新故事内容和状态
       await ctx.runMutation(internal.guidedStory.updateStoryScript, {
         storyId,
         script: refinedScript,
@@ -324,10 +339,10 @@ ${instructions}
       console.log("Story updated successfully");
     } catch (error) {
       console.error("Error in refineStoryAction:", error);
-      // 发生错误时更新状态
+
       await ctx.runMutation(internal.guidedStory.updateStoryScript, {
         storyId,
-        script: story.script, // 保持原始内容
+        script: story.script,
         status: "error",
       });
       throw error;
