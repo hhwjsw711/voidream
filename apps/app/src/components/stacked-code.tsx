@@ -16,11 +16,11 @@ export function StackedCode() {
   }, []);
 
   const translations = [
-    "Hello → es: 'Hola', fr: 'Bonjour', de: 'Hallo', it: 'Ciao', ja: 'こんにちは'",
-    "Thank you → es: 'Gracias', fr: 'Merci', de: 'Danke', it: 'Grazie', ja: 'ありがとう'",
-    "Welcome → es: 'Bienvenido', fr: 'Bienvenue', de: 'Willkommen', it: 'Benvenuto', ja: 'ようこそ'",
-    "Goodbye → es: 'Adiós', fr: 'Au revoir', de: 'Auf Wiedersehen', it: 'Arrivederci', ja: 'さようなら'",
-    "Please → es: 'Por favor', fr: 'S'il vous plaît', de: 'Bitte', it: 'Per favore', ja: 'お願いします'",
+    "城市宣传 → 城市形象片、城市风光片、城市印象片，展现城市特色与魅力",
+    "文旅非遗 → 非遗文化片、传统工艺片、文化记录片，传承文化精髓",
+    "影视创作 → 电影预告片、微电影、短视频，制作精彩影视内容",
+    "景区推广 → 景区宣传片、景点介绍片、旅游攻略片，展示旅游资源",
+    "品牌营销 → 品牌故事片、产品宣传片、企业形象片，塑造品牌价值",
   ];
 
   return (
@@ -58,7 +58,7 @@ export function StackedCode() {
             }
           >
             <div className="bg-[#121212] bg-noise border border-border">
-              <div className="text-secondary font-mono text-xs text-center whitespace-nowrap overflow-hidden p-6">
+              <div className="text-secondary font-mono text-sm text-center whitespace-nowrap overflow-hidden p-6">
                 {translations[i]}
               </div>
             </div>

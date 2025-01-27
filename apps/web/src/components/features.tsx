@@ -31,6 +31,14 @@ export function Features() {
       title: t("readyForI18nLibraries"),
       description: t("readyForI18nLibrariesDescription"),
     },
+    {
+      title: t("easySocialSharing"),
+      description: t("easySocialSharingDescription"),
+    },
+    {
+      title: t("fastProcessing"),
+      description: t("fastProcessingDescription"),
+    },
   ];
 
   return (

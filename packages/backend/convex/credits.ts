@@ -1,6 +1,8 @@
+import { getAuthUserId } from "@convex-dev/auth/server";
 import { ConvexError } from "convex/values";
 import type { Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
+import { query } from "./_generated/server";
 
 export async function consumeCreditsHelper(
   ctx: MutationCtx,
@@ -24,3 +26,17 @@ export async function consumeCreditsHelper(
     remaining: credits.remaining - amountToUse,
   });
 }
+
+export const getCredits = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) return null;
+
+    // 查询积分
+    return await ctx.db
+      .query("credits")
+      .withIndex("userId_index", (q) => q.eq("userId", userId))
+      .first();
+  },
+});

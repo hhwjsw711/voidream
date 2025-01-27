@@ -15,21 +15,23 @@ export default async function Generation() {
   const currentStep = 2;
 
   return (
-    <>
-      <h1 className="mt-24 font-medium text-center text-5xl text-primary/80">
-        Guided Story Creation
-      </h1>
+    <div className="min-h-screen flex flex-col">
+      <div className="pt-8 sm:pt-12 pb-6 space-y-6 sm:space-y-8 px-4">
+        <h1 className="font-medium text-center text-3xl sm:text-4xl lg:text-5xl text-primary/80">
+          Guided Story Creation
+        </h1>
+        <StepIndicator steps={steps} currentStep={currentStep} />
+      </div>
 
-      <StepIndicator
-        steps={steps}
-        currentStep={currentStep}
-        className="mt-16"
-      />
-      <div className="mx-auto max-w-3xl w-full mt-8">
-        <div className="rounded-xl border text-card-foreground w-full bg-white shadow-lg">
-          <GuidedGenerationForm />
+      <div className="flex-1 px-4 py-6 space-y-8">
+        <div className="container mx-auto">
+          <div className="mx-auto max-w-3xl w-full">
+            <div className="rounded-xl border text-card-foreground w-full bg-white dark:bg-gray-800 shadow-sm dark:border-gray-700">
+              <GuidedGenerationForm />
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

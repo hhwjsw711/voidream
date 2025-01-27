@@ -1,5 +1,6 @@
 "use client";
 
+import { debounce } from "@/utils/debounce";
 import { api } from "@v1/backend/convex/_generated/api";
 import type { Id } from "@v1/backend/convex/_generated/dataModel";
 import { Button } from "@v1/ui/button";
@@ -15,7 +16,7 @@ import { Input } from "@v1/ui/input";
 import { toast } from "@v1/ui/use-toast";
 import { cn } from "@v1/ui/utils";
 import { useMutation, useQuery } from "convex/react";
-import { Monitor, Smartphone } from "lucide-react";
+import { Loader2, Monitor, Smartphone, Wand2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -29,30 +30,6 @@ interface VideoInfo {
   length: string;
   wordCount: number;
   characterCount: number;
-}
-
-function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number,
-): T & { cancel: () => void } {
-  let timeout: NodeJS.Timeout | null = null;
-
-  const debounced = (...args: Parameters<T>) => {
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-    timeout = setTimeout(() => {
-      func(...args);
-    }, wait);
-  };
-
-  debounced.cancel = () => {
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-  };
-
-  return debounced as T & { cancel: () => void };
 }
 
 export function countWordsAndCharacters(text: string) {
@@ -240,16 +217,7 @@ export function RefineStoryContent() {
   if (!story) {
     return (
       <div className="flex flex-col items-center justify-center gap-4">
-        <svg
-          width="20"
-          height="20"
-          fill="currentColor"
-          className="mr-2 animate-spin"
-          viewBox="0 0 1792 1792"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z" />
-        </svg>
+        <Loader2 className="h-5 w-5 animate-spin" />
         <span className="ml-2">Loading story...</span>
       </div>
     );
@@ -257,36 +225,71 @@ export function RefineStoryContent() {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
-      <h1 className="text-4xl font-bold text-center mb-8">{story.title}</h1>
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <div className="border border-gray-300 rounded-lg p-4 mb-4">
-          <textarea
-            ref={textareaRef}
-            className="w-full min-h-[400px] resize-none focus:outline-none text-gray-800 bg-gray-50"
-            defaultValue={story.script}
-            onChange={handleScriptChange}
-            disabled={story.status === "processing"}
-          />
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
+          {story.title}
+        </h1>
+
+        <div className="space-y-2">
+          {" "}
+          {/* 添加一个容器来管理间距 */}
+          {/* 未保存提示 */}
+          <div className="h-6">
+            {" "}
+            {/* 固定高度避免布局偏移 */}
+            <p
+              className={cn(
+                "text-sm text-gray-500 dark:text-gray-400",
+                "transition-opacity duration-200",
+                isUnsaved ? "opacity-100" : "opacity-0",
+              )}
+            >
+              Unsaved changes
+            </p>
+          </div>
+          <div className="relative group">
+            <textarea
+              ref={textareaRef}
+              className="w-full min-h-[400px] p-5 resize-none rounded-lg text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 focus:border-blue-500/50 dark:focus:border-blue-500/50 focus:outline-none transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed font-medium leading-relaxed"
+              defaultValue={story.script}
+              onChange={handleScriptChange}
+              disabled={story.status === "processing"}
+              spellCheck={false}
+            />
+            {story.status === "processing" && (
+              <div
+                className="absolute inset-0 bg-gray-50/50 dark:bg-gray-900/50 
+            backdrop-blur-[1px] rounded-lg 
+            flex items-center justify-center"
+              >
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <span className="text-sm">Processing...</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex justify-between text-sm text-gray-600 mb-4">
+        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
           <span>
             {videoInfo.wordCount} words / {videoInfo.characterCount} characters
           </span>
-          <span>Estimated video length: {videoInfo.length}</span>
+          <div className="flex items-center gap-2">
+            <span>Estimated video length: {videoInfo.length}</span>
+          </div>
         </div>
-        {isUnsaved && (
-          <p className="text-sm text-gray-500 mt-2">Unsaved changes</p>
-        )}
+
         <div className="flex justify-between space-x-4 mt-4">
           <Button
-            className="flex-1 px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="flex-1 px-4 py-2 text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
             variant="outline"
             onClick={() => setOpenDialog(DialogType.Refine)}
           >
+            <Wand2 className="h-4 w-4 mr-2" />
             Refine Story
           </Button>
           <Button
-            className="flex-1 px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="flex-1 px-4 py-2 text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
             variant="outline"
             onClick={() => setOpenDialog(DialogType.GenerateSegments)}
           >
@@ -299,14 +302,14 @@ export function RefineStoryContent() {
         open={openDialog !== DialogType.None}
         onOpenChange={(open) => !open && setOpenDialog(DialogType.None)}
       >
-        <DialogContent className="sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] max-h-[80vh] overflow-y-auto bg-white">
+        <DialogContent className="sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-800">
           {openDialog === DialogType.Refine && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-md font-bold text-gray-900 mb-8">
+                <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
                   Refine Your Story
                 </DialogTitle>
-                <DialogDescription className="text-gray-900">
+                <DialogDescription className="text-gray-900 dark:text-gray-200">
                   Enter your refinement instructions. This will cost 1 credit.
                 </DialogDescription>
               </DialogHeader>
@@ -317,7 +320,7 @@ export function RefineStoryContent() {
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
                     placeholder="Enter refinement instructions..."
-                    className="col-span-4 text-gray-900 placeholder-gray-400 bg-gray-100"
+                    className="col-span-4 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 bg-gray-100 dark:bg-gray-700"
                     disabled={isRefining}
                   />
                 </div>
@@ -326,7 +329,7 @@ export function RefineStoryContent() {
                 <Button
                   type="button"
                   variant="secondary"
-                  className="text-gray-700 bg-gray-200 hover:bg-gray-300 mr-2"
+                  className="text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 mr-2"
                   onClick={() => {
                     setOpenDialog(DialogType.None);
                     setInstructions("");
@@ -339,7 +342,7 @@ export function RefineStoryContent() {
                   type="button"
                   onClick={handleRefine}
                   disabled={isRefining || !instructions.trim()}
-                  className="text-white bg-blue-600 rounded hover:bg-blue-700"
+                  className="text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
                 >
                   Refine (1 credit)
                 </Button>
@@ -349,10 +352,10 @@ export function RefineStoryContent() {
           {openDialog === DialogType.GenerateSegments && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-md font-bold text-gray-900 mb-4">
+                <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-4">
                   Choose Video Orientation
                 </DialogTitle>
-                <DialogDescription className="text-gray-900 space-y-2">
+                <DialogDescription className="text-gray-900 dark:text-gray-200 space-y-2">
                   <span className="block">
                     Vertical videos are ideal for platforms like TikTok and
                     Instagram Reels.
@@ -369,24 +372,16 @@ export function RefineStoryContent() {
               </DialogHeader>
               <div className="flex justify-between space-x-4 mt-4">
                 <Button
-                  className={cn(
-                    "flex-1 px-4 py-2 rounded transition-colors flex items-center justify-center gap-3",
-                    isVertical
-                      ? "text-white bg-blue-600 hover:bg-blue-700"
-                      : "text-gray-900 bg-gray-200 hover:bg-gray-300",
-                  )}
+                  variant={isVertical ? "default" : "secondary"}
+                  className="flex-1 gap-3"
                   onClick={() => setIsVertical(true)}
                 >
                   <Smartphone className="h-5 w-5" />
                   <span>Vertical</span>
                 </Button>
                 <Button
-                  className={cn(
-                    "flex-1 px-4 py-2 rounded transition-colors flex items-center justify-center gap-3",
-                    isVertical
-                      ? "text-gray-900 bg-gray-200 hover:bg-gray-300"
-                      : "text-white bg-blue-600 hover:bg-blue-700",
-                  )}
+                  variant={!isVertical ? "default" : "secondary"}
+                  className="flex-1 gap-3"
                   onClick={() => setIsVertical(false)}
                 >
                   <Monitor className="h-5 w-5" />
@@ -396,15 +391,14 @@ export function RefineStoryContent() {
               <DialogFooter className="mt-8">
                 <Button
                   type="button"
-                  variant="secondary"
-                  className="text-gray-700 bg-gray-200 hover:bg-gray-300 mr-2"
+                  variant="outline"
                   onClick={() => setOpenDialog(DialogType.None)}
                 >
                   Cancel
                 </Button>
                 <Button
                   type="button"
-                  className="text-white bg-blue-600 rounded hover:bg-blue-700"
+                  variant="default"
                   onClick={handleGenerateSegments}
                   disabled={isGenerating}
                 >

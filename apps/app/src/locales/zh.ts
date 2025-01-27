@@ -81,7 +81,7 @@ export default {
     github: "使用GitHub登录",
     google: "使用Google登录",
     footer: "自动化您的本地化。",
-    description: "登录以在几秒钟内开始自动化您的本地化。",
+    description: "登录后即可开始创作。",
     terms: {
       text: "通过登录，您同意我们的",
       termsOfService: "服务条款",
@@ -494,12 +494,6 @@ export default {
     title_4: "生成图片",
     title_5: "生成视频",
     title_6: "生成音频",
-    bodyTip_1: "最受欢迎的",
-    bodyTip_2: "即将上线",
-    bodyTip_3: "即将上线",
-    bodyTip_4: "限时免费",
-    bodyTip_5: "按创作付费",
-    bodyTip_6: "永久免费",
   },
   generate: {
     title_1: "I have a script ready",

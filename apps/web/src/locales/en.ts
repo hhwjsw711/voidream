@@ -33,24 +33,30 @@ export default {
   },
   features: {
     title: "Features",
-    fullyOpenSource: "Fully open source",
+    fullyOpenSource: "AI Story Generation",
     fullyOpenSourceDescription:
-      "Our code is publicly available on GitHub, enabling transparency and community contributions.",
-    noVendorLockIn: "No vendor lock in",
+      "Let our advanced AI craft engaging narratives tailored to your preferences.",
+    noVendorLockIn: "Dynamic Visuals",
     noVendorLockInDescription:
-      "We don't lock you into a specific service, use your own LLMs.",
-    presetsForExpo: "Presets for Expo",
+      "Generate high-quality images that bring your story to life.",
+    presetsForExpo: "Professional Voiceovers",
     presetsForExpoDescription:
-      "We provide presets for Expo, so you can get started quickly.",
-    presetForReactNative: "Preset for React Native",
+      "Add compelling narration with our AI-powered voice synthesis technology.",
+    presetForReactNative: "Seamless Video Creation",
     presetForReactNativeDescription:
-      "We provide a preset for React Native, so you can get started quickly.",
-    presetForReactEmail: "React Email Library",
+      "Automatically combine your story, images, and audio into a captivating video.",
+    presetForReactEmail: "Auto-Generated Captions",
     presetForReactEmailDescription:
-      "We have created a i18n library for React Email.",
-    readyForI18nLibraries: "Ready for i18n libraries",
+      "Ensure accessibility and engagement with accurate, timed captions.",
+    readyForI18nLibraries: "Background Music",
     readyForI18nLibrariesDescription:
-      "We support all libraries including the most popular ones (next-intl, react-i18next, react-intl, etc).",
+      "Set the mood with our library of soundtracks and effects.",
+    easySocialSharing: "Easy Social Sharing",
+    easySocialSharingDescription:
+      "Instantly share your creations across multiple platforms.",
+    fastProcessing: "Fast Processing",
+    fastProcessingDescription:
+      "Generate your story videos in minutes, not hours.",
   },
   info: {
     title: "Handles every aspect of localizing your app including",

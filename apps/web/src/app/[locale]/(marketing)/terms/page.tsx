@@ -1,244 +1,473 @@
-import Link from "next/link";
-
-export default function TermsOfServicePage() {
+export default function TermsPage() {
   return (
-    <div className="prose container py-12">
-      <h1>Terms of Service</h1>
-      <h2>Liability</h2>
-      <p>
-        Our commitment to providing this service is founded on the principles of
-        transparency and user responsibility. It is important to understand the
-        following regarding liability:
-      </p>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <article className="space-y-10">
+        {/* 标题区域 */}
+        <header className="space-y-6">
+          <h1 className="text-2xl sm:text-3xl font-bold">服务条款</h1>
+          <div className="text-sm text-muted-foreground space-y-1">
+            <p>更新日期：2025年1月27日</p>
+            <p>生效日期：2025年1月27日</p>
+            <p>版本编号：FWTK-2025001</p>
+          </div>
+        </header>
 
-      <p>
-        <strong>No Warranty or Guarantee:</strong> We provide this service
-        &apos;as-is&apos; and without any warranty or guarantee. While we make
-        every effort to ensure the functionality, security, and reliability of
-        our site, we do not make any representations or warranties regarding the
-        accuracy, completeness, or suitability of the information and materials
-        found or offered on this website.
-      </p>
+        {/* 正文内容 */}
+        <div className="space-y-10">
+          {/* 前言 */}
+          <section className="space-y-4">
+            <p className="text-muted-foreground leading-relaxed">
+              欢迎使用我们的AI视频生成服务，本服务由丽水市逐梦科技有限公司（以下简称"我们"）开发及运营。为使用本服务，您应当阅读并遵守本《服务条款》（"本条款"）。
+            </p>
 
-      <p>
-        <strong>Exclusion of Liability:</strong> In no event shall we be liable
-        for any direct, indirect, incidental, consequential, special, or
-        exemplary damages, including but not limited to, damages for loss of
-        profits, goodwill, use, data, or other intangible losses, resulting from
-        the use or inability to use our services.
-      </p>
+            {/* 重要提示 */}
+            <div className="mt-8 bg-muted/50 rounded-lg p-6">
+              <h2 className="font-semibold text-lg mb-4">重要提示</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  在接受本条款之前，请您务必审慎阅读本条款的全部内容。其中，免除或限制责任的条款将以加粗的方式提示您注意，请您重点阅读。
+                </p>
+                <p>
+                  您通过网页点击确认本条款或实际使用本服务即表示您确认：您具有与我们达成具有约束力的合同所需的民事权利能力和民事行为能力。如果您未满18周岁，请在监护人的陪同下阅读本条款，并在征得监护人的同意后使用本服务。
+                </p>
+              </div>
+            </div>
 
-      <p>
-        <strong>User Responsibility:</strong> You acknowledge and agree that
-        your use of this service is at your own risk. We are not responsible for
-        any damages or issues that may arise, including but not limited to, data
-        loss, system errors, or interruptions in service. It is your
-        responsibility to take appropriate precautions and ensure that any
-        services or information obtained through our site meet your specific
-        requirements.
-      </p>
+            {/* 目录 */}
+            <div className="mt-8 bg-muted/50 rounded-lg p-6">
+              <h2 className="font-semibold text-lg mb-4">目录</h2>
+              <ul className="space-y-2.5 text-muted-foreground">
+                <li>一、通则</li>
+                <li>二、账号管理</li>
+                <li>三、服务内容与规则</li>
+                <li>四、用户义务与承诺</li>
+                <li>五、费用规则</li>
+                <li>六、知识产权</li>
+                <li>七、数据保护与隐私</li>
+                <li>八、责任限制</li>
+                <li>九、协议终止</li>
+                <li>十、法律适用与争议解决</li>
+                <li>十一、其他条款</li>
+              </ul>
+            </div>
+          </section>
 
-      <p>
-        <strong>Indemnification:</strong> By using this service, you agree to
-        indemnify and hold us harmless from any claims, actions, damages,
-        liabilities, costs, and expenses, including reasonable attorneys&apos;
-        fees, arising out of or in connection with your use of the service or
-        any violation of these terms.
-      </p>
+          {/* 各章节内容 */}
+          <section className="space-y-8">
+            {/* 第一章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">一、通则</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）服务定义
+                  </h3>
+                  <p>
+                    本服务指我们提供的AI视频生成产品、服务、文档、软件和其他服务。该等服务将根据您的订单约定向您提供（具体以实际提供的为准），您可以根据自己的需求选择使用一项或多项具体服务并遵守其服务规则。
+                  </p>
+                </div>
 
-      <p>
-        It&apos;s important to review and understand these terms fully. If you
-        do not agree with any part of these terms, your only recourse is to
-        discontinue your use of the service.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）服务规则
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>
+                      适用于具体服务的服务内容、服务等级、技术规范、操作文档、计费标准等内容的服务规则，以官网展示的届时有效的内容为准
+                    </li>
+                    <li>
+                      我们可能会根据业务调整情况对服务规则进行修改，修改后的服务规则将在官网公示后生效
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-      <h2>Account</h2>
-      <p>
-        By creating an account on this website, you acknowledge and agree to the
-        following terms regarding your account:
-      </p>
+            {/* 第二章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">二、账号管理</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）账号注册
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>
+                      您应依法具备必要、适当的权利能力和行为能力，按照我们的要求提交资料，完成注册
+                    </li>
+                    <li>
+                      您应当使用您享有合法权益的身份信息进行注册，并保证提供的所有注册信息真实、准确、完整
+                    </li>
+                    <li>如您提供的信息不准确或发生变更，应及时更新相关信息</li>
+                  </ul>
+                </div>
 
-      <p>
-        <strong>Account Management:</strong> We reserve the right to manage your
-        account at our discretion. This includes the right to delete, suspend,
-        or lock your account and associated data without prior notice. Such
-        actions may be taken for reasons including, but not limited to,
-        violation of our terms of service, suspected fraudulent activities, or
-        any other actions that may compromise the security and integrity of our
-        platform.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）账号安全
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>您应当对账号安全负责，包括但不限于：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>妥善保管账号和密码，不得将账号提供给他人使用</li>
+                      <li>定期修改密码，避免使用简单密码</li>
+                      <li>发现账号被他人非法使用时，应立即通知我们</li>
+                    </ul>
+                    <p className="font-medium">
+                      <strong>
+                        因您未尽账号安全保护义务，导致的一切损失由您自行承担。
+                      </strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <p>
-        <strong>Termination:</strong> We may terminate or suspend your account
-        for any reason, including breach of these terms. In the event of
-        termination, you will no longer have access to your account and any data
-        associated with it. We are not liable for any loss or damage that may
-        result from the termination of your account.
-      </p>
+            {/* 第三章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">三、服务内容与规则</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）服务内容
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>AI视频生成及相关技术服务</li>
+                    <li>技术支持和咨询服务</li>
+                    <li>其他双方约定的服务内容</li>
+                  </ul>
+                </div>
 
-      <p>
-        <strong>Account Security:</strong> It is your responsibility to maintain
-        the security of your account credentials. You agree not to share your
-        login information with third parties. You are solely responsible for any
-        activities that occur under your account.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）服务规则
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <h4 className="font-medium">您应当遵守以下规则：</h4>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>遵守法律法规和服务规则</li>
+                      <li>按照约定支付服务费用</li>
+                      <li>不得从事任何违法违规行为</li>
+                      <li>不得损害其他用户或第三方的合法权益</li>
+                    </ul>
+                  </div>
+                </div>
 
-      <p>
-        <strong>Account Data:</strong> You can delete your account and all the
-        associated data we store in our system at any time by going to your{" "}
-        <Link href="/settings">settings</Link> page and deleting your account.
-        Just note that once your account is delete, there is no way to recover
-        your data.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （三）服务变更
+                  </h3>
+                  <p>
+                    为了向您提供更好的服务，我们可能会适时对服务内容进行变更：
+                  </p>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>对于重大变更，我们会提前通知您</li>
+                    <li>变更后的服务内容将在官网公示后生效</li>
+                    <li>如您不同意变更，可以停止使用相关服务或终止本协议</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-      <h2>Uptime, Security, and Privacy</h2>
-      <p>
-        By using this service, you acknowledge and agree to the following terms
-        related to uptime, security, and privacy:
-      </p>
+            {/* 第四章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">四、用户义务与承诺</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）合法使用
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>您承诺使用本服务时：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>遵守国家法律法规</li>
+                      <li>不侵犯他人知识产权</li>
+                      <li>不传播违法违规内容</li>
+                      <li>不从事危害网络安全的行为</li>
+                    </ul>
+                    <p className="font-medium">
+                      <strong>
+                        违反上述承诺的，我们有权立即终止服务，并追究您的相关责任。
+                      </strong>
+                    </p>
+                  </div>
+                </div>
 
-      <p>
-        <strong>Uptime:</strong> While we strive to maintain the availability of
-        our services, we do not provide any service level agreement (SLA). The
-        website&apos;s uptime may be subject to occasional interruptions,
-        including maintenance, updates, or unforeseen technical issues. Your use
-        of this service is at your own risk, and we do not guarantee
-        uninterrupted access to our platform.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）内容规范
+                  </h3>
+                  <p>您生成、上传、发布的内容应当：</p>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>符合法律法规要求</li>
+                    <li>尊重他人知识产权</li>
+                    <li>不含有违法违规信息</li>
+                    <li>不侵犯他人合法权益</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-      <p>
-        <strong>Security:</strong> We implement reasonable security measures to
-        protect the integrity of our platform. However, you acknowledge that no
-        online service can be completely secure. We do not assume responsibility
-        for any unauthorized access, data breaches, or other security incidents
-        that may occur. It is your responsibility to take appropriate measures
-        to secure your account and data.
-      </p>
+            {/* 第五章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">五、费用规则</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）费用标准
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>服务费用以官网展示或订单约定为准</li>
+                    <li>我们可能会根据运营情况调整费用标准</li>
+                    <li>费用调整将提前在官网公示</li>
+                  </ul>
+                </div>
 
-      <p>
-        <strong>Privacy:</strong> Your privacy is important to us. Our privacy
-        practices are outlined in our separate{" "}
-        <Link href="/privacy-policy">Privacy Policy</Link>, which is an integral
-        part of these terms. By using our services, you agree to the collection,
-        use, and disclosure of your information as described in the Privacy
-        Policy. It is your responsibility to review the Privacy Policy and
-        understand how your data is handled.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）支付规则
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>关于费用支付，您需要注意：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>应当按照约定的方式和时间支付费用</li>
+                      <li>预付费服务需在服务开始前支付</li>
+                      <li>后付费服务需按时支付账单</li>
+                    </ul>
+                    <p className="font-medium">
+                      <strong>
+                        如您未及时付款，我们有权：
+                        <ul className="ml-5 mt-2 space-y-1 list-disc">
+                          <li>暂停或终止服务</li>
+                          <li>要求支付违约金</li>
+                          <li>采取法律措施追讨欠款</li>
+                        </ul>
+                      </strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <h2>Copyright and Content Ownership</h2>
-      <p>
-        When it comes to copyright and content ownership, it&apos;s important to
-        understand the following terms:
-      </p>
+            {/* 第六章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">六、知识产权</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）权利归属
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>关于知识产权归属：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>我们拥有本服务的全部知识产权</li>
+                      <li>您使用本服务不构成知识产权的转让</li>
+                      <li>您上传的原创内容的知识产权归您所有</li>
+                      <li>
+                        <strong>
+                          使用我们的服务生成的内容，其知识产权归属按具体服务规则确定
+                        </strong>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-      <p>
-        <strong>Ownership of Generated Content:</strong> We do not claim any
-        rights to the images or assets generated within the plans created using
-        our service. The content produced by the service is considered your
-        intellectual property, and we respect your ownership rights.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）使用限制
+                  </h3>
+                  <p>未经我们书面许可，您不得：</p>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>复制、修改或创建衍生作品</li>
+                    <li>反向工程、反编译或反汇编</li>
+                    <li>删除或修改版权信息</li>
+                    <li>将服务转让或授权给第三方使用</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-      <h2>Features and Bugs</h2>
-      <p>
-        Our commitment to providing a quality service involves continuous
-        efforts to enhance features and address any bugs. It&apos;s important to
-        be aware of the following regarding features and bugs:
-      </p>
+            {/* 第七章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">七、数据保护与隐私</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）数据保护
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>我们重视您的数据安全：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>采用业界标准的安全技术和程序</li>
+                      <li>定期进行安全评估和升级</li>
+                      <li>严格控制数据访问权限</li>
+                      <li>
+                        <strong>
+                          但请理解，互联网环境并非百分之百安全，我们不对因第三方原因导致的数据泄露承担责任
+                        </strong>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
 
-      <p>
-        <strong>Continuous Improvement:</strong> We are dedicated to
-        continuously adding new features and improving existing functionalities
-        to enhance your experience. By agreeing to our terms, you acknowledge
-        that the system may undergo changes over time to introduce new features
-        or enhance existing ones.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）隐私保护
+                  </h3>
+                  <p>
+                    我们会按照《隐私政策》收集、使用、存储和保护您的个人信息。使用我们的服务即表示您同意我们按照《隐私政策》处理您的个人信息。
+                  </p>
+                </div>
+              </div>
+            </div>
 
-      <p>
-        <strong>Bug Fixes:</strong> Bugs are an inevitable part of any software
-        system. While we strive to maintain a seamless experience, you
-        understand that bugs may be identified and fixed during the course of
-        our ongoing development efforts. We appreciate your understanding and
-        cooperation in reporting any issues you may encounter.
-      </p>
+            {/* 第八章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">八、责任限制</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）免责声明
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>
+                      <strong>
+                        在法律允许的最大范围内，以下情况我们不承担责任：
+                      </strong>
+                    </p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>因不可抗力导致的服务中断或损失</li>
+                      <li>因网络服务质量、系统故障、数据丢失等引起的损失</li>
+                      <li>因第三方原因（如黑客攻击）导致的损失</li>
+                      <li>因您自身原因（如操作不当）导致的损失</li>
+                    </ul>
+                  </div>
+                </div>
 
-      <p>
-        <strong>Impact on User Experience:</strong> Changes to the system,
-        including the introduction of new features or bug fixes, may impact your
-        overall experience. By agreeing to our terms, you accept that such
-        changes are inherent in the nature of software development, and we
-        cannot guarantee that your experience will remain unchanged.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）责任限制
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>
+                      <strong>我们的责任限制包括：</strong>
+                    </p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>不对服务的适销性、适用性作任何明示或暗示的保证</li>
+                      <li>不保证服务不会中断或无错误</li>
+                      <li>
+                        不对任何间接损失承担责任，包括：
+                        <ul className="ml-5 mt-2 space-y-1 list-disc">
+                          <li>利润损失</li>
+                          <li>业务中断</li>
+                          <li>商誉损失</li>
+                          <li>数据丢失</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <h2>Use of AI and Third Party Services</h2>
-      <p>
-        Our commitment to providing cutting-edge services involves the use of
-        third-party AI services for helping review your thumbnails. To ensure a
-        clear understanding, it&apos;s important to acknowledge the following
-        terms related to the use of AI:
-      </p>
+            {/* 第九章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">九、协议终止</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）终止情形
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>您主动终止使用本服务</li>
+                    <li>您违反本条款，我们有权终止服务</li>
+                    <li>因法律法规要求终止服务</li>
+                    <li>因业务调整等原因终止服务</li>
+                  </ul>
+                </div>
 
-      <p>
-        <strong>Third-Party Services:</strong> We utilize third-party services
-        to employ authentication and artificial intelligence in the generation
-        of thumbnail tests. It&apos;s crucial to note that these third-party
-        services are independent entities, and we are not responsible for their
-        operations, performance, or any consequences arising from their use.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）终止后处理
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <p>协议终止后：</p>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>您应支付所有未付费用</li>
+                      <li>我们将停止提供服务</li>
+                      <li>您应自行备份数据，我们可能会删除您的数据</li>
+                      <li>已产生的权利义务不受影响</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <p>
-        <strong>No Affiliation:</strong> We want to make it explicitly clear
-        that we are not affiliated with the third-party AI services we employ.
-        Any issues or concerns related to their services should be directed to
-        the respective third-party providers.
-      </p>
+            {/* 第十章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">十、法律适用与争议解决</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <ul className="ml-5 space-y-2 list-disc">
+                  <li>本条款适用中华人民共和国法律</li>
+                  <li>争议应首先通过友好协商解决</li>
+                  <li>
+                    协商不成的，任何一方均可向本公司所在地有管辖权的人民法院提起诉讼
+                  </li>
+                </ul>
+              </div>
+            </div>
 
-      <p>
-        <strong>User Responsibility:</strong> By using our service, you agree
-        that it is your responsibility to familiarize yourself with the laws of
-        your own country concerning the use of AI-generated comments. Compliance
-        with local laws and regulations is essential, and you acknowledge that
-        we do not assume responsibility for any legal implications arising from
-        your use of the service.
-      </p>
+            {/* 第十一章 */}
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">十一、其他条款</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （一）条款效力
+                  </h3>
+                  <ul className="ml-5 space-y-2 list-disc">
+                    <li>本条款构成完整的协议</li>
+                    <li>任何条款无效不影响其他条款的效力</li>
+                    <li>标题仅供参考，不影响条款解释</li>
+                  </ul>
+                </div>
 
-      <p>
-        <strong>Continuous Improvement:</strong> While we strive to provide
-        accurate and valuable AI-generated content, it&apos;s important to
-        understand that AI systems are continually evolving. We appreciate your
-        feedback in enhancing the quality of our AI-generated comments.
-      </p>
+                <div className="space-y-4">
+                  <h3 className="text-base font-medium text-foreground">
+                    （二）条款修改
+                  </h3>
+                  <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+                    <ul className="ml-5 space-y-2 list-disc">
+                      <li>我们保留修改本条款的权利</li>
+                      <li>修改后的条款将在官网公示</li>
+                      <li>继续使用服务即表示同意修改后的条款</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      <h2>Updates to Terms of Service</h2>
-      <p>
-        To ensure transparency and compliance, it&apos;s important to be aware
-        of our policy regarding updates to the terms of service:
-      </p>
-
-      <p>
-        <strong>Right to Update:</strong> We reserve the right to update these
-        terms of service at any time. Updates may be made to reflect changes in
-        our services, legal requirements, or other considerations. Your
-        continued use of our application after any such changes constitutes your
-        acceptance of the modified terms.
-      </p>
-
-      <p>
-        <strong>No Obligation to Notify:</strong> While we may make efforts to
-        communicate significant changes, you agree that we are not obligated to
-        notify users individually when updates occur. It is your responsibility
-        to check back on these terms periodically to stay informed about any
-        modifications.
-      </p>
-
-      <p>
-        <strong>Review of Terms:</strong> It&apos;s advisable to review these
-        terms regularly to ensure that you are aware of any changes that may
-        affect your use of the application. Your continued use of the service
-        after updates indicates your agreement to be bound by the modified
-        terms.
-      </p>
-
-      <p>Last Modified: 1/21/2025</p>
+          {/* 底部联系方式 */}
+          <footer className="mt-12 pt-8 border-t border-border">
+            <div className="space-y-4 text-muted-foreground">
+              <h2 className="text-lg font-semibold text-foreground">
+                联系我们
+              </h2>
+              <p>如您对本条款有任何疑问，请通过以下方式联系我们：</p>
+              <ul className="ml-5 space-y-2 list-disc">
+                <li>公司名称：丽水市逐梦科技有限公司</li>
+                <li>注册地址：浙江省丽水市莲都区丽园19幢1003室</li>
+                <li>电子邮箱：hhwjsw711@gmail.com</li>
+                <li>工作时间：周一至周五 9:00-18:00</li>
+              </ul>
+              <p className="text-sm">
+                我们收到您的问题后，会在15个工作日内回复。
+              </p>
+            </div>
+          </footer>
+        </div>
+      </article>
     </div>
   );
 }

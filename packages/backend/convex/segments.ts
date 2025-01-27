@@ -138,6 +138,7 @@ export const updateSegment = internalMutation({
     previewImage: v.optional(v.id("_storage")),
     prompt: v.optional(v.string()),
     error: v.optional(v.string()),
+    text: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { segmentId, ...updateFields } = args;
@@ -224,14 +225,26 @@ export const getSegments = query({
   },
 });
 
+// 添加内部版本
+export const getSegmentsInternal = internalQuery({
+  args: { storyId: v.id("story") },
+  handler: async (ctx, args) => {
+    const segments = await ctx.db
+      .query("segments")
+      .filter((q) => q.eq(q.field("storyId"), args.storyId))
+      .order("asc")
+      .collect();
+    return segments;
+  },
+});
+
 export const addSegment = mutation({
   args: {
     storyId: v.id("story"),
-    text: v.string(),
-    context: v.optional(v.string()),
+    insertAfterOrder: v.optional(v.number()), // 添加可选的插入位置参数
   },
   handler: async (ctx, args) => {
-    const { storyId, text, context } = args;
+    const { storyId, insertAfterOrder } = args;
 
     // 获取当前故事的所有段落
     const existingSegments = await ctx.db
@@ -240,29 +253,331 @@ export const addSegment = mutation({
       .collect();
 
     // 计算新段落的顺序
-    const newOrder = existingSegments.length;
+    let newOrder: number;
+    if (insertAfterOrder !== undefined) {
+      await Promise.all(
+        existingSegments
+          .filter((segment) => segment.order > insertAfterOrder)
+          .map((segment) =>
+            ctx.db.patch(segment._id, { order: segment.order + 1 }),
+          ),
+      );
+      newOrder = insertAfterOrder + 1;
+    } else {
+      newOrder = existingSegments.length;
+    }
 
-    // 创建新段落
+    // 创建新的空段落
     const segmentId = await ctx.db.insert("segments", {
       storyId,
-      text,
+      text: "", // 空文本
       order: newOrder,
+      isGenerating: false, // 初始不生成图片
+    });
+
+    return segmentId;
+  },
+});
+
+export const refineText = mutation({
+  args: {
+    segmentId: v.id("segments"),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) throw new Error("Segment not found");
+
+    // 设置生成状态
+    await ctx.db.patch(args.segmentId, {
       isGenerating: true,
     });
 
-    // 触发图像生成过程
+    // 调用 action 来处理 AI 请求
+    await ctx.scheduler.runAfter(0, internal.segments.refineTextAction, {
+      segmentId: args.segmentId,
+      text: segment.text,
+    });
+
+    return { success: true };
+  },
+});
+
+export const refineTextAction = internalAction({
+  args: {
+    segmentId: v.id("segments"),
+    text: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+      generationConfig: {
+        temperature: 0.7,
+        topP: 0.8,
+        topK: 40,
+        maxOutputTokens: 8192,
+      },
+    });
+
+    try {
+      const result = await model.generateContent(
+        `
+You are a professional text editor. Please refine and improve the following text while maintaining its original meaning.
+
+Focus on:
+1. Enhancing clarity and readability
+2. Improving grammar and expression
+3. Making the language more engaging
+4. Maintaining the original tone and style
+5. Ensuring content continuity
+
+Original text:
+${args.text}
+
+Return only the refined text without any explanations.
+`.trim(),
+      );
+
+      const refinedText = result.response.text();
+
+      if (!refinedText) throw new Error("Text refinement failed");
+
+      // 更新文本并重置生成状态
+      await ctx.runMutation(internal.segments.updateSegment, {
+        segmentId: args.segmentId,
+        text: refinedText.trim(),
+        isGenerating: false,
+      });
+    } catch (error) {
+      // 发生错误时更新状态和错误信息
+      await ctx.runMutation(internal.segments.updateSegment, {
+        segmentId: args.segmentId,
+        isGenerating: false,
+        error:
+          error instanceof Error ? error.message : "Text refinement failed",
+      });
+
+      throw error;
+    }
+  },
+});
+
+export const regenerateImage = mutation({
+  args: {
+    segmentId: v.id("segments"),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) throw new Error("Segment not found");
+    if (!segment.prompt) throw new Error("Prompt not found");
+
+    const story = await ctx.db.get(segment.storyId);
+    if (!story) throw new Error("Story not found");
+
+    const credits = await ctx.db
+      .query("credits")
+      .withIndex("userId_index") // 使用正确的索引名称
+      .filter((q) => q.eq(q.field("userId"), story.userId))
+      .first();
+
+    if (!credits || credits.remaining < 10) {
+      throw new Error("Insufficient credits, 10 credits are required");
+    }
+
+    await ctx.db.patch(credits._id, {
+      remaining: credits.remaining - 10,
+      updatedAt: Date.now(),
+    });
+
+    await ctx.db.patch(args.segmentId, {
+      isGenerating: true,
+      error: undefined,
+    });
+
+    // 直接使用原有的提示词重新生成图片
+    await ctx.scheduler.runAfter(
+      0,
+      internal.replicate.regenerateSegmentImageUsingPrompt,
+      {
+        segmentId: args.segmentId,
+        prompt: segment.prompt,
+      },
+    );
+
+    return { success: true };
+  },
+});
+
+export const savePrompt = mutation({
+  args: {
+    segmentId: v.id("segments"),
+    prompt: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) throw new Error("段落不存在");
+
+    await ctx.db.patch(args.segmentId, {
+      prompt: args.prompt,
+    });
+
+    return { success: true };
+  },
+});
+
+export const updateSegmentText = mutation({
+  args: {
+    segmentId: v.id("segments"),
+    text: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) throw new Error("段落不存在");
+
+    await ctx.db.patch(args.segmentId, {
+      text: args.text,
+    });
+
+    return { success: true };
+  },
+});
+
+export const get = query({
+  args: { segmentId: v.id("segments") },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+
+    if (!segment) {
+      throw new Error(`段落不存在 (ID: ${args.segmentId})`);
+    }
+
+    return segment;
+  },
+});
+
+export const deleteSegment = mutation({
+  args: {
+    segmentId: v.id("segments"),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) {
+      throw new Error("段落不存在");
+    }
+
+    // 获取故事信息以检查权限
+    const story = await ctx.db.get(segment.storyId);
+    if (!story) {
+      throw new Error("故事不存在");
+    }
+
+    // 获取所有相关段落并按顺序排列
+    const allSegments = await ctx.db
+      .query("segments")
+      .withIndex("by_storyId", (q) => q.eq("storyId", segment.storyId))
+      .collect();
+
+    const sortedSegments = allSegments.sort((a, b) => a.order - b.order);
+    const deletedOrder = segment.order;
+
+    // 删除段落
+    await ctx.db.delete(args.segmentId);
+
+    // 更新后续段落的顺序
+    for (const seg of sortedSegments) {
+      if (seg._id !== args.segmentId && seg.order > deletedOrder) {
+        await ctx.db.patch(seg._id, {
+          order: seg.order - 1,
+        });
+      }
+    }
+
+    return { success: true };
+  },
+});
+
+export const deleteSegmentInternal = internalMutation({
+  args: {
+    segmentId: v.id("segments"),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) {
+      throw new Error("段落不存在");
+    }
+
+    // 获取所有相关段落并按顺序排列
+    const allSegments = await ctx.db
+      .query("segments")
+      .withIndex("by_storyId", (q) => q.eq("storyId", segment.storyId))
+      .collect();
+
+    const sortedSegments = allSegments.sort((a, b) => a.order - b.order);
+    const deletedOrder = segment.order;
+
+    // 删除段落
+    await ctx.db.delete(args.segmentId);
+
+    // 更新后续段落的顺序
+    for (const seg of sortedSegments) {
+      if (seg._id !== args.segmentId && seg.order > deletedOrder) {
+        await ctx.db.patch(seg._id, {
+          order: seg.order - 1,
+        });
+      }
+    }
+
+    return { success: true };
+  },
+});
+
+export const generateImage = mutation({
+  args: {
+    segmentId: v.id("segments"),
+  },
+  handler: async (ctx, args) => {
+    const segment = await ctx.db.get(args.segmentId);
+    if (!segment) throw new Error("Segment not found");
+    if (!segment.text) throw new Error("Text is required");
+
+    const story = await ctx.db.get(segment.storyId);
+    if (!story) throw new Error("Story not found");
+
+    // 检查积分
+    const credits = await ctx.db
+      .query("credits")
+      .withIndex("userId_index")
+      .filter((q) => q.eq(q.field("userId"), story.userId))
+      .first();
+
+    if (!credits || credits.remaining < 10) {
+      throw new Error("Insufficient credits, 10 credits are required");
+    }
+
+    // 扣除积分
+    await ctx.db.patch(credits._id, {
+      remaining: credits.remaining - 10,
+      updatedAt: Date.now(),
+    });
+
+    // 更新 segment 状态
+    await ctx.db.patch(args.segmentId, {
+      isGenerating: true,
+      error: undefined,
+    });
+
+    // 使用现有的 generateSegmentImageReplicateInternal
     await ctx.scheduler.runAfter(
       0,
       internal.segments.generateSegmentImageReplicateInternal,
       {
         segment: {
-          text,
-          _id: segmentId,
+          text: segment.text,
+          _id: args.segmentId,
         },
-        context: context || "",
+        context: story.context,
       },
     );
 
-    return segmentId;
+    return { success: true };
   },
 });

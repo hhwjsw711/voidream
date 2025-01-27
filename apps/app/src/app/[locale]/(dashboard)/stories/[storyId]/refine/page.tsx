@@ -15,22 +15,19 @@ export default async function RefineStory() {
   const currentStep = 3;
 
   return (
-    <>
-      <h1 className="mt-24 font-medium text-center text-5xl text-primary/80">
-        Guided Story Creation
-      </h1>
+    <div className="min-h-screen flex flex-col">
+      <div className="pt-8 sm:pt-12 pb-6 space-y-6 sm:space-y-8 px-4">
+        <h1 className="font-medium text-center text-3xl sm:text-4xl lg:text-5xl text-primary/80">
+          Refine Your Story
+        </h1>
+        <StepIndicator steps={steps} currentStep={currentStep} />
+      </div>
 
-      <StepIndicator
-        steps={steps}
-        currentStep={currentStep}
-        className="mt-16"
-      />
-
-      <div className="min-h-screen p-4 space-y-8 py-8">
+      <div className="flex-1 px-4 py-6 space-y-8">
         <div className="container mx-auto">
           <RefineStoryContent />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -6,23 +6,21 @@ export default {
     goToApp: "前往应用",
   },
   hero: {
-    title: "几分钟内为您的频道制作无脸视频",
-    description:
-      "将您的创意转化为引人入胜的内容，无需订阅。只需为您创建的视频付费。",
+    title: "每个想法都是一部大片",
+    description: "输入想法，即刻成片，按次付费，简单实惠",
   },
   getStarted: {
     heading: "开始使用",
-    title: "为您的应用程序提供自动化本地化",
-    description:
-      "通过专为开发者设计的AI驱动的CLI和流水线，简化您的本地化流程，实现翻译自动化。",
+    title: "把想法变成视频",
+    description: "输入想法，AI 帮你生成视频。",
     button: {
-      startAutomating: "开始自动化",
-      readDocumentation: "阅读文档",
+      startAutomating: "立即体验",
+      readDocumentation: "查看定价",
     },
   },
   companies: {
-    title: "使用者",
-    addYourCompany: "+ 添加您的公司",
+    title: "用户案例",
+    addYourCompany: "更多机构持续加入中...",
   },
   activity: {
     title: "活动",
@@ -32,23 +30,23 @@ export default {
     clearSearch: "清除搜索",
   },
   features: {
-    title: "功能",
-    fullyOpenSource: "完全开源",
-    fullyOpenSourceDescription:
-      "我们的代码在GitHub上公开可用，支持透明度和社区贡献。",
-    noVendorLockIn: "无供应商锁定",
-    noVendorLockInDescription:
-      "我们不会将您锁定在特定服务中，您可以使用自己的LLMs。",
-    presetsForExpo: "Expo预设",
-    presetsForExpoDescription: "我们为Expo提供预设，以便您可以快速开始。",
-    presetForReactNative: "React Native预设",
-    presetForReactNativeDescription:
-      "我们为React Native提供预设，以便您可以快速开始。",
-    presetForReactEmail: "React Email库",
-    presetForReactEmailDescription: "我们为React Email创建了一个i18n库。",
-    readyForI18nLibraries: "支持i18n库",
-    readyForI18nLibrariesDescription:
-      "我们支持所有库，包括最受欢迎的（next-intl, react-i18next, react-intl等）。",
+    title: "核心功能",
+    fullyOpenSource: "AI 故事生成",
+    fullyOpenSourceDescription: "让 AI 为您创作独特的精彩故事。",
+    noVendorLockIn: "动态视觉",
+    noVendorLockInDescription: "智能生成高质量图像，让故事更生动。",
+    presetsForExpo: "专业配音",
+    presetsForExpoDescription: "AI 语音合成技术，为您的故事配上专业旁白。",
+    presetForReactNative: "无缝视频制作",
+    presetForReactNativeDescription: "自动整合故事、图像和音频，生成精彩视频。",
+    presetForReactEmail: "自动生成字幕",
+    presetForReactEmailDescription: "智能添加精准字幕，提升视频观看体验。",
+    readyForI18nLibraries: "背景音乐",
+    readyForI18nLibrariesDescription: "精选音乐音效库，为视频锦上添花。",
+    easySocialSharing: "便捷分享",
+    easySocialSharingDescription: "一键分享到各大平台，让作品获得更多关注。",
+    fastProcessing: "快速处理",
+    fastProcessingDescription: "先进的处理技术，让创意快速变成作品。",
   },
   info: {
     title: "处理本地化应用的每一个方面，包括",

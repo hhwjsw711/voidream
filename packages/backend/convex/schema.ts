@@ -104,8 +104,8 @@ export default defineSchema({
     ),
     isVertical: v.optional(v.boolean()),
     context: v.optional(v.string()),
+    review: v.optional(v.string()),
     reviewedAt: v.optional(v.string()),
-    grammarCheckedAt: v.optional(v.string()),
     createdAt: v.string(),
     // 保留这些字段，因为它们是生成选项而不是结果
     voiceId: v.optional(v.string()),
@@ -125,5 +125,5 @@ export default defineSchema({
     previewImage: v.optional(v.id("_storage")),
     prompt: v.optional(v.string()),
     error: v.optional(v.string()),
-  }),
+  }).index("by_storyId", ["storyId"]),
 });

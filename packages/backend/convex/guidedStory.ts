@@ -183,28 +183,27 @@ export const generateSegmentsAction = internalAction({
     userId: v.id("users"),
   },
   handler: async (ctx, args) => {
-    /* const context = await generateContext(args.script);
-    if (!context) throw new Error("Failed to generate context"); */
-
-    const context = `${args.script.slice(0, 100)}...`;
-    console.log("Temporary context:", context);
+    const context = await generateContext(args.script);
+    if (!context) throw new Error("Failed to generate context");
 
     const segments = args.script.split(/\n{2,}/);
 
-    await ctx.runMutation(internal.story.updateStoryContent, {
+    await ctx.runMutation(internal.story.updateStoryContextInternal, {
       storyId: args.storyId,
       context,
     });
 
-    for (let i = 0; i < segments.length; i++) {
-      await ctx.runMutation(internal.segments.createSegmentWithImageInternal, {
-        storyId: args.storyId,
-        text: segments[i],
-        order: i,
-        context,
-        userId: args.userId,
-      });
-    }
+    await Promise.all(
+      segments.map((segment, i) =>
+        ctx.runMutation(internal.segments.createSegmentWithImageInternal, {
+          storyId: args.storyId,
+          text: segment.trim(),
+          order: i,
+          context,
+          userId: args.userId,
+        }),
+      ),
+    );
   },
 });
 
@@ -349,3 +348,34 @@ Return only the optimized content without any titles or explanations.`;
     }
   },
 });
+
+export async function generateContext(script: string): Promise<string> {
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+
+    const prompt = `You are a professional story editor. Please generate a brief context summary (100-150 words) for the following story, focusing on:
+1. Key scenes
+2. Main characters
+3. Overall atmosphere
+4. Visual elements
+5. Emotional tone
+
+Story:
+${script}
+
+Return only the context summary without any additional text or explanations.`;
+
+    const result = await model.generateContent(prompt);
+    const context = result.response.text();
+
+    if (!context) {
+      throw new Error("Failed to generate context");
+    }
+
+    console.log("Successfully generated context");
+    return context.trim();
+  } catch (error) {
+    console.error("Error generating context:", error);
+    throw error;
+  }
+}
