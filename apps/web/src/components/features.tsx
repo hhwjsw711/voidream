@@ -8,36 +8,36 @@ export function Features() {
 
   const features = [
     {
-      title: t("fullyOpenSource"),
-      description: t("fullyOpenSourceDescription"),
+      title: t("aiScript"),
+      description: t("aiScriptDescription"),
     },
     {
-      title: t("noVendorLockIn"),
-      description: t("noVendorLockInDescription"),
+      title: t("aiVoice"),
+      description: t("aiVoiceDescription"),
     },
     {
-      title: t("presetsForExpo"),
-      description: t("presetsForExpoDescription"),
+      title: t("aiVideo"),
+      description: t("aiVideoDescription"),
     },
     {
-      title: t("presetForReactNative"),
-      description: t("presetForReactNativeDescription"),
+      title: t("aiSubtitle"),
+      description: t("aiSubtitleDescription"),
     },
     {
-      title: t("presetForReactEmail"),
-      description: t("presetForReactEmailDescription"),
+      title: t("aiTemplate"),
+      description: t("aiTemplateDescription"),
     },
     {
-      title: t("readyForI18nLibraries"),
-      description: t("readyForI18nLibrariesDescription"),
+      title: t("aiStyle"),
+      description: t("aiStyleDescription"),
     },
     {
-      title: t("easySocialSharing"),
-      description: t("easySocialSharingDescription"),
+      title: t("easyShare"),
+      description: t("easyShareDescription"),
     },
     {
-      title: t("fastProcessing"),
-      description: t("fastProcessingDescription"),
+      title: t("fastRender"),
+      description: t("fastRenderDescription"),
     },
   ];
 

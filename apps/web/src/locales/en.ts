@@ -32,31 +32,23 @@ export default {
     loadMore: "Show more",
   },
   features: {
-    title: "Features",
-    fullyOpenSource: "AI Story Generation",
-    fullyOpenSourceDescription:
-      "Let our advanced AI craft engaging narratives tailored to your preferences.",
-    noVendorLockIn: "Dynamic Visuals",
-    noVendorLockInDescription:
-      "Generate high-quality images that bring your story to life.",
-    presetsForExpo: "Professional Voiceovers",
-    presetsForExpoDescription:
-      "Add compelling narration with our AI-powered voice synthesis technology.",
-    presetForReactNative: "Seamless Video Creation",
-    presetForReactNativeDescription:
-      "Automatically combine your story, images, and audio into a captivating video.",
-    presetForReactEmail: "Auto-Generated Captions",
-    presetForReactEmailDescription:
-      "Ensure accessibility and engagement with accurate, timed captions.",
-    readyForI18nLibraries: "Background Music",
-    readyForI18nLibrariesDescription:
-      "Set the mood with our library of soundtracks and effects.",
-    easySocialSharing: "Easy Social Sharing",
-    easySocialSharingDescription:
-      "Instantly share your creations across multiple platforms.",
-    fastProcessing: "Fast Processing",
-    fastProcessingDescription:
-      "Generate your story videos in minutes, not hours.",
+    title: "核心功能",
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "一键生成专业视频剧本，让创意更高效。",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然语音。",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "将文字自动转化为精美视频，省时又专业。",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "自动生成多语言字幕，完美同步音画。",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "丰富的场景模板库，一键套用快速出片。",
+    aiStyle: "风格定制",
+    aiStyleDescription: "多种视觉风格可选，打造独特品牌形象。",
+    easyShare: "便捷分享",
+    easyShareDescription: "支持多平台一键分享，扩大内容影响力。",
+    fastRender: "快速渲染",
+    fastRenderDescription: "高效云端渲染，让创意快速变成作品。",
   },
   info: {
     title: "Handles every aspect of localizing your app including",

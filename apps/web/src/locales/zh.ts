@@ -1,9 +1,7 @@
 export default {
   header: {
     pricing: "定价",
-    docs: "文档",
     signIn: "登录",
-    goToApp: "前往应用",
   },
   hero: {
     title: "每个想法都是一部大片",
@@ -22,57 +20,24 @@ export default {
     title: "用户案例",
     addYourCompany: "更多机构持续加入中...",
   },
-  activity: {
-    title: "活动",
-    loading: "加载中",
-    loadMore: "显示更多",
-    noResults: "没有找到'{search}'的结果",
-    clearSearch: "清除搜索",
-  },
   features: {
     title: "核心功能",
-    fullyOpenSource: "AI 故事生成",
-    fullyOpenSourceDescription: "让 AI 为您创作独特的精彩故事。",
-    noVendorLockIn: "动态视觉",
-    noVendorLockInDescription: "智能生成高质量图像，让故事更生动。",
-    presetsForExpo: "专业配音",
-    presetsForExpoDescription: "AI 语音合成技术，为您的故事配上专业旁白。",
-    presetForReactNative: "无缝视频制作",
-    presetForReactNativeDescription: "自动整合故事、图像和音频，生成精彩视频。",
-    presetForReactEmail: "自动生成字幕",
-    presetForReactEmailDescription: "智能添加精准字幕，提升视频观看体验。",
-    readyForI18nLibraries: "背景音乐",
-    readyForI18nLibrariesDescription: "精选音乐音效库，为视频锦上添花。",
-    easySocialSharing: "便捷分享",
-    easySocialSharingDescription: "一键分享到各大平台，让作品获得更多关注。",
-    fastProcessing: "快速处理",
-    fastProcessingDescription: "先进的处理技术，让创意快速变成作品。",
-  },
-  info: {
-    title: "处理本地化应用的每一个方面，包括",
-    smartTranslation: {
-      title: "智能翻译",
-      intelligentTranslation: "具有上下文意识的智能翻译",
-      brandVoice: "品牌声音和语调一致性",
-      terminology: "术语管理",
-      linguisticFeatures: "高级语言功能",
-      realtimeUpdates: "实时翻译更新",
-    },
-    implementation: {
-      title: "实施",
-      quickSetup: "快速设置和集成",
-      fileFormat: "文件格式处理",
-      contentStructure: "内容结构组织",
-      assetOrganization: "资产组织",
-    },
-    developer: {
-      title: "开发者体验",
-      cli: "命令行界面",
-      cicd: "CI/CD集成",
-      versionControl: "版本控制",
-      workflow: "开发者工作流程",
-      documentation: "全面的文档",
-    },
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "一键生成专业视频剧本，让创意更高效。",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然语音。",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "将文字自动转化为精美视频，省时又专业。",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "自动生成多语言字幕，完美同步音画。",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "丰富的场景模板库，一键套用快速出片。",
+    aiStyle: "风格定制",
+    aiStyleDescription: "多种视觉风格可选，打造独特品牌形象。",
+    easyShare: "便捷分享",
+    easyShareDescription: "支持多平台一键分享，扩大内容影响力。",
+    fastRender: "快速渲染",
+    fastRenderDescription: "高效云端渲染，让创意快速变成作品。",
   },
   login: {
     title: "登录",
@@ -87,382 +52,39 @@ export default {
       privacyPolicy: "隐私政策",
     },
   },
-  userMenu: {
-    account: "账户设置",
-    signOut: "登出",
-    createTeam: "创建团队",
-    homepage: "主页",
-    team: "团队设置",
-  },
-  teamSelector: {
-    addProject: "创建项目",
-    createProjectTitle: "创建一个新项目",
-    projectNamePlaceholder: "项目名称",
-    createProjectButton: "创建项目",
-    pro: "专业版",
-    project: "项目",
-    teams: "团队",
-    createTeam: "创建团队",
-    createTeamTitle: "创建一个新团队",
-    teamNamePlaceholder: "团队名称",
-    createTeamButton: "创建团队",
-  },
-  coming_soon: {
-    title: "Languine处于早期访问阶段",
-    description: "我们目前处于早期访问阶段。请联系",
-    cta: "在X上获取早期访问。",
-  },
-  account: {
-    fullName: {
-      title: "全名",
-      description: "您的全名将出现在整个平台上。",
-      placeholder: "输入您的全名",
-    },
-    email: {
-      title: "电子邮件地址",
-      description: "与您的账户关联的电子邮件地址。",
-      placeholder: "输入您的电子邮件地址",
-    },
-    apiKey: {
-      title: "API密钥",
-      description: "您的个人API密钥，用于访问Languine API和CLI。",
-    },
-    deleteAccount: {
-      title: "删除账户",
-      description: "永久删除您的账户和所有相关数据。此操作无法撤销。",
-      button: "删除账户",
-    },
-  },
-  copyInstall: {
-    copied: "已复制到剪贴板",
-  },
-  dangerZone: {
-    dialog: {
-      title: "您确定吗？",
-      description: "此操作无法撤销。请输入DELETE以确认。",
-      placeholder: "输入DELETE以确认",
-      confirm: "确认删除",
-      cancel: "取消",
-    },
-  },
-  pipeline: {
-    title: "工作流程（CI/CD流水线）",
-    pro: "[专业版]",
-    description:
-      "我们的翻译引擎无缝集成到您现有的CI/CD流水线中，每次推送时自动翻译您的代码库。当代码更改被推送时，我们分析修改的内容，维护您的翻译记忆，并生成准确的翻译，同时保留您的品牌声音和术语。翻译随后作为拉取请求提交，允许在合并到您的主分支并部署之前进行审查。这个自动化工作流程确保您的本地化内容与开发保持同步。",
-  },
-  settings: {
-    saved: "设置已保存",
-    savedDescription: "您的更改已成功保存",
-    tabs: {
-      project: "项目",
-      account: "账户",
-      team: "团队",
-      provider: "提供商",
-      billing: "账单",
-    },
-    project: {
-      name: {
-        title: "项目名称",
-        description: "您的项目名称",
-        placeholder: "输入项目名称",
-      },
-      id: {
-        title: "项目ID",
-        description: "您的唯一项目标识符",
-        placeholder: "项目ID",
-      },
-      delete: {
-        title: "删除项目",
-        description: "永久删除此项目及其所有数据",
-        button: "删除项目",
-      },
-    },
-    team: {
-      name: {
-        title: "团队名称",
-        description: "您的团队名称",
-        placeholder: "输入团队名称",
-      },
-      billing: {
-        title: "账单计划",
-        description: "管理您团队的账单计划",
-        free: "免费",
-        pro: "专业版",
-        unlimited: "无限",
-      },
-      apiKey: {
-        title: "团队API密钥",
-        description: "团队访问的API密钥，与项目ID一起从您的CI/CD流水线中使用",
-        placeholder: "团队API密钥",
-      },
-      members: {
-        title: "成员",
-        pendingInvitations: "待处理的邀请",
-        filterPlaceholder: "过滤成员...",
-        allRoles: "所有角色",
-        date: "日期",
-        selectAll: "{count} 已选择",
-        noPendingInvitations: "没有待处理的邀请",
-        inviteMembers: "邀请成员协作",
-        roles: {
-          owner: "拥有者",
-          admin: "管理员",
-          member: "成员",
-        },
-        dateSort: {
-          newest: "最新",
-          oldest: "最旧",
-        },
-        leaveTeamConfirm: "离开团队",
-        leaveTeamDescription: "您确定要离开这个团队吗？",
-        cancel: "取消",
-        leaveTeam: "离开团队",
-        invite: "邀请成员",
-        removeMember: "移除成员",
-        removeMemberConfirm: "移除成员",
-        removeMemberDescription: "您确定要移除这个成员吗？",
-        noResults: "没有找到成员",
-        tryDifferentSearch: "尝试不同的搜索",
-        deleteInvite: "删除邀请",
-        deleteInviteDescription: "删除邀请",
-        invitedBy: "由{name}邀请",
-        deleteInviteSuccess: "邀请已删除",
-        deleteInviteError: "删除邀请失败",
-        removeMemberSuccess: "成员已移除",
-        removeMemberError: "移除成员失败",
-        removeMemberSuccessDescription: "成员已成功移除",
-        removeMemberErrorDescription: "移除成员失败",
-      },
-    },
-    badRequest: "无效请求",
-    badRequestDescription:
-      "组织必须至少有一个所有者。在移除此所有者之前，请将所有权转移给另一个成员。",
-    permissionDenied: "权限被拒绝",
-    permissionDeniedDescription: "您需要是团队的拥有者才能执行此操作",
-    deleteTeamTitle: "删除团队",
-    deleteTeamDescription: "当您是唯一成员时无法删除组织，请改为删除您的账户",
-    error: "出了点问题",
-    errorDescription: "请重试或联系支持",
-    addTeam: "创建团队",
-    apiKey: {
-      updated: "API密钥已更新",
-      updatedDescription: "您的API密钥已成功更新并复制到剪贴板。",
-      title: "更新API密钥",
-      description: "您确定要生成新的API密钥吗？旧密钥将立即停止工作。",
-      cancel: "取消",
-      continue: "继续",
-    },
-    provider: {
-      updateSuccess: "设置更新成功",
-      updateError: "设置更新失败",
-      translationProvider: {
-        title: "翻译提供商",
-        description:
-          "选择您偏好的AI服务以生成翻译。每个提供商提供不同的能力和定价。",
-        placeholder: "选择一个提供商",
-      },
-      languageModel: {
-        title: "语言模型",
-        description:
-          "选择最适合您翻译需求的AI模型，平衡质量和速度。更强大的模型可能更慢但产生更好的结果。",
-        placeholder: "选择一个模型",
-      },
-      apiKey: {
-        title: "提供商API密钥",
-        description:
-          "输入您的API密钥以与您选择的提供商进行身份验证。请保持此密钥安全 - 我们在存储前会加密它。",
-        placeholder: "输入您的API密钥",
-      },
-    },
-    addProject: "创建项目",
-    save: "保存",
-  },
-  tuning: {
-    general: "常规",
-    translationMemory: {
-      title: "翻译记忆",
-      description: "使用翻译记忆提高一致性和效率",
-    },
-    qualityChecks: {
-      title: "质量检查",
-      description: "启用翻译的自动质量检查",
-    },
-    contextDetection: {
-      title: "上下文检测",
-      description: "自动检测并保留翻译中的上下文",
-    },
-    styleGuide: "风格指南",
-    lengthControl: {
-      title: "长度控制",
-      description: "控制翻译文本的长度",
-      options: {
-        flexible: "灵活",
-        strict: "严格",
-        exact: "精确",
-        loose: "宽松",
-      },
-    },
-    inclusiveLanguage: {
-      title: "包容性语言",
-      description: "确保翻译使用包容性语言",
-    },
-    formality: {
-      title: "正式度",
-      description: "控制翻译的正式度",
-    },
-    brandName: {
-      title: "品牌名称",
-      description: "设置您的品牌名称以确保一致使用",
-      placeholder: "输入您的品牌名称",
-    },
-    brandVoice: {
-      title: "品牌声音",
-      description: "定义您的品牌声音和语调",
-      placeholder: "描述您的品牌声音...",
-    },
-    localization: "本地化",
-    idioms: {
-      title: "习语",
-      description: "适当处理习语表达",
-    },
-    terminology: {
-      title: "术语",
-      description: "管理专业术语和词汇表",
-    },
-    culturalAdaptation: {
-      title: "文化适应",
-      description: "适应内容以符合文化适宜性",
-    },
-  },
   pricing: {
-    title: "简单定价",
-    free: {
-      title: "免费（100个键）",
-      price: "免费",
-      keys_limit: "最多100个键",
+    title: "灵活定价",
+    basic: {
+      title: "基础套餐",
+      price: "¥98",
+      points: "100积分",
+      description: "适合轻度使用",
       features: {
-        unlimited_projects: "无限项目",
-        fine_tuning: "微调选项",
-        overrides: "翻译覆盖",
-        analytics: "分析",
-        context_memory: "上下文记忆",
-        community_support: "社区支持",
+        video_quality: "生成720P视频",
+        basic_voice: "基础AI配音",
+        basic_template: "基础场景模板",
+        with_watermark: "带水印导出",
+        subtitle: "单语种字幕",
+        basic_bgm: "基础背景音乐",
       },
     },
     pro: {
-      title: "专业版",
-      includes_free: "免费版的所有功能，加上：",
+      title: "超值套餐",
       features: {
-        github_action: "GitHub Action集成",
-        latest_features: "早期访问最新功能",
-        priority_support: "优先支持",
+        point_usage: "积分可用于以下全部功能：",
+        video_quality: "生成1080P高清视频",
+        all_voice: "全部AI配音音色",
+        all_template: "全部场景模板",
+        no_watermark: "无水印导出",
+        multi_subtitle: "多语种字幕",
+        pro_bgm: "专业音乐音效库",
       },
     },
-    cta: "开始自动化",
-  },
-  createTeam: {
-    teamName: "团队名称",
-    teamNamePlaceholder: "输入团队名称",
-    createTeamButton: "创建团队",
-    cancel: "取消",
-    createTeamDescription: "创建一个新团队来管理您的项目和协作者。",
-  },
-  createProject: {
-    createProjectTitle: "创建一个新项目",
-    projectNamePlaceholder: "输入项目名称",
-    createProjectButton: "创建项目",
-    cancel: "取消",
-    createProjectDescription: "创建一个新项目以开始自动化您的本地化。",
-  },
-  invite: {
-    inviteMember: "邀请成员",
-    inviteDescription: "邀请成员加入您的团队",
-    emailLabel: "电子邮件",
-    emailPlaceholder: "输入电子邮件",
-    cancel: "取消",
-    sendInvite: "发送邀请",
-    success: {
-      title: "邀请已发送",
-      description: "成功发送邀请至{email}",
-    },
-    error: {
-      title: "错误",
-      description: "发送邀请失败。请重试。",
-    },
-    validation: {
-      invalidEmail: "请输入有效的电子邮件",
-    },
-  },
-  months: {
-    "10": "十月",
-    "11": "十一月",
-    "12": "十二月",
-    "01": "一月",
-    "02": "二月",
-    "03": "三月",
-    "04": "四月",
-    "05": "五月",
-    "06": "六月",
-    "07": "七月",
-    "08": "八月",
-    "09": "九月",
-  },
-  onboarding: {
-    steps: {
-      "1": {
-        title: "设置Languine CLI",
-        description: "安装并配置Languine CLI以管理翻译",
-      },
-      "2": {
-        title: "推送翻译",
-        description: "等待翻译被推送",
-      },
-      "3": {
-        title: "文档",
-        description: "查看我们的文档以获取详细指南和最佳实践",
-        link: "文档",
-      },
-    },
-    info: {
-      description: "需要帮助？查看我们的",
-      link: "文档",
-      description_2: "以获取详细指南和最佳实践。",
-    },
-  },
-  cli: {
-    success: {
-      title: "Languine CLI登录成功",
-      description: "Languine CLI已成功认证为：",
-      description_2: "您现在可以关闭此标签页并返回到CLI",
-    },
-  },
-  translations: {
-    header: "翻译的键",
-  },
-  search: {
-    placeholder: "搜索",
-  },
-  periods: {
-    daily: "每日",
-    weekly: "每周",
-    monthly: "每月",
-    selectPeriod: "选择周期",
-  },
-  welcome: {
-    title: "欢迎使用 Languine",
-    description: "使用 Languine 自动化您的本地化流程",
-  },
-  button: {
-    update: "新翻译",
-  },
-  update: {
-    button: "新翻译",
-  },
-  hero2: {
-    title: "为您的应用程序自动化本地化",
-    description:
-      "使用人工智能驱动的命令行界面和管道，简化您的本地化流程，为开发者自动化翻译。",
+    cta: "立即购买",
+    points_never_expire:
+      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
+    points_usage_explanation:
+      "1积分可用于生成5秒视频。视频质量、是否带水印、字幕语言数量等会影响具体积分消耗。详细定价请查看具体功能页面。",
   },
   language: {
     en: "英语",
@@ -484,5 +106,73 @@ export default {
     sv: "瑞典语",
     fi: "芬兰语",
     vi: "越南语",
+  },
+  faq: {
+    title: "常见问题",
+    processing_time: {
+      question: "视频生成需要多长时间？",
+      answer:
+        "视频生成时间取决于内容长度和复杂度。一般5秒的视频片段生成需要1-2分钟，包括AI文案、配音、画面生成和合成的全过程。系统会自动将多个片段合并，您可以在生成过程中预览每个片段。",
+    },
+    ai_features: {
+      question: "支持哪些AI功能？",
+      answer:
+        "我们提供AI文本生成、AI配音（支持多种音色）、AI场景生成、智能字幕等功能。所有功能都可以用积分兑换使用，不同功能消耗的积分数量不同。您可以在生成前查看具体的积分消耗。",
+    },
+    edit_after_generation: {
+      question: "生成后的视频可以编辑吗？",
+      answer:
+        "生成的视频支持基础编辑功能，包括修改字幕、调整背景音乐、裁剪时长等。每次重新生成都会消耗相应积分，编辑已生成的视频不额外消耗积分。",
+    },
+    batch_generation: {
+      question: "支持批量生成视频吗？",
+      answer:
+        "支持批量生成，您可以提前准备好文案列表。建议先用少量积分测试效果，确认满意后再进行批量生成。企业用户可以通过API实现更高效的批量处理。",
+    },
+    points_expire: {
+      question: "积分会过期吗？",
+      answer:
+        "不会。您购买的积分永不过期，可以一直保留在账户中。我们还会不定期推出优惠活动，购买更多积分可以获得额外赠送。",
+    },
+    points_transfer: {
+      question: "积分可以转让或退款吗？",
+      answer:
+        "积分不支持转让或退款。购买前请确认您的需求，积分一旦购买即视为确认使用我们的服务。企业用户可以通过团队账号实现积分共享。",
+    },
+    quality_guarantee: {
+      question: "如果生成效果不理想怎么办？",
+      answer:
+        "AI生成是一个迭代的过程，您可以：1) 调整提示词重新生成；2) 更换场景模板重试；3) 使用编辑功能微调。每次生成都会消耗相应积分，建议在小规模测试满意后再进行批量生成。如遇到技术问题，可以联系客服获取帮助。",
+    },
+    commercial_use: {
+      question: "可以用于商业用途吗？",
+      answer:
+        "可以。我们的服务支持商业使用，生成的内容您拥有完整的使用权。对于大量商业需求，建议选择更优惠的批量积分包或联系我们获取企业定制方案。",
+    },
+    content_safety: {
+      question: "对生成内容有什么限制？",
+      answer:
+        "我们禁止生成任何违法、暴力、色情等违规内容。如发现违规使用，将直接关闭账号且不予退还积分。建议您在使用前仔细阅读我们的服务条款和内容规范。",
+    },
+    api_access: {
+      question: "是否提供API接口？",
+      answer:
+        "是的，我们提供完整的API接口，支持视频生成的全流程自动化。企业用户可以获得专属的API支持和更高的并发限制。如需了解详情，请联系商务团队。",
+    },
+    payment_methods: {
+      question: "支持哪些支付方式？",
+      answer:
+        "目前支持支付宝、微信支付等主流支付方式。支付成功后积分会立即到账。企业用户如需对公转账或开具发票，请联系客服处理。",
+    },
+  },
+  pricing_slider: {
+    tier: "套餐 {tier}",
+    points: "基础积分",
+    bonus: "赠送积分",
+    period: "永久",
+    points_suffix: "积分",
+    bonus_suffix: "赠送",
+    total: "总积分",
+    price_per_point: "单价",
   },
 } as const;

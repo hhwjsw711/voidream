@@ -21,7 +21,7 @@ const I18nMiddleware = createI18nMiddleware({
     "tr",
     "vi",
   ],
-  defaultLocale: "en",
+  defaultLocale: "zh",
   urlMappingStrategy: "rewrite",
 });
 
