@@ -4,8 +4,8 @@ export default {
     signIn: "登录",
   },
   hero: {
-    title: "颠覆传统影视，AI一键制片",
-    description: "输入想法，分分钟成片，按次付费，简单实惠",
+    title: "颠覆传统影视，AI一键制作",
+    description: "输入想法，分分钟成片，按次计费，简单实惠",
   },
   getStarted: {
     heading: "开始使用",
@@ -26,12 +26,12 @@ export default {
     aiScriptDescription: "输入简单文案，AI自动生成专业视频剧本，让创作事半功倍",
     aiVoice: "智能配音",
     aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然真实的配音效果",
-    aiVideo: "智能视频生成",
-    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级制作",
+    aiVideo: "智能视频制作",
+    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级效果",
     aiSubtitle: "智能字幕",
     aiSubtitleDescription: "多语言字幕自动生成，完美同步画面，支持多种字幕样式",
     aiTemplate: "场景模板",
-    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速出片",
+    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速生成",
     aiStyle: "风格定制",
     aiStyleDescription: "支持品牌色、字体、Logo等个性化定制，打造专属视觉形象",
     easyShare: "便捷分享",
@@ -40,7 +40,7 @@ export default {
     fastRenderDescription: "先进云端渲染技术，10分钟内完成视频生成",
   },
   pricing: {
-    title: "简单定价",
+    title: "产品定价",
     free: {
       title: "免费版",
       price: "免费",
@@ -57,9 +57,9 @@ export default {
       cta: "立即体验",
     },
     pro: {
-      title: "超值套餐",
+      title: "专业版",
       features: {
-        point_usage: "包含以下高级功能：",
+        point_usage: "包含以下专业功能：",
         video_quality: "1080P高清视频",
         all_voice: "20+专业配音音色",
         all_template: "100+场景模板",
@@ -70,7 +70,7 @@ export default {
       cta: "立即订购",
     },
     points_never_expire:
-      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
+      "积分永不过期，可随时使用。购买更多积分享更多优惠。支持对公转账，可开具发票。",
   },
   pricing_slider: {
     tier: "套餐 {tier}",
@@ -105,21 +105,21 @@ export default {
     he: "希伯来语",
     hr: "克罗地亚语",
     hu: "匈牙利语",
-    id: "印尼语",
+    id: "印度尼西亚语",
     iw: "希伯来语",
-    km: "高棉语",
+    km: "柬埔寨语",
     lv: "拉脱维亚语",
-    "pt-BR": "葡萄牙语（巴西）",
+    "pt-BR": "巴西葡萄牙语",
     ro: "罗马尼亚语",
     ru: "俄语",
-    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    "sk-SK": "斯洛伐克语",
     sk: "斯洛伐克语",
     sr: "塞尔维亚语",
     ta: "泰米尔语",
     th: "泰语",
     uk: "乌克兰语",
-    "zh-CN": "中文（简体）",
-    "zh-TW": "中文（繁体）",
+    "zh-CN": "简体中文",
+    "zh-TW": "繁体中文",
   },
   faq: {
     title: "常见问题",
@@ -149,9 +149,9 @@ export default {
         "个人账号的积分暂不支持转让。企业用户可以开通团队账号，实现成员间的积分共享。所有已购积分均永久有效，可以随时使用。",
     },
     points_transfer: {
-      question: "如何获得更多优惠？",
+      question: "如何获取更多优惠？",
       answer:
-        "1. 购买更高档次套餐可享受更优惠的积分单价；2. 关注我们的公众号获取限时优惠活动；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可以联系商务获取专属优惠。",
+        "1. 购买更高级别套餐可享更优惠的积分价格；2. 关注我们的公众号获取限时优惠；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可联系商务获取专属方案。", // 优化表达
     },
     quality_guarantee: {
       question: "如果生成效果不满意怎么办？",
@@ -175,7 +175,7 @@ export default {
         "我们禁止生成任何违法、侵权、色情或暴力内容。如发现违规使用将终止服务且不退还积分。请在使用前阅读服务条款和内容规范。",
     },
     api_access: {
-      question: "是否支持API对接？",
+      question: "是否支持API接入？",
       answer:
         "支持。企业用户可以获取API接口，实现视频生成流程的完整对接。我们提供专业的技术支持和更高的并发配额，详情请联系商务团队。",
     },
