@@ -45,6 +45,10 @@ export function FAQ() {
       answer: t("commercial_use.answer"),
     },
     {
+      question: t("copyright.question"),
+      answer: t("copyright.answer"),
+    },
+    {
       question: t("content_safety.question"),
       answer: t("content_safety.answer"),
     },

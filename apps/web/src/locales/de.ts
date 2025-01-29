@@ -1,517 +1,188 @@
 export default {
   header: {
-    pricing: "Preise",
-    docs: "Dokumentation",
-    signIn: "Anmelden",
-    goToApp: "Zur App",
+    pricing: "定价",
+    signIn: "登录",
   },
   hero: {
-    title: "Gesichtslose Videos für Ihre Kanäle in wenigen Minuten",
-    description:
-      "Verwandeln Sie Ihre Ideen in fesselnden Inhalt, ohne ein Abonnement zu benötigen. Bezahlen Sie nur für die Videos, die Sie erstellen.",
+    title: "颠覆传统影视，AI一键制片",
+    description: "输入想法，分分钟成片，按次付费，简单实惠",
   },
   getStarted: {
-    heading: "Loslegen",
-    title: "Automatisierte Lokalisierung für Ihre Anwendungen",
-    description:
-      "Optimieren Sie Ihren Lokalisierungsprozess mit einer KI-gestützten CLI und Pipeline, die entwickelt wurde, um Übersetzungen für Entwickler zu automatisieren.",
+    heading: "开始使用",
+    title: "10分钟，从想法到视频",
+    description: "无需专业技能，输入文字即可生成高质量视频",
     button: {
-      startAutomating: "Automatisierung starten",
-      readDocumentation: "Dokumentation lesen",
+      startAutomating: "开始创作",
+      readDocumentation: "套餐详情",
     },
   },
   companies: {
-    title: "Verwendet von",
-    addYourCompany: "+ Fügen Sie Ihr Unternehmen hinzu",
-  },
-  activity: {
-    title: "Aktivität",
-    loading: "Laden",
-    loadMore: "Mehr anzeigen",
-    noResults: "Keine Ergebnisse für '{search}'",
-    clearSearch: "Suche löschen",
+    title: "他们都在用",
+    addYourCompany: "更多机构正在加入...",
   },
   features: {
-    title: "Funktionen",
-    fullyOpenSource: "Vollständig Open Source",
-    fullyOpenSourceDescription:
-      "Unser Code ist öffentlich auf GitHub verfügbar, was Transparenz und Gemeinschaftsbeiträge ermöglicht.",
-    noVendorLockIn: "Kein Vendor Lock-in",
-    noVendorLockInDescription:
-      "Wir binden Sie nicht an einen bestimmten Dienst, verwenden Sie Ihre eigenen LLMs.",
-    presetsForExpo: "Voreinstellungen für Expo",
-    presetsForExpoDescription:
-      "Wir bieten Voreinstellungen für Expo, damit Sie schnell starten können.",
-    presetForReactNative: "Voreinstellung für React Native",
-    presetForReactNativeDescription:
-      "Wir bieten eine Voreinstellung für React Native, damit Sie schnell starten können.",
-    presetForReactEmail: "React Email Bibliothek",
-    presetForReactEmailDescription:
-      "Wir haben eine i18n-Bibliothek für React Email erstellt.",
-    readyForI18nLibraries: "Bereit für i18n-Bibliotheken",
-    readyForI18nLibrariesDescription:
-      "Wir unterstützen alle Bibliotheken, einschließlich der beliebtesten (next-intl, react-i18next, react-intl, etc).",
-  },
-  info: {
-    title: "Behandelt jeden Aspekt der Lokalisierung Ihrer App, einschließlich",
-    smartTranslation: {
-      title: "Intelligente Übersetzung",
-      intelligentTranslation: "Intelligente Übersetzung mit Kontextbewusstsein",
-      brandVoice: "Markenstimme und Tonkonsistenz",
-      terminology: "Terminologieverwaltung",
-      linguisticFeatures: "Erweiterte linguistische Funktionen",
-      realtimeUpdates: "Echtzeit-Übersetzungsaktualisierungen",
-    },
-    implementation: {
-      title: "Implementierung",
-      quickSetup: "Schnelle Einrichtung und Integration",
-      fileFormat: "Dateiformatbehandlung",
-      contentStructure: "Organisation der Inhaltsstruktur",
-      assetOrganization: "Organisation der Assets",
-    },
-    developer: {
-      title: "Entwicklererfahrung",
-      cli: "Befehlszeilenschnittstelle",
-      cicd: "CI/CD-Integration",
-      versionControl: "Versionskontrolle",
-      workflow: "Entwickler-Workflow",
-      documentation: "Umfassende Dokumentation",
-    },
-  },
-  login: {
-    title: "Anmelden",
-    github: "Mit GitHub anmelden",
-    google: "Mit Google anmelden",
-    footer: "Automatisieren Sie Ihre Lokalisierung.",
-    description:
-      "Melden Sie sich an, um Ihre Lokalisierung in Sekunden zu automatisieren.",
-    terms: {
-      text: "Durch die Anmeldung stimmen Sie unseren",
-      termsOfService: "Nutzungsbedingungen",
-      and: "und",
-      privacyPolicy: "Datenschutzrichtlinie",
-    },
-  },
-  userMenu: {
-    account: "Kontoeinstellungen",
-    signOut: "Abmelden",
-    createTeam: "Team erstellen",
-    homepage: "Startseite",
-    team: "Team-Einstellungen",
-  },
-  teamSelector: {
-    addProject: "Projekt erstellen",
-    createProjectTitle: "Ein neues Projekt erstellen",
-    projectNamePlaceholder: "Projektname",
-    createProjectButton: "Projekt erstellen",
-    pro: "Pro",
-    project: "Projekt",
-    teams: "Teams",
-    createTeam: "Team erstellen",
-    createTeamTitle: "Ein neues Team erstellen",
-    teamNamePlaceholder: "Teamname",
-    createTeamButton: "Team erstellen",
-  },
-  coming_soon: {
-    title: "Languine ist in der Early Access-Phase",
-    description:
-      "Wir befinden uns derzeit in der Early Access-Phase. Kontaktieren Sie",
-    cta: "auf X, um frühzeitigen Zugang zu erhalten.",
-  },
-  account: {
-    fullName: {
-      title: "Vollständiger Name",
-      description:
-        "Ihr vollständiger Name, wie er auf der Plattform erscheinen wird.",
-      placeholder: "Geben Sie Ihren vollständigen Namen ein",
-    },
-    email: {
-      title: "E-Mail-Adresse",
-      description: "Die E-Mail-Adresse, die mit Ihrem Konto verknüpft ist.",
-      placeholder: "Geben Sie Ihre E-Mail-Adresse ein",
-    },
-    apiKey: {
-      title: "API-Schlüssel",
-      description:
-        "Ihr persönlicher API-Schlüssel für den Zugriff auf die Languine API und die CLI.",
-    },
-    deleteAccount: {
-      title: "Konto löschen",
-      description:
-        "Ihr Konto und alle damit verbundenen Daten dauerhaft löschen. Diese Aktion kann nicht rückgängig gemacht werden.",
-      button: "Konto löschen",
-    },
-  },
-  copyInstall: {
-    copied: "In die Zwischenablage kopiert",
-  },
-  dangerZone: {
-    dialog: {
-      title: "Sind Sie absolut sicher?",
-      description:
-        "Diese Aktion kann nicht rückgängig gemacht werden. Bitte geben Sie LÖSCHEN zur Bestätigung ein.",
-      placeholder: "Geben Sie LÖSCHEN zur Bestätigung ein",
-      confirm: "Löschen bestätigen",
-      cancel: "Abbrechen",
-    },
-  },
-  pipeline: {
-    title: "Workflow (CI/CD-Pipeline)",
-    pro: "[pro]",
-    description:
-      "Unsere Übersetzungsmaschine integriert sich nahtlos in Ihre bestehende CI/CD-Pipeline und übersetzt automatisch Ihre Codebasis bei jedem Push. Wenn Codeänderungen gepusht werden, analysieren wir die geänderten Inhalte, pflegen Ihr Übersetzungsgedächtnis und generieren genaue Übersetzungen, während wir Ihre Markenstimme und Terminologie bewahren. Die Übersetzungen werden dann als Pull Requests eingereicht, die vor der Zusammenführung in Ihren Hauptzweig und der Bereitstellung überprüft werden können. Dieser automatisierte Workflow stellt sicher, dass Ihre lokalisierten Inhalte mit der Entwicklung synchron bleiben.",
-  },
-  settings: {
-    saved: "Einstellungen gespeichert",
-    savedDescription: "Ihre Änderungen wurden erfolgreich gespeichert",
-    tabs: {
-      project: "Projekt",
-      account: "Konto",
-      team: "Team",
-      provider: "Anbieter",
-      billing: "Abrechnung",
-    },
-    project: {
-      name: {
-        title: "Projektname",
-        description: "Der Name Ihres Projekts",
-        placeholder: "Geben Sie den Projektnamen ein",
-      },
-      id: {
-        title: "Projekt-ID",
-        description: "Ihr eindeutiger Projektbezeichner",
-        placeholder: "Projekt-ID",
-      },
-      delete: {
-        title: "Projekt löschen",
-        description: "Dieses Projekt und alle seine Daten dauerhaft löschen",
-        button: "Projekt löschen",
-      },
-    },
-    team: {
-      name: {
-        title: "Teamname",
-        description: "Der Name Ihres Teams",
-        placeholder: "Geben Sie den Teamnamen ein",
-      },
-      billing: {
-        title: "Abrechnungsplan",
-        description: "Verwalten Sie den Abrechnungsplan Ihres Teams",
-        free: "Kostenlos",
-        pro: "Pro",
-        unlimited: "Unbegrenzt",
-      },
-      apiKey: {
-        title: "Team-API-Schlüssel",
-        description:
-          "API-Schlüssel für den Teamzugriff, verwenden Sie diesen von Ihrer CI/CD-Pipeline zusammen mit der Projekt-ID",
-        placeholder: "Team-API-Schlüssel",
-      },
-      members: {
-        title: "Mitglieder",
-        pendingInvitations: "Ausstehende Einladungen",
-        filterPlaceholder: "Mitglieder filtern...",
-        allRoles: "Alle Rollen",
-        date: "Datum",
-        selectAll: "{count} ausgewählt",
-        noPendingInvitations: "Keine ausstehenden Einladungen",
-        inviteMembers: "Laden Sie Mitglieder zur Zusammenarbeit ein",
-        roles: {
-          owner: "Besitzer",
-          admin: "Administrator",
-          member: "Mitglied",
-        },
-        dateSort: {
-          newest: "Neueste",
-          oldest: "Älteste",
-        },
-        leaveTeamConfirm: "Team verlassen",
-        leaveTeamDescription:
-          "Sind Sie sicher, dass Sie dieses Team verlassen möchten?",
-        cancel: "Abbrechen",
-        leaveTeam: "Team verlassen",
-        invite: "Mitglied einladen",
-        removeMember: "Mitglied entfernen",
-        removeMemberConfirm: "Mitglied entfernen",
-        removeMemberDescription:
-          "Sind Sie sicher, dass Sie dieses Mitglied entfernen möchten?",
-        noResults: "Keine Mitglieder gefunden",
-        tryDifferentSearch: "Versuchen Sie eine andere Suche",
-        deleteInvite: "Einladung löschen",
-        deleteInviteDescription: "Löschen Sie die Einladung",
-        invitedBy: "Eingeladen von {name}",
-        deleteInviteSuccess: "Einladung gelöscht",
-        deleteInviteError: "Fehler beim Löschen der Einladung",
-        removeMemberSuccess: "Mitglied entfernt",
-        removeMemberError: "Fehler beim Entfernen des Mitglieds",
-        removeMemberSuccessDescription: "Mitglied wurde erfolgreich entfernt",
-        removeMemberErrorDescription: "Fehler beim Entfernen des Mitglieds",
-      },
-    },
-    badRequest: "Ungültige Anfrage",
-    badRequestDescription:
-      "Die Organisation muss mindestens einen Besitzer haben. Übertragen Sie das Eigentum an ein anderes Mitglied, bevor Sie diesen Besitzer entfernen.",
-    permissionDenied: "Zugriff verweigert",
-    permissionDeniedDescription:
-      "Sie müssen ein Besitzer des Teams sein, um diese Aktion durchzuführen",
-    deleteTeamTitle: "Team löschen",
-    deleteTeamDescription:
-      "Kann die Organisation nicht löschen, wenn Sie das einzige Mitglied sind, löschen Sie stattdessen Ihr Konto",
-    error: "Etwas ist schief gelaufen",
-    errorDescription:
-      "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support",
-    addTeam: "Team erstellen",
-    apiKey: {
-      updated: "API-Schlüssel aktualisiert",
-      updatedDescription:
-        "Ihr API-Schlüssel wurde erfolgreich aktualisiert und in Ihre Zwischenablage kopiert.",
-      title: "API-Schlüssel aktualisieren",
-      description:
-        "Sind Sie sicher, dass Sie einen neuen API-Schlüssel generieren möchten? Der alte Schlüssel wird sofort ungültig.",
-      cancel: "Abbrechen",
-      continue: "Fortfahren",
-    },
-    provider: {
-      updateSuccess: "Einstellungen erfolgreich aktualisiert",
-      updateError: "Fehler beim Aktualisieren der Einstellungen",
-      translationProvider: {
-        title: "Übersetzungsanbieter",
-        description:
-          "Wählen Sie Ihren bevorzugten KI-Dienst für die Generierung von Übersetzungen. Jeder Anbieter bietet unterschiedliche Fähigkeiten und Preise.",
-        placeholder: "Wählen Sie einen Anbieter",
-      },
-      languageModel: {
-        title: "Sprachmodell",
-        description:
-          "Wählen Sie das KI-Modell, das Qualität und Geschwindigkeit für Ihre Übersetzungsanforderungen am besten ausbalanciert. Leistungsfähigere Modelle können langsamer sein, aber bessere Ergebnisse liefern.",
-        placeholder: "Wählen Sie ein Modell",
-      },
-      apiKey: {
-        title: "Anbieter-API-Schlüssel",
-        description:
-          "Geben Sie Ihren API-Schlüssel ein, um sich bei Ihrem gewählten Anbieter zu authentifizieren. Bewahren Sie diesen Schlüssel sicher auf - wir verschlüsseln ihn vor der Speicherung.",
-        placeholder: "Geben Sie Ihren API-Schlüssel ein",
-      },
-    },
-    addProject: "Projekt erstellen",
-    save: "Speichern",
-  },
-  tuning: {
-    general: "Allgemein",
-    translationMemory: {
-      title: "Übersetzungsgedächtnis",
-      description:
-        "Verwenden Sie das Übersetzungsgedächtnis, um Konsistenz und Effizienz zu verbessern",
-    },
-    qualityChecks: {
-      title: "Qualitätsprüfungen",
-      description:
-        "Aktivieren Sie automatische Qualitätsprüfungen für Übersetzungen",
-    },
-    contextDetection: {
-      title: "Kontexterkennung",
-      description:
-        "Erkennen und bewahren Sie automatisch den Kontext in Übersetzungen",
-    },
-    styleGuide: "Stilrichtlinie",
-    lengthControl: {
-      title: "Längenkontrolle",
-      description: "Kontrollieren Sie die Länge des übersetzten Textes",
-      options: {
-        flexible: "Flexibel",
-        strict: "Streng",
-        exact: "Exakt",
-        loose: "Locker",
-      },
-    },
-    inclusiveLanguage: {
-      title: "Inklusive Sprache",
-      description:
-        "Stellen Sie sicher, dass Übersetzungen inklusive Sprache verwenden",
-    },
-    formality: {
-      title: "Formalität",
-      description: "Kontrollieren Sie das Formalitätsniveau von Übersetzungen",
-    },
-    brandName: {
-      title: "Markenname",
-      description:
-        "Legen Sie Ihren Markennamen für eine konsistente Verwendung fest",
-      placeholder: "Geben Sie Ihren Markennamen ein",
-    },
-    brandVoice: {
-      title: "Markenstimme",
-      description: "Definieren Sie Ihre Markenstimme und Ihren Ton",
-      placeholder: "Beschreiben Sie Ihre Markenstimme...",
-    },
-    localization: "Lokalisierung",
-    idioms: {
-      title: "Idiome",
-      description: "Behandeln Sie idiomatische Ausdrücke angemessen",
-    },
-    terminology: {
-      title: "Terminologie",
-      description: "Verwalten Sie spezialisierte Terminologie und Glossare",
-    },
-    culturalAdaptation: {
-      title: "Kulturelle Anpassung",
-      description: "Passen Sie Inhalte für kulturelle Angemessenheit an",
-    },
+    title: "核心功能",
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "输入简单文案，AI自动生成专业视频剧本，让创作事半功倍",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然真实的配音效果",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级制作",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "多语言字幕自动生成，完美同步画面，支持多种字幕样式",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速出片",
+    aiStyle: "风格定制",
+    aiStyleDescription: "支持品牌色、字体、Logo等个性化定制，打造专属视觉形象",
+    easyShare: "便捷分享",
+    easyShareDescription: "一键分享到各大平台，支持多种格式导出，扩大传播力",
+    fastRender: "快速渲染",
+    fastRenderDescription: "先进云端渲染技术，10分钟内完成视频生成",
   },
   pricing: {
-    title: "Einfache Preisgestaltung",
+    title: "简单定价",
     free: {
-      title: "Kostenlos (100 Schlüssel)",
-      price: "Kostenlos",
-      keys_limit: "Bis zu 100 Schlüssel",
+      title: "免费版",
+      price: "免费",
+      points: "300积分",
+      description: "新用户专享，可生成2-3个完整视频",
       features: {
-        unlimited_projects: "Unbegrenzte Projekte",
-        fine_tuning: "Feinabstimmungsoptionen",
-        overrides: "Übersetzungsüberschreibungen",
-        analytics: "Analytik",
-        context_memory: "Kontextgedächtnis",
-        community_support: "Community-Support",
+        video_quality: "720P视频清晰度",
+        basic_voice: "2个AI配音音色",
+        basic_template: "10个精选模板",
+        with_watermark: "带水印导出",
+        subtitle: "单语种字幕",
+        basic_bgm: "基础背景音乐",
       },
+      cta: "立即体验",
     },
     pro: {
-      title: "Pro",
-      includes_free: "Alles in Kostenlos, plus:",
+      title: "超值套餐",
       features: {
-        github_action: "GitHub-Action-Integration",
-        latest_features: "Frühzeitiger Zugang zu neuesten Funktionen",
-        priority_support: "Priorisierter Support",
+        point_usage: "包含以下高级功能：",
+        video_quality: "1080P高清视频",
+        all_voice: "20+专业配音音色",
+        all_template: "100+场景模板",
+        no_watermark: "无水印导出",
+        multi_subtitle: "多语种字幕转换",
+        pro_bgm: "版权音乐库",
       },
+      cta: "立即订购",
     },
-    cta: "Automatisierung starten",
+    points_never_expire:
+      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
   },
-  createTeam: {
-    teamName: "Teamname",
-    teamNamePlaceholder: "Geben Sie den Teamnamen ein",
-    createTeamButton: "Team erstellen",
-    cancel: "Abbrechen",
-    createTeamDescription:
-      "Erstellen Sie ein neues Team, um Ihre Projekte und Mitarbeiter zu verwalten.",
-  },
-  createProject: {
-    createProjectTitle: "Ein neues Projekt erstellen",
-    projectNamePlaceholder: "Geben Sie den Projektnamen ein",
-    createProjectButton: "Projekt erstellen",
-    cancel: "Abbrechen",
-    createProjectDescription:
-      "Erstellen Sie ein neues Projekt, um Ihre Lokalisierung zu automatisieren.",
-  },
-  invite: {
-    inviteMember: "Mitglied einladen",
-    inviteDescription: "Laden Sie ein Mitglied in Ihr Team ein",
-    emailLabel: "E-Mail",
-    emailPlaceholder: "E-Mail eingeben",
-    cancel: "Abbrechen",
-    sendInvite: "Einladung senden",
-    success: {
-      title: "Einladung gesendet",
-      description: "Einladung erfolgreich an {email} gesendet",
-    },
-    error: {
-      title: "Fehler",
-      description:
-        "Fehler beim Senden der Einladung. Bitte versuchen Sie es erneut.",
-    },
-    validation: {
-      invalidEmail: "Bitte geben Sie eine gültige E-Mail ein",
-    },
-  },
-  months: {
-    "10": "Okt",
-    "11": "Nov",
-    "12": "Dez",
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mär",
-    "04": "Apr",
-    "05": "Mai",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-  },
-  onboarding: {
-    steps: {
-      "1": {
-        title: "Languine CLI einrichten",
-        description:
-          "Installieren und konfigurieren Sie die Languine CLI, um Übersetzungen zu verwalten",
-      },
-      "2": {
-        title: "Übersetzungen pushen",
-        description: "Warten auf das Pushen der Übersetzungen",
-      },
-      "3": {
-        title: "Dokumentation",
-        description:
-          "Schauen Sie sich unsere Dokumentation für detaillierte Anleitungen und Best Practices an",
-        link: "Dokumentation",
-      },
-    },
-    info: {
-      description: "Brauchen Sie Hilfe? Schauen Sie sich unsere",
-      link: "Dokumentation",
-      description_2: "für detaillierte Anleitungen und Best Practices an.",
-    },
-  },
-  cli: {
-    success: {
-      title: "Languine CLI Login erfolgreich",
-      description: "Languine CLI wurde erfolgreich authentifiziert als:",
-      description_2:
-        "Sie können diesen Tab jetzt schließen und zur CLI zurückkehren",
-    },
-  },
-  translations: {
-    header: "Übersetzte Schlüssel",
-  },
-  search: {
-    placeholder: "Suche",
-  },
-  periods: {
-    daily: "Täglich",
-    weekly: "Wöchentlich",
-    monthly: "Monatlich",
-    selectPeriod: "Zeitraum auswählen",
-  },
-  welcome: {
-    title: "Willkommen bei Languine",
-    description: "Automatisieren Sie Ihren Lokalisierungsprozess mit Languine",
-  },
-  button: {
-    update: "Neue Übersetzungen",
-  },
-  update: {
-    button: "Neue Übersetzungen",
-  },
-  hero2: {
-    title: "Automatisierte Lokalisierung für Ihre Anwendungen",
-    description:
-      "Optimieren Sie Ihren Lokalisierungsprozess mit einer KI-gestützten CLI und einem Pipeline-System, das speziell für Entwickler entwickelt wurde, um Übersetzungen zu automatisieren.",
+  pricing_slider: {
+    tier: "套餐 {tier}",
+    points: "基础积分",
+    bonus_points: "赠送积分",
+    period: "永久",
   },
   language: {
-    en: "Englisch",
-    es: "Spanisch",
-    fr: "Französisch",
-    de: "Deutsch",
-    it: "Italienisch",
-    pt: "Portugiesisch",
-    zh: "Chinesisch",
-    ja: "Japanisch",
-    ko: "Koreanisch",
-    ar: "Arabisch",
-    hi: "Hindi",
-    tr: "Türkisch",
-    nl: "Niederländisch",
-    pl: "Polnisch",
-    no: "Norwegisch",
-    da: "Dänisch",
-    sv: "Schwedisch",
-    fi: "Finnisch",
-    vi: "Vietnamesisch",
+    en: "英语",
+    es: "西班牙语",
+    fr: "法语",
+    de: "德语",
+    it: "意大利语",
+    pt: "葡萄牙语",
+    ja: "日语",
+    ko: "韩语",
+    ar: "阿拉伯语",
+    tr: "土耳其语",
+    nl: "荷兰语",
+    pl: "波兰语",
+    no: "挪威语",
+    da: "丹麦语",
+    sv: "瑞典语",
+    fi: "芬兰语",
+    vi: "越南语",
+    az: "阿塞拜疆语",
+    bg: "保加利亚语",
+    ca: "加泰罗尼亚语",
+    cs: "捷克语",
+    el: "希腊语",
+    et: "爱沙尼亚语",
+    he: "希伯来语",
+    hr: "克罗地亚语",
+    hu: "匈牙利语",
+    id: "印尼语",
+    iw: "希伯来语",
+    km: "高棉语",
+    lv: "拉脱维亚语",
+    "pt-BR": "葡萄牙语（巴西）",
+    ro: "罗马尼亚语",
+    ru: "俄语",
+    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    sk: "斯洛伐克语",
+    sr: "塞尔维亚语",
+    ta: "泰米尔语",
+    th: "泰语",
+    uk: "乌克兰语",
+    "zh-CN": "中文（简体）",
+    "zh-TW": "中文（繁体）",
+  },
+  faq: {
+    title: "常见问题",
+    processing_time: {
+      question: "视频生成需要多长时间？",
+      answer:
+        "一般1分钟视频生成需要3-5分钟，包括AI文案、配音、画面生成和合成的全过程。您可以在生成过程中实时预览每个片段的效果。",
+    },
+    ai_features: {
+      question: "一个视频需要多少积分？",
+      answer:
+        "一个1分钟的标准视频约需100积分。新用户可获得300积分免费体验，足够生成2-3个完整视频。付费用户起步70元可获得3000积分，购买更多积分享受更优惠的价格。您可以在生成前查看预估积分消耗。",
+    },
+    edit_after_generation: {
+      question: "生成后的视频可以编辑吗？",
+      answer:
+        "可以。生成后支持修改字幕、调整配音、更换背景音乐、裁剪画面等编辑功能。编辑已生成的视频不会额外消耗积分，仅重新生成时才会消耗积分。",
+    },
+    batch_generation: {
+      question: "购买的积分可以一直使用吗？",
+      answer:
+        "是的，所有购买的积分永不过期。我们提供多档套餐：基础套餐70元3000积分起，购买更多积分享受更优惠的价格。企业用户可以联系我们获取定制方案。",
+    },
+    points_expire: {
+      question: "积分可以共享和转让吗？",
+      answer:
+        "个人账号的积分暂不支持转让。企业用户可以开通团队账号，实现成员间的积分共享。所有已购积分均永久有效，可以随时使用。",
+    },
+    points_transfer: {
+      question: "如何获得更多优惠？",
+      answer:
+        "1. 购买更高档次套餐可享受更优惠的积分单价；2. 关注我们的公众号获取限时优惠活动；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可以联系商务获取专属优惠。",
+    },
+    quality_guarantee: {
+      question: "如果生成效果不满意怎么办？",
+      answer:
+        "您可以：1) 调整提示词重新生成；2) 更换场景模板重试；3) 使用编辑功能微调。建议先用免费积分测试效果，满意后再购买积分使用。如遇技术问题，可以联系客服获取帮助。",
+    },
+    commercial_use: {
+      question: "可以用于商业用途吗？",
+      answer:
+        "可以。生成的视频支持商业使用，您拥有完整的版权。对于企业用户，我们提供更灵活的套餐方案和专属服务支持，欢迎联系商务咨询。",
+    },
+    copyright: {
+      question: "视频的知识产权归属问题？",
+      answer:
+        "使用我们服务生成的视频，其知识产权归您所有。您可以自由使用、分享和商用。但请注意：1) 您需要确保上传的素材拥有相应使用权；2) 平台的技术、界面等知识产权归我们所有；3) 请勿侵犯他人知识产权，否则后果自负。",
+    },
+
+    content_safety: {
+      question: "对内容生成有什么限制？",
+      answer:
+        "我们禁止生成任何违法、侵权、色情或暴力内容。如发现违规使用将终止服务且不退还积分。请在使用前阅读服务条款和内容规范。",
+    },
+    api_access: {
+      question: "是否支持API对接？",
+      answer:
+        "支持。企业用户可以获取API接口，实现视频生成流程的完整对接。我们提供专业的技术支持和更高的并发配额，详情请联系商务团队。",
+    },
+    payment_methods: {
+      question: "支持哪些支付方式？",
+      answer:
+        "支持微信支付、支付宝等主流支付方式，支付成功后积分立即到账。企业用户如需对公转账或开具发票，可以联系客服处理。",
+    },
   },
 } as const;

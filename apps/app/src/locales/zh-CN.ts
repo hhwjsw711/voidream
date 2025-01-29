@@ -46,8 +46,8 @@ export default {
     title: "登录",
     github: "使用GitHub登录",
     google: "使用Google登录",
-    footer: "自动化您的本地化。",
-    description: "登录后即可开始创作。",
+    footer: "让AI为您创作精彩视频",
+    description: "登录即可开始AI视频创作",
     terms: {
       text: "通过登录，您同意我们的",
       termsOfService: "服务条款",

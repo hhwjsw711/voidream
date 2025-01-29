@@ -1,508 +1,188 @@
 export default {
   header: {
-    pricing: "Prezzi",
-    docs: "Documentazione",
-    signIn: "Accedi",
-    goToApp: "Vai all'app",
+    pricing: "定价",
+    signIn: "登录",
   },
   hero: {
-    title: "Video senza volto per i tuoi canali in pochi minuti",
-    description:
-      "Trasforma le tue idee in contenuti accattivanti senza bisogno di un abbonamento. Paga solo per i video che crei.",
+    title: "颠覆传统影视，AI一键制片",
+    description: "输入想法，分分钟成片，按次付费，简单实惠",
   },
   getStarted: {
-    heading: "Inizia",
-    title: "Localizzazione automatizzata per le tue applicazioni",
-    description:
-      "Ottimizza il tuo processo di localizzazione con una CLI e una pipeline alimentate dall'IA progettate per automatizzare le traduzioni per gli sviluppatori.",
+    heading: "开始使用",
+    title: "10分钟，从想法到视频",
+    description: "无需专业技能，输入文字即可生成高质量视频",
     button: {
-      startAutomating: "Inizia l'automazione",
-      readDocumentation: "Leggi la documentazione",
+      startAutomating: "开始创作",
+      readDocumentation: "套餐详情",
     },
   },
   companies: {
-    title: "Usato da",
-    addYourCompany: "+ Aggiungi la tua azienda",
-  },
-  activity: {
-    title: "Attività",
-    loading: "Caricamento",
-    loadMore: "Mostra di più",
-    noResults: "Nessun risultato per '{search}'",
-    clearSearch: "Cancella ricerca",
+    title: "他们都在用",
+    addYourCompany: "更多机构正在加入...",
   },
   features: {
-    title: "Funzionalità",
-    fullyOpenSource: "Completamente open source",
-    fullyOpenSourceDescription:
-      "Il nostro codice è pubblicamente disponibile su GitHub, consentendo trasparenza e contributi della comunità.",
-    noVendorLockIn: "Nessun vincolo di fornitore",
-    noVendorLockInDescription:
-      "Non ti blocchiamo in un servizio specifico, usa i tuoi LLM.",
-    presetsForExpo: "Preset per Expo",
-    presetsForExpoDescription:
-      "Forniamo preset per Expo, così puoi iniziare rapidamente.",
-    presetForReactNative: "Preset per React Native",
-    presetForReactNativeDescription:
-      "Forniamo un preset per React Native, così puoi iniziare rapidamente.",
-    presetForReactEmail: "Libreria React Email",
-    presetForReactEmailDescription:
-      "Abbiamo creato una libreria i18n per React Email.",
-    readyForI18nLibraries: "Pronto per le librerie i18n",
-    readyForI18nLibrariesDescription:
-      "Supportiamo tutte le librerie, comprese le più popolari (next-intl, react-i18next, react-intl, ecc).",
-  },
-  info: {
-    title: "Gestisce ogni aspetto della localizzazione della tua app, inclusi",
-    smartTranslation: {
-      title: "Traduzione intelligente",
-      intelligentTranslation:
-        "Traduzione intelligente con consapevolezza del contesto",
-      brandVoice: "Coerenza del tono e della voce del brand",
-      terminology: "Gestione della terminologia",
-      linguisticFeatures: "Funzionalità linguistiche avanzate",
-      realtimeUpdates: "Aggiornamenti delle traduzioni in tempo reale",
-    },
-    implementation: {
-      title: "Implementazione",
-      quickSetup: "Configurazione e integrazione rapida",
-      fileFormat: "Gestione dei formati di file",
-      contentStructure: "Organizzazione della struttura dei contenuti",
-      assetOrganization: "Organizzazione delle risorse",
-    },
-    developer: {
-      title: "Esperienza dello sviluppatore",
-      cli: "Interfaccia a riga di comando",
-      cicd: "Integrazione CI/CD",
-      versionControl: "Controllo delle versioni",
-      workflow: "Flusso di lavoro dello sviluppatore",
-      documentation: "Documentazione completa",
-    },
-  },
-  login: {
-    title: "Accedi",
-    github: "Accedi con GitHub",
-    google: "Accedi con Google",
-    footer: "Automatizza la tua localizzazione.",
-    description:
-      "Accedi per iniziare ad automatizzare la tua localizzazione in pochi secondi.",
-    terms: {
-      text: "Accedendo, accetti i nostri",
-      termsOfService: "Termini di servizio",
-      and: "e",
-      privacyPolicy: "Politica sulla privacy",
-    },
-  },
-  userMenu: {
-    account: "Impostazioni dell'account",
-    signOut: "Esci",
-    createTeam: "Crea team",
-    homepage: "Homepage",
-    team: "Impostazioni del team",
-  },
-  teamSelector: {
-    addProject: "Crea progetto",
-    createProjectTitle: "Crea un nuovo progetto",
-    projectNamePlaceholder: "Nome del progetto",
-    createProjectButton: "Crea progetto",
-    pro: "Pro",
-    project: "Progetto",
-    teams: "Team",
-    createTeam: "Crea team",
-    createTeamTitle: "Crea un nuovo team",
-    teamNamePlaceholder: "Nome del team",
-    createTeamButton: "Crea team",
-  },
-  coming_soon: {
-    title: "Languine è in Accesso Anticipato",
-    description: "Siamo attualmente in accesso anticipato. Contatta",
-    cta: "su X per ottenere l'accesso anticipato.",
-  },
-  account: {
-    fullName: {
-      title: "Nome completo",
-      description: "Il tuo nome completo come apparirà sulla piattaforma.",
-      placeholder: "Inserisci il tuo nome completo",
-    },
-    email: {
-      title: "Indirizzo email",
-      description: "L'indirizzo email associato al tuo account.",
-      placeholder: "Inserisci il tuo indirizzo email",
-    },
-    apiKey: {
-      title: "Chiave API",
-      description:
-        "La tua chiave API personale per accedere all'API di Languine e dalla CLI.",
-    },
-    deleteAccount: {
-      title: "Elimina account",
-      description:
-        "Elimina definitivamente il tuo account e tutti i dati associati. Questa azione non può essere annullata.",
-      button: "Elimina account",
-    },
-  },
-  copyInstall: {
-    copied: "Copiato negli appunti",
-  },
-  dangerZone: {
-    dialog: {
-      title: "Sei assolutamente sicuro?",
-      description:
-        "Questa azione non può essere annullata. Digita DELETE per confermare.",
-      placeholder: "Digita DELETE per confermare",
-      confirm: "Conferma eliminazione",
-      cancel: "Annulla",
-    },
-  },
-  pipeline: {
-    title: "Flusso di lavoro (Pipeline CI/CD)",
-    pro: "[pro]",
-    description:
-      "Il nostro motore di traduzione si integra perfettamente nella tua pipeline CI/CD esistente, traducendo automaticamente il tuo codice base ad ogni push. Quando vengono effettuate modifiche al codice, analizziamo il contenuto modificato, manteniamo la tua memoria di traduzione e generiamo traduzioni accurate preservando la voce del brand e la terminologia. Le traduzioni vengono quindi inviate come pull request, consentendo la revisione prima di essere unite nel tuo ramo principale e distribuite. Questo flusso di lavoro automatizzato assicura che i tuoi contenuti localizzati rimangano sincronizzati con lo sviluppo.",
-  },
-  settings: {
-    badRequest: "Richiesta non valida",
-    badRequestDescription:
-      "L'organizzazione deve avere almeno un proprietario. Trasferisci la proprietà a un altro membro prima di rimuovere questo proprietario.",
-    permissionDenied: "Permesso negato",
-    permissionDeniedDescription:
-      "Devi essere un proprietario del team per eseguire questa azione",
-    deleteTeamTitle: "Elimina team",
-    deleteTeamDescription:
-      "Non puoi eliminare l'organizzazione quando sei l'unico membro, elimina invece il tuo account",
-    saved: "Impostazioni salvate",
-    savedDescription: "Le tue modifiche sono state salvate con successo",
-    error: "Qualcosa è andato storto",
-    errorDescription: "Riprova o contatta il supporto",
-    addTeam: "Crea team",
-    apiKey: {
-      updated: "Chiave API aggiornata",
-      updatedDescription:
-        "La tua chiave API è stata aggiornata con successo e copiata negli appunti.",
-      title: "Aggiorna chiave API",
-      description:
-        "Sei sicuro di voler generare una nuova chiave API? La vecchia chiave smetterà di funzionare immediatamente.",
-      cancel: "Annulla",
-      continue: "Continua",
-    },
-    tabs: {
-      project: "Progetto",
-      account: "Account",
-      team: "Team",
-      provider: "Fornitore",
-      billing: "Fatturazione",
-    },
-    provider: {
-      updateSuccess: "Impostazioni aggiornate con successo",
-      updateError: "Impossibile aggiornare le impostazioni",
-      translationProvider: {
-        title: "Fornitore di traduzioni",
-        description:
-          "Scegli il servizio AI preferito per generare traduzioni. Ogni fornitore offre diverse capacità e prezzi.",
-        placeholder: "Seleziona un fornitore",
-      },
-      languageModel: {
-        title: "Modello linguistico",
-        description:
-          "Seleziona il modello AI che bilancia meglio qualità e velocità per le tue esigenze di traduzione. Modelli più potenti possono essere più lenti ma producono risultati migliori.",
-        placeholder: "Seleziona un modello",
-      },
-      apiKey: {
-        title: "Chiave API del fornitore",
-        description:
-          "Inserisci la tua chiave API per autenticarti con il fornitore scelto. Mantieni questa chiave sicura - la crittiamo prima di memorizzarla.",
-        placeholder: "Inserisci la tua chiave API",
-      },
-    },
-    addProject: "Crea progetto",
-    project: {
-      name: {
-        title: "Nome del progetto",
-        description: "Il nome del tuo progetto",
-        placeholder: "Inserisci il nome del progetto",
-      },
-      id: {
-        title: "ID progetto",
-        description: "Il tuo identificatore unico del progetto",
-        placeholder: "ID progetto",
-      },
-      delete: {
-        title: "Elimina progetto",
-        description:
-          "Elimina definitivamente questo progetto e tutti i suoi dati",
-        button: "Elimina progetto",
-      },
-    },
-    save: "Salva",
-    team: {
-      name: {
-        title: "Nome del team",
-        description: "Il nome del tuo team",
-        placeholder: "Inserisci il nome del team",
-      },
-      billing: {
-        title: "Piano di fatturazione",
-        description: "Gestisci il piano di fatturazione del tuo team",
-        free: "Gratuito",
-        pro: "Pro",
-        unlimited: "Illimitato",
-      },
-      apiKey: {
-        title: "Chiave API del team",
-        description:
-          "Chiave API per l'accesso del team, usala dalla tua pipeline CI/CD insieme all'ID progetto",
-        placeholder: "Chiave API del team",
-      },
-      members: {
-        leaveTeamConfirm: "Lascia il team",
-        leaveTeamDescription: "Sei sicuro di voler lasciare questo team?",
-        cancel: "Annulla",
-        leaveTeam: "Lascia il team",
-        invite: "Invita membro",
-        title: "Membri",
-        pendingInvitations: "Inviti in sospeso",
-        removeMember: "Rimuovi membro",
-        removeMemberConfirm: "Rimuovi membro",
-        removeMemberDescription: "Sei sicuro di voler rimuovere questo membro?",
-        filterPlaceholder: "Filtra membri...",
-        allRoles: "Tutti i ruoli",
-        date: "Data",
-        selectAll: "{count} selezionati",
-        noPendingInvitations: "Nessun invito in sospeso",
-        noResults: "Nessun membro trovato",
-        tryDifferentSearch: "Prova una ricerca diversa",
-        inviteMembers: "Invita membri a collaborare",
-        deleteInvite: "Elimina invito",
-        deleteInviteDescription: "Elimina l'invito",
-        invitedBy: "Invitato da {name}",
-        deleteInviteSuccess: "Invito eliminato",
-        deleteInviteError: "Impossibile eliminare l'invito",
-        removeMemberSuccess: "Membro rimosso",
-        removeMemberError: "Impossibile rimuovere il membro",
-        removeMemberSuccessDescription:
-          "Il membro è stato rimosso con successo",
-        removeMemberErrorDescription: "Impossibile rimuovere il membro",
-        roles: {
-          owner: "Proprietario",
-          member: "Membro",
-        },
-        dateSort: {
-          newest: "Più recente",
-          oldest: "Più vecchio",
-        },
-      },
-    },
-  },
-  tuning: {
-    general: "Generale",
-    translationMemory: {
-      title: "Memoria di traduzione",
-      description:
-        "Usa la memoria di traduzione per migliorare la coerenza e l'efficienza",
-    },
-    qualityChecks: {
-      title: "Controlli di qualità",
-      description:
-        "Abilita controlli di qualità automatizzati per le traduzioni",
-    },
-    contextDetection: {
-      title: "Rilevamento del contesto",
-      description:
-        "Rileva e preserva automaticamente il contesto nelle traduzioni",
-    },
-    styleGuide: "Guida di stile",
-    lengthControl: {
-      title: "Controllo della lunghezza",
-      description: "Controlla la lunghezza del testo tradotto",
-      options: {
-        flexible: "Flessibile",
-        strict: "Rigoroso",
-        exact: "Esatto",
-        loose: "Largo",
-      },
-    },
-    inclusiveLanguage: {
-      title: "Linguaggio inclusivo",
-      description:
-        "Assicura che le traduzioni utilizzino un linguaggio inclusivo",
-    },
-    formality: {
-      title: "Formalità",
-      description: "Controlla il livello di formalità delle traduzioni",
-    },
-    brandName: {
-      title: "Nome del brand",
-      description: "Imposta il nome del tuo brand per un uso coerente",
-      placeholder: "Inserisci il nome del tuo brand",
-    },
-    brandVoice: {
-      title: "Voce del brand",
-      description: "Definisci la voce e il tono del tuo brand",
-      placeholder: "Descrivi la voce del tuo brand...",
-    },
-    localization: "Localizzazione",
-    idioms: {
-      title: "Idiomi",
-      description: "Gestisci le espressioni idiomatiche in modo appropriato",
-    },
-    terminology: {
-      title: "Terminologia",
-      description: "Gestisci la terminologia specializzata e i glossari",
-    },
-    culturalAdaptation: {
-      title: "Adattamento culturale",
-      description: "Adatta i contenuti per l'appropriatezza culturale",
-    },
+    title: "核心功能",
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "输入简单文案，AI自动生成专业视频剧本，让创作事半功倍",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然真实的配音效果",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级制作",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "多语言字幕自动生成，完美同步画面，支持多种字幕样式",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速出片",
+    aiStyle: "风格定制",
+    aiStyleDescription: "支持品牌色、字体、Logo等个性化定制，打造专属视觉形象",
+    easyShare: "便捷分享",
+    easyShareDescription: "一键分享到各大平台，支持多种格式导出，扩大传播力",
+    fastRender: "快速渲染",
+    fastRenderDescription: "先进云端渲染技术，10分钟内完成视频生成",
   },
   pricing: {
-    title: "Prezzi semplici",
+    title: "简单定价",
     free: {
-      title: "Gratuito (100 chiavi)",
-      price: "Gratuito",
-      keys_limit: "Fino a 100 chiavi",
+      title: "免费版",
+      price: "免费",
+      points: "300积分",
+      description: "新用户专享，可生成2-3个完整视频",
       features: {
-        unlimited_projects: "Progetti illimitati",
-        fine_tuning: "Opzioni di fine-tuning",
-        overrides: "Sovrascritture delle traduzioni",
-        analytics: "Analitiche",
-        context_memory: "Memoria del contesto",
-        community_support: "Supporto della comunità",
+        video_quality: "720P视频清晰度",
+        basic_voice: "2个AI配音音色",
+        basic_template: "10个精选模板",
+        with_watermark: "带水印导出",
+        subtitle: "单语种字幕",
+        basic_bgm: "基础背景音乐",
       },
+      cta: "立即体验",
     },
     pro: {
-      title: "Pro",
-      includes_free: "Tutto ciò che è incluso in Gratuito, più:",
+      title: "超值套餐",
       features: {
-        github_action: "Integrazione con GitHub Action",
-        latest_features: "Accesso anticipato alle ultime funzionalità",
-        priority_support: "Supporto prioritario",
+        point_usage: "包含以下高级功能：",
+        video_quality: "1080P高清视频",
+        all_voice: "20+专业配音音色",
+        all_template: "100+场景模板",
+        no_watermark: "无水印导出",
+        multi_subtitle: "多语种字幕转换",
+        pro_bgm: "版权音乐库",
       },
+      cta: "立即订购",
     },
-    cta: "Inizia l'automazione",
+    points_never_expire:
+      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
   },
-  createTeam: {
-    teamName: "Nome del team",
-    teamNamePlaceholder: "Inserisci il nome del team",
-    createTeamButton: "Crea team",
-    cancel: "Annulla",
-    createTeamDescription:
-      "Crea un nuovo team per gestire i tuoi progetti e collaboratori.",
-  },
-  createProject: {
-    createProjectTitle: "Crea un nuovo progetto",
-    projectNamePlaceholder: "Inserisci il nome del progetto",
-    createProjectButton: "Crea progetto",
-    cancel: "Annulla",
-    createProjectDescription:
-      "Crea un nuovo progetto per iniziare ad automatizzare la tua localizzazione.",
-  },
-  invite: {
-    inviteMember: "Invita membro",
-    inviteDescription: "Invita un membro nel tuo team",
-    emailLabel: "Email",
-    emailPlaceholder: "Inserisci email",
-    cancel: "Annulla",
-    sendInvite: "Invia invito",
-    success: {
-      title: "Invito inviato",
-      description: "Invito inviato con successo a {email}",
-    },
-    error: {
-      title: "Errore",
-      description: "Impossibile inviare l'invito. Riprova.",
-    },
-    validation: {
-      invalidEmail: "Inserisci un'email valida",
-    },
-  },
-  months: {
-    "10": "Ott",
-    "11": "Nov",
-    "12": "Dic",
-    "01": "Gen",
-    "02": "Feb",
-    "03": "Mar",
-    "04": "Apr",
-    "05": "Mag",
-    "06": "Giu",
-    "07": "Lug",
-    "08": "Ago",
-    "09": "Set",
-  },
-  onboarding: {
-    steps: {
-      "1": {
-        title: "Configura Languine CLI",
-        description:
-          "Installa e configura la CLI di Languine per gestire le traduzioni",
-      },
-      "2": {
-        title: "Push delle traduzioni",
-        description: "In attesa che le traduzioni vengano inviate",
-      },
-      "3": {
-        title: "Documentazione",
-        description:
-          "Consulta la nostra documentazione per guide dettagliate e migliori pratiche",
-        link: "documentazione",
-      },
-    },
-    info: {
-      description: "Hai bisogno di aiuto? Consulta la nostra",
-      link: "documentazione",
-      description_2: "per guide dettagliate e migliori pratiche.",
-    },
-  },
-  cli: {
-    success: {
-      title: "Accesso alla CLI di Languine riuscito",
-      description: "La CLI di Languine è stata autenticata con successo come:",
-      description_2: "Ora puoi chiudere questa scheda e tornare alla CLI",
-    },
-  },
-  translations: {
-    header: "Chiavi tradotte",
-  },
-  search: {
-    placeholder: "Cerca",
-  },
-  periods: {
-    daily: "Giornaliero",
-    weekly: "Settimanale",
-    monthly: "Mensile",
-    selectPeriod: "Seleziona periodo",
-  },
-  welcome: {
-    title: "Benvenuti su Languine",
-    description: "Automatizza il tuo processo di localizzazione con Languine",
-  },
-  update: {
-    button: "Nuove traduzioni",
-  },
-  hero2: {
-    title: "Localizzazione automatizzata per le tue applicazioni",
-    description:
-      "Ottimizza il tuo processo di localizzazione con un CLI e una pipeline potenziati dall'IA, progettati per automatizzare le traduzioni per gli sviluppatori.",
+  pricing_slider: {
+    tier: "套餐 {tier}",
+    points: "基础积分",
+    bonus_points: "赠送积分",
+    period: "永久",
   },
   language: {
-    en: "Inglese",
-    es: "Spagnolo",
-    fr: "Francese",
-    de: "Tedesco",
-    it: "Italiano",
-    pt: "Portoghese",
-    zh: "Cinese",
-    ja: "Giapponese",
-    ko: "Coreano",
-    ar: "Arabo",
-    hi: "Hindi",
-    tr: "Turco",
-    nl: "Olandese",
-    pl: "Polacco",
-    no: "Norvegese",
-    da: "Danese",
-    sv: "Svedese",
-    fi: "Finlandese",
-    vi: "Vietnamita",
+    en: "英语",
+    es: "西班牙语",
+    fr: "法语",
+    de: "德语",
+    it: "意大利语",
+    pt: "葡萄牙语",
+    ja: "日语",
+    ko: "韩语",
+    ar: "阿拉伯语",
+    tr: "土耳其语",
+    nl: "荷兰语",
+    pl: "波兰语",
+    no: "挪威语",
+    da: "丹麦语",
+    sv: "瑞典语",
+    fi: "芬兰语",
+    vi: "越南语",
+    az: "阿塞拜疆语",
+    bg: "保加利亚语",
+    ca: "加泰罗尼亚语",
+    cs: "捷克语",
+    el: "希腊语",
+    et: "爱沙尼亚语",
+    he: "希伯来语",
+    hr: "克罗地亚语",
+    hu: "匈牙利语",
+    id: "印尼语",
+    iw: "希伯来语",
+    km: "高棉语",
+    lv: "拉脱维亚语",
+    "pt-BR": "葡萄牙语（巴西）",
+    ro: "罗马尼亚语",
+    ru: "俄语",
+    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    sk: "斯洛伐克语",
+    sr: "塞尔维亚语",
+    ta: "泰米尔语",
+    th: "泰语",
+    uk: "乌克兰语",
+    "zh-CN": "中文（简体）",
+    "zh-TW": "中文（繁体）",
+  },
+  faq: {
+    title: "常见问题",
+    processing_time: {
+      question: "视频生成需要多长时间？",
+      answer:
+        "一般1分钟视频生成需要3-5分钟，包括AI文案、配音、画面生成和合成的全过程。您可以在生成过程中实时预览每个片段的效果。",
+    },
+    ai_features: {
+      question: "一个视频需要多少积分？",
+      answer:
+        "一个1分钟的标准视频约需100积分。新用户可获得300积分免费体验，足够生成2-3个完整视频。付费用户起步70元可获得3000积分，购买更多积分享受更优惠的价格。您可以在生成前查看预估积分消耗。",
+    },
+    edit_after_generation: {
+      question: "生成后的视频可以编辑吗？",
+      answer:
+        "可以。生成后支持修改字幕、调整配音、更换背景音乐、裁剪画面等编辑功能。编辑已生成的视频不会额外消耗积分，仅重新生成时才会消耗积分。",
+    },
+    batch_generation: {
+      question: "购买的积分可以一直使用吗？",
+      answer:
+        "是的，所有购买的积分永不过期。我们提供多档套餐：基础套餐70元3000积分起，购买更多积分享受更优惠的价格。企业用户可以联系我们获取定制方案。",
+    },
+    points_expire: {
+      question: "积分可以共享和转让吗？",
+      answer:
+        "个人账号的积分暂不支持转让。企业用户可以开通团队账号，实现成员间的积分共享。所有已购积分均永久有效，可以随时使用。",
+    },
+    points_transfer: {
+      question: "如何获得更多优惠？",
+      answer:
+        "1. 购买更高档次套餐可享受更优惠的积分单价；2. 关注我们的公众号获取限时优惠活动；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可以联系商务获取专属优惠。",
+    },
+    quality_guarantee: {
+      question: "如果生成效果不满意怎么办？",
+      answer:
+        "您可以：1) 调整提示词重新生成；2) 更换场景模板重试；3) 使用编辑功能微调。建议先用免费积分测试效果，满意后再购买积分使用。如遇技术问题，可以联系客服获取帮助。",
+    },
+    commercial_use: {
+      question: "可以用于商业用途吗？",
+      answer:
+        "可以。生成的视频支持商业使用，您拥有完整的版权。对于企业用户，我们提供更灵活的套餐方案和专属服务支持，欢迎联系商务咨询。",
+    },
+    copyright: {
+      question: "视频的知识产权归属问题？",
+      answer:
+        "使用我们服务生成的视频，其知识产权归您所有。您可以自由使用、分享和商用。但请注意：1) 您需要确保上传的素材拥有相应使用权；2) 平台的技术、界面等知识产权归我们所有；3) 请勿侵犯他人知识产权，否则后果自负。",
+    },
+
+    content_safety: {
+      question: "对内容生成有什么限制？",
+      answer:
+        "我们禁止生成任何违法、侵权、色情或暴力内容。如发现违规使用将终止服务且不退还积分。请在使用前阅读服务条款和内容规范。",
+    },
+    api_access: {
+      question: "是否支持API对接？",
+      answer:
+        "支持。企业用户可以获取API接口，实现视频生成流程的完整对接。我们提供专业的技术支持和更高的并发配额，详情请联系商务团队。",
+    },
+    payment_methods: {
+      question: "支持哪些支付方式？",
+      answer:
+        "支持微信支付、支付宝等主流支付方式，支付成功后积分立即到账。企业用户如需对公转账或开具发票，可以联系客服处理。",
+    },
   },
 } as const;

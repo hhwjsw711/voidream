@@ -16,11 +16,12 @@ export function StackedCode() {
   }, []);
 
   const translations = [
-    "城市宣传 → 城市形象片、城市风光片、城市印象片，展现城市特色与魅力",
-    "文旅非遗 → 非遗文化片、传统工艺片、文化记录片，传承文化精髓",
-    "影视创作 → 电影预告片、微电影、短视频，制作精彩影视内容",
-    "景区推广 → 景区宣传片、景点介绍片、旅游攻略片，展示旅游资源",
-    "品牌营销 → 品牌故事片、产品宣传片、企业形象片，塑造品牌价值",
+    "城市宣传 → 城市形象宣传片、人文风光片、城市纪实片，展现城市独特魅力与发展活力",
+    "文化传承 → 非遗记录片、传统技艺展示、民俗文化片，让传统文化焕发新生",
+    "创意短片 → 创意短视频、故事微电影、预告片制作，打造精彩影视内容",
+    "旅游推广 → 景区宣传片、特色景点介绍、旅游体验片，全方位展示旅游魅力",
+    "品牌营销 → 品牌故事片、产品宣传片、企业形象片，提升品牌价值与影响力",
+    "活动记录 → 活动花絮、大型庆典、节日纪实片，留存精彩瞬间",
   ];
 
   return (
@@ -58,7 +59,7 @@ export function StackedCode() {
             }
           >
             <div className="bg-[#121212] bg-noise border border-border">
-              <div className="text-secondary font-mono text-sm text-center whitespace-nowrap overflow-hidden p-6">
+              <div className="text-secondary font-mono text-base text-center whitespace-nowrap overflow-hidden p-6">
                 {translations[i]}
               </div>
             </div>

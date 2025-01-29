@@ -1,508 +1,188 @@
 export default {
   header: {
-    pricing: "Prijzen",
-    docs: "Documentatie",
-    signIn: "Inloggen",
-    goToApp: "Ga naar app",
+    pricing: "定价",
+    signIn: "登录",
   },
   hero: {
-    title: "Gezichtsloze video's voor je kanalen in enkele minuten",
-    description:
-      "Transformeer je ideeën in boeiende content zonder dat je een abonnement nodig hebt. Betaal alleen voor de video's die je maakt.",
+    title: "颠覆传统影视，AI一键制片",
+    description: "输入想法，分分钟成片，按次付费，简单实惠",
   },
   getStarted: {
-    heading: "Aan de slag",
-    title: "Geautomatiseerde lokalisatie voor uw applicaties",
-    description:
-      "Stroomlijn uw lokalisatieproces met een AI-aangedreven CLI en pijplijn ontworpen om vertalingen voor ontwikkelaars te automatiseren.",
+    heading: "开始使用",
+    title: "10分钟，从想法到视频",
+    description: "无需专业技能，输入文字即可生成高质量视频",
     button: {
-      startAutomating: "Begin met automatiseren",
-      readDocumentation: "Lees documentatie",
+      startAutomating: "开始创作",
+      readDocumentation: "套餐详情",
     },
   },
   companies: {
-    title: "Gebruikt door",
-    addYourCompany: "+ Voeg uw bedrijf toe",
-  },
-  activity: {
-    title: "Activiteit",
-    loading: "Laden",
-    loadMore: "Toon meer",
-    noResults: "Geen resultaten voor '{search}'",
-    clearSearch: "Zoekopdracht wissen",
+    title: "他们都在用",
+    addYourCompany: "更多机构正在加入...",
   },
   features: {
-    title: "Functies",
-    fullyOpenSource: "Volledig open source",
-    fullyOpenSourceDescription:
-      "Onze code is openbaar beschikbaar op GitHub, wat transparantie en bijdragen van de gemeenschap mogelijk maakt.",
-    noVendorLockIn: "Geen vendor lock-in",
-    noVendorLockInDescription:
-      "We sluiten u niet op in een specifieke service, gebruik uw eigen LLMs.",
-    presetsForExpo: "Presets voor Expo",
-    presetsForExpoDescription:
-      "We bieden presets voor Expo, zodat u snel aan de slag kunt.",
-    presetForReactNative: "Preset voor React Native",
-    presetForReactNativeDescription:
-      "We bieden een preset voor React Native, zodat u snel aan de slag kunt.",
-    presetForReactEmail: "React Email Bibliotheek",
-    presetForReactEmailDescription:
-      "We hebben een i18n bibliotheek gemaakt voor React Email.",
-    readyForI18nLibraries: "Klaar voor i18n bibliotheken",
-    readyForI18nLibrariesDescription:
-      "We ondersteunen alle bibliotheken inclusief de meest populaire (next-intl, react-i18next, react-intl, etc).",
-  },
-  info: {
-    title: "Behandelt elk aspect van het lokaliseren van uw app inclusief",
-    smartTranslation: {
-      title: "Slimme Vertaling",
-      intelligentTranslation: "Intelligente vertaling met contextbewustzijn",
-      brandVoice: "Consistentie in merkstem en toon",
-      terminology: "Terminologiebeheer",
-      linguisticFeatures: "Geavanceerde linguïstische functies",
-      realtimeUpdates: "Real-time vertalingsupdates",
-    },
-    implementation: {
-      title: "Implementatie",
-      quickSetup: "Snelle setup en integratie",
-      fileFormat: "Bestandsformaatbehandeling",
-      contentStructure: "Organisatie van contentstructuur",
-      assetOrganization: "Organisatie van assets",
-    },
-    developer: {
-      title: "Ontwikkelaarservaring",
-      cli: "Command-line interface",
-      cicd: "CI/CD integratie",
-      versionControl: "Versiebeheer",
-      workflow: "Ontwikkelaarswerkstroom",
-      documentation: "Uitgebreide documentatie",
-    },
-  },
-  login: {
-    title: "Inloggen",
-    github: "Inloggen met GitHub",
-    google: "Inloggen met Google",
-    footer: "Automatiseer uw lokalisatie.",
-    description: "Log in om uw lokalisatie in seconden te automatiseren.",
-    terms: {
-      text: "Door in te loggen gaat u akkoord met onze",
-      termsOfService: "Servicevoorwaarden",
-      and: "en",
-      privacyPolicy: "Privacybeleid",
-    },
-  },
-  userMenu: {
-    account: "Accountinstellingen",
-    signOut: "Uitloggen",
-    createTeam: "Team aanmaken",
-    homepage: "Startpagina",
-    team: "Teaminstellingen",
-  },
-  teamSelector: {
-    addProject: "Project aanmaken",
-    createProjectTitle: "Een nieuw project aanmaken",
-    projectNamePlaceholder: "Projectnaam",
-    createProjectButton: "Project aanmaken",
-    pro: "Pro",
-    project: "Project",
-    teams: "Teams",
-    createTeam: "Team aanmaken",
-    createTeamTitle: "Een nieuw team aanmaken",
-    teamNamePlaceholder: "Teamnaam",
-    createTeamButton: "Team aanmaken",
-  },
-  coming_soon: {
-    title: "Languine is in Early Access",
-    description: "We zijn momenteel in early access. Neem contact op met",
-    cta: "op X om early access te krijgen.",
-  },
-  account: {
-    fullName: {
-      title: "Volledige naam",
-      description:
-        "Uw volledige naam zoals deze op het platform zal verschijnen.",
-      placeholder: "Voer uw volledige naam in",
-    },
-    email: {
-      title: "E-mailadres",
-      description: "Het e-mailadres dat aan uw account is gekoppeld.",
-      placeholder: "Voer uw e-mailadres in",
-    },
-    apiKey: {
-      title: "API-sleutel",
-      description:
-        "Uw persoonlijke API-sleutel voor toegang tot de Languine API en vanaf de CLI.",
-    },
-    deleteAccount: {
-      title: "Account verwijderen",
-      description:
-        "Verwijder uw account en alle bijbehorende gegevens permanent. Deze actie kan niet ongedaan worden gemaakt.",
-      button: "Account verwijderen",
-    },
-  },
-  copyInstall: {
-    copied: "Gekopieerd naar klembord",
-  },
-  dangerZone: {
-    dialog: {
-      title: "Weet u het zeker?",
-      description:
-        "Deze actie kan niet ongedaan worden gemaakt. Typ DELETE om te bevestigen.",
-      placeholder: "Typ DELETE om te bevestigen",
-      confirm: "Verwijderen bevestigen",
-      cancel: "Annuleren",
-    },
-  },
-  pipeline: {
-    title: "Workflow (CI/CD Pipeline)",
-    pro: "[pro]",
-    description:
-      "Onze vertaalmachine integreert naadloos in uw bestaande CI/CD-pijplijn en vertaalt uw codebase automatisch bij elke push. Wanneer codewijzigingen worden gepusht, analyseren we de gewijzigde inhoud, onderhouden we uw vertaalgeheugen en genereren we nauwkeurige vertalingen terwijl we uw merkstem en terminologie behouden. De vertalingen worden vervolgens ingediend als pull-requests, waardoor ze kunnen worden beoordeeld voordat ze worden samengevoegd in uw hoofdtak en worden geïmplementeerd. Deze geautomatiseerde workflow zorgt ervoor dat uw gelokaliseerde inhoud synchroon blijft met de ontwikkeling.",
-  },
-  settings: {
-    badRequest: "Ongeldig verzoek",
-    badRequestDescription:
-      "Organisatie moet minimaal één eigenaar hebben. Draag eigendom over naar een ander lid voordat u deze eigenaar verwijdert.",
-    permissionDenied: "Toestemming geweigerd",
-    permissionDeniedDescription:
-      "U moet eigenaar van het team zijn om deze actie uit te voeren",
-    deleteTeamTitle: "Team verwijderen",
-    deleteTeamDescription:
-      "Kan organisatie niet verwijderen wanneer u het enige lid bent, verwijder in plaats daarvan uw account",
-    saved: "Instellingen opgeslagen",
-    savedDescription: "Uw wijzigingen zijn succesvol opgeslagen",
-    error: "Er is iets misgegaan",
-    errorDescription:
-      "Probeer het opnieuw of neem contact op met ondersteuning",
-    addTeam: "Team aanmaken",
-    apiKey: {
-      updated: "API-sleutel bijgewerkt",
-      updatedDescription:
-        "Uw API-sleutel is succesvol bijgewerkt en naar uw klembord gekopieerd.",
-      title: "API-sleutel bijwerken",
-      description:
-        "Weet u zeker dat u een nieuwe API-sleutel wilt genereren? De oude sleutel werkt onmiddellijk niet meer.",
-      cancel: "Annuleren",
-      continue: "Doorgaan",
-    },
-    tabs: {
-      project: "Project",
-      account: "Account",
-      team: "Team",
-      provider: "Provider",
-      billing: "Facturering",
-    },
-    provider: {
-      updateSuccess: "Instellingen succesvol bijgewerkt",
-      updateError: "Instellingen bijwerken mislukt",
-      translationProvider: {
-        title: "Vertaalprovider",
-        description:
-          "Kies uw voorkeurs AI-service voor het genereren van vertalingen. Elke provider biedt verschillende mogelijkheden en prijzen.",
-        placeholder: "Selecteer een provider",
-      },
-      languageModel: {
-        title: "Taalmodel",
-        description:
-          "Selecteer het AI-model dat het beste balans biedt tussen kwaliteit en snelheid voor uw vertaalbehoeften. Krachtigere modellen kunnen langzamer zijn maar betere resultaten opleveren.",
-        placeholder: "Selecteer een model",
-      },
-      apiKey: {
-        title: "Provider API-sleutel",
-        description:
-          "Voer uw API-sleutel in om te authenticeren bij uw gekozen provider. Houd deze sleutel veilig - we versleutelen deze voordat we deze opslaan.",
-        placeholder: "Voer uw API-sleutel in",
-      },
-    },
-    addProject: "Project aanmaken",
-    project: {
-      name: {
-        title: "Projectnaam",
-        description: "De naam van uw project",
-        placeholder: "Voer projectnaam in",
-      },
-      id: {
-        title: "Project-ID",
-        description: "Uw unieke projectidentificatie",
-        placeholder: "Project-ID",
-      },
-      delete: {
-        title: "Project verwijderen",
-        description:
-          "Verwijder dit project en alle bijbehorende gegevens permanent",
-        button: "Project verwijderen",
-      },
-    },
-    save: "Opslaan",
-    team: {
-      name: {
-        title: "Teamnaam",
-        description: "De naam van uw team",
-        placeholder: "Voer teamnaam in",
-      },
-      billing: {
-        title: "Factureringsplan",
-        description: "Beheer het factureringsplan van uw team",
-        free: "Gratis",
-        pro: "Pro",
-        unlimited: "Onbeperkt",
-      },
-      apiKey: {
-        title: "Team API-sleutel",
-        description:
-          "API-sleutel voor teamtoegang, gebruik deze vanuit uw CI/CD-pijplijn samen met de Project-ID",
-        placeholder: "Team API-sleutel",
-      },
-      members: {
-        leaveTeamConfirm: "Team verlaten",
-        leaveTeamDescription: "Weet u zeker dat u dit team wilt verlaten?",
-        cancel: "Annuleren",
-        leaveTeam: "Team verlaten",
-        invite: "Lid uitnodigen",
-        title: "Leden",
-        pendingInvitations: "Uitstaande uitnodigingen",
-        removeMember: "Lid verwijderen",
-        removeMemberConfirm: "Lid verwijderen",
-        removeMemberDescription: "Weet u zeker dat u dit lid wilt verwijderen?",
-        filterPlaceholder: "Filter leden...",
-        allRoles: "Alle rollen",
-        date: "Datum",
-        selectAll: "{count} geselecteerd",
-        noPendingInvitations: "Geen uitstaande uitnodigingen",
-        noResults: "Geen leden gevonden",
-        tryDifferentSearch: "Probeer een andere zoekopdracht",
-        inviteMembers: "Nodig leden uit om samen te werken",
-        deleteInvite: "Uitnodiging verwijderen",
-        deleteInviteDescription: "Verwijder de uitnodiging",
-        invitedBy: "Uitgenodigd door {name}",
-        deleteInviteSuccess: "Uitnodiging verwijderd",
-        deleteInviteError: "Verwijderen van uitnodiging mislukt",
-        removeMemberSuccess: "Lid verwijderd",
-        removeMemberError: "Verwijderen van lid mislukt",
-        removeMemberSuccessDescription: "Lid is succesvol verwijderd",
-        removeMemberErrorDescription: "Verwijderen van lid mislukt",
-        roles: {
-          owner: "Eigenaar",
-          member: "Lid",
-        },
-        dateSort: {
-          newest: "Nieuwste",
-          oldest: "Oudste",
-        },
-      },
-    },
-  },
-  tuning: {
-    general: "Algemeen",
-    translationMemory: {
-      title: "Vertaalgeheugen",
-      description:
-        "Gebruik vertaalgeheugen om consistentie en efficiëntie te verbeteren",
-    },
-    qualityChecks: {
-      title: "Kwaliteitscontroles",
-      description:
-        "Schakel automatische kwaliteitscontroles in voor vertalingen",
-    },
-    contextDetection: {
-      title: "Contextdetectie",
-      description: "Detecteer en behoud automatisch context in vertalingen",
-    },
-    styleGuide: "Stijlgids",
-    lengthControl: {
-      title: "Lengtecontrole",
-      description: "Beheer de lengte van vertaalde tekst",
-      options: {
-        flexible: "Flexibel",
-        strict: "Strikt",
-        exact: "Exact",
-        loose: "Los",
-      },
-    },
-    inclusiveLanguage: {
-      title: "Inclusieve taal",
-      description: "Zorg ervoor dat vertalingen inclusieve taal gebruiken",
-    },
-    formality: {
-      title: "Formaliteit",
-      description: "Beheer het formaliteitsniveau van vertalingen",
-    },
-    brandName: {
-      title: "Merknaam",
-      description: "Stel uw merknaam in voor consistent gebruik",
-      placeholder: "Voer uw merknaam in",
-    },
-    brandVoice: {
-      title: "Merkstem",
-      description: "Definieer uw merkstem en toon",
-      placeholder: "Beschrijf uw merkstem...",
-    },
-    localization: "Lokalisatie",
-    idioms: {
-      title: "Idiomen",
-      description: "Behandel idiomatische uitdrukkingen op de juiste manier",
-    },
-    terminology: {
-      title: "Terminologie",
-      description: "Beheer gespecialiseerde terminologie en woordenlijsten",
-    },
-    culturalAdaptation: {
-      title: "Culturele aanpassing",
-      description: "Pas inhoud aan voor culturele geschiktheid",
-    },
+    title: "核心功能",
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "输入简单文案，AI自动生成专业视频剧本，让创作事半功倍",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然真实的配音效果",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级制作",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "多语言字幕自动生成，完美同步画面，支持多种字幕样式",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速出片",
+    aiStyle: "风格定制",
+    aiStyleDescription: "支持品牌色、字体、Logo等个性化定制，打造专属视觉形象",
+    easyShare: "便捷分享",
+    easyShareDescription: "一键分享到各大平台，支持多种格式导出，扩大传播力",
+    fastRender: "快速渲染",
+    fastRenderDescription: "先进云端渲染技术，10分钟内完成视频生成",
   },
   pricing: {
-    title: "Eenvoudige prijzen",
+    title: "简单定价",
     free: {
-      title: "Gratis (100 sleutels)",
-      price: "Gratis",
-      keys_limit: "Tot 100 sleutels",
+      title: "免费版",
+      price: "免费",
+      points: "300积分",
+      description: "新用户专享，可生成2-3个完整视频",
       features: {
-        unlimited_projects: "Onbeperkte projecten",
-        fine_tuning: "Fine-tuning opties",
-        overrides: "Vertalingsoverrides",
-        analytics: "Analytics",
-        context_memory: "Contextgeheugen",
-        community_support: "Community ondersteuning",
+        video_quality: "720P视频清晰度",
+        basic_voice: "2个AI配音音色",
+        basic_template: "10个精选模板",
+        with_watermark: "带水印导出",
+        subtitle: "单语种字幕",
+        basic_bgm: "基础背景音乐",
       },
+      cta: "立即体验",
     },
     pro: {
-      title: "Pro",
-      includes_free: "Alles in Gratis, plus:",
+      title: "超值套餐",
       features: {
-        github_action: "GitHub Action integratie",
-        latest_features: "Vroege toegang tot de nieuwste functies",
-        priority_support: "Prioritaire ondersteuning",
+        point_usage: "包含以下高级功能：",
+        video_quality: "1080P高清视频",
+        all_voice: "20+专业配音音色",
+        all_template: "100+场景模板",
+        no_watermark: "无水印导出",
+        multi_subtitle: "多语种字幕转换",
+        pro_bgm: "版权音乐库",
       },
+      cta: "立即订购",
     },
-    cta: "Begin met automatiseren",
+    points_never_expire:
+      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
   },
-  createTeam: {
-    teamName: "Teamnaam",
-    teamNamePlaceholder: "Voer teamnaam in",
-    createTeamButton: "Team aanmaken",
-    cancel: "Annuleren",
-    createTeamDescription:
-      "Maak een nieuw team aan om uw projecten en medewerkers te beheren.",
-  },
-  createProject: {
-    createProjectTitle: "Een nieuw project aanmaken",
-    projectNamePlaceholder: "Voer projectnaam in",
-    createProjectButton: "Project aanmaken",
-    cancel: "Annuleren",
-    createProjectDescription:
-      "Maak een nieuw project aan om uw lokalisatie te automatiseren.",
-  },
-  invite: {
-    inviteMember: "Lid uitnodigen",
-    inviteDescription: "Nodig een lid uit voor uw team",
-    emailLabel: "E-mail",
-    emailPlaceholder: "Voer e-mail in",
-    cancel: "Annuleren",
-    sendInvite: "Uitnodiging verzenden",
-    success: {
-      title: "Uitnodiging verzonden",
-      description: "Uitnodiging succesvol verzonden naar {email}",
-    },
-    error: {
-      title: "Fout",
-      description: "Verzenden van uitnodiging mislukt. Probeer het opnieuw.",
-    },
-    validation: {
-      invalidEmail: "Voer een geldig e-mailadres in",
-    },
-  },
-  months: {
-    "10": "Okt",
-    "11": "Nov",
-    "12": "Dec",
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mrt",
-    "04": "Apr",
-    "05": "Mei",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-  },
-  onboarding: {
-    steps: {
-      "1": {
-        title: "Languine CLI instellen",
-        description:
-          "Installeer en configureer de Languine CLI om vertalingen te beheren",
-      },
-      "2": {
-        title: "Push Vertalingen",
-        description: "Wachten tot de vertalingen worden gepusht",
-      },
-      "3": {
-        title: "Documentatie",
-        description:
-          "Bekijk onze documentatie voor gedetailleerde handleidingen en best practices",
-        link: "documentatie",
-      },
-    },
-    info: {
-      description: "Hulp nodig? Bekijk onze",
-      link: "documentatie",
-      description_2: "voor gedetailleerde handleidingen en best practices.",
-    },
-  },
-  cli: {
-    success: {
-      title: "Languine CLI Login Succes",
-      description: "Languine CLI is succesvol geauthenticeerd als:",
-      description_2: "U kunt dit tabblad nu sluiten en terugkeren naar de CLI",
-    },
-  },
-  translations: {
-    header: "Vertaalde sleutels",
-  },
-  search: {
-    placeholder: "Zoeken",
-  },
-  periods: {
-    daily: "Dagelijks",
-    weekly: "Wekelijks",
-    monthly: "Maandelijks",
-    selectPeriod: "Selecteer periode",
-  },
-  welcome: {
-    title: "Welkom bij Languine",
-    description: "Automatiseer uw lokalisatieproces met Languine",
-  },
-  button: {
-    update: "Nieuwe vertalingen",
-  },
-  update: {
-    button: "Nieuwe vertalingen",
-  },
-  hero2: {
-    title: "Geautomatiseerde lokalisatie voor uw applicaties",
-    description:
-      "Stroomlijn uw lokalisatieproces met een door AI aangedreven CLI en pijplijn die ontworpen is om vertalingen voor ontwikkelaars te automatiseren.",
+  pricing_slider: {
+    tier: "套餐 {tier}",
+    points: "基础积分",
+    bonus_points: "赠送积分",
+    period: "永久",
   },
   language: {
-    en: "Engels",
-    es: "Spaans",
-    fr: "Frans",
-    de: "Duits",
-    it: "Italiaans",
-    pt: "Portugees",
-    zh: "Chinees",
-    ja: "Japans",
-    ko: "Koreaans",
-    ar: "Arabisch",
-    hi: "Hindi",
-    tr: "Turks",
-    nl: "Nederlands",
-    pl: "Pools",
-    no: "Noors",
-    da: "Deens",
-    sv: "Zweeds",
-    fi: "Fins",
-    vi: "Vietnamees",
+    en: "英语",
+    es: "西班牙语",
+    fr: "法语",
+    de: "德语",
+    it: "意大利语",
+    pt: "葡萄牙语",
+    ja: "日语",
+    ko: "韩语",
+    ar: "阿拉伯语",
+    tr: "土耳其语",
+    nl: "荷兰语",
+    pl: "波兰语",
+    no: "挪威语",
+    da: "丹麦语",
+    sv: "瑞典语",
+    fi: "芬兰语",
+    vi: "越南语",
+    az: "阿塞拜疆语",
+    bg: "保加利亚语",
+    ca: "加泰罗尼亚语",
+    cs: "捷克语",
+    el: "希腊语",
+    et: "爱沙尼亚语",
+    he: "希伯来语",
+    hr: "克罗地亚语",
+    hu: "匈牙利语",
+    id: "印尼语",
+    iw: "希伯来语",
+    km: "高棉语",
+    lv: "拉脱维亚语",
+    "pt-BR": "葡萄牙语（巴西）",
+    ro: "罗马尼亚语",
+    ru: "俄语",
+    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    sk: "斯洛伐克语",
+    sr: "塞尔维亚语",
+    ta: "泰米尔语",
+    th: "泰语",
+    uk: "乌克兰语",
+    "zh-CN": "中文（简体）",
+    "zh-TW": "中文（繁体）",
+  },
+  faq: {
+    title: "常见问题",
+    processing_time: {
+      question: "视频生成需要多长时间？",
+      answer:
+        "一般1分钟视频生成需要3-5分钟，包括AI文案、配音、画面生成和合成的全过程。您可以在生成过程中实时预览每个片段的效果。",
+    },
+    ai_features: {
+      question: "一个视频需要多少积分？",
+      answer:
+        "一个1分钟的标准视频约需100积分。新用户可获得300积分免费体验，足够生成2-3个完整视频。付费用户起步70元可获得3000积分，购买更多积分享受更优惠的价格。您可以在生成前查看预估积分消耗。",
+    },
+    edit_after_generation: {
+      question: "生成后的视频可以编辑吗？",
+      answer:
+        "可以。生成后支持修改字幕、调整配音、更换背景音乐、裁剪画面等编辑功能。编辑已生成的视频不会额外消耗积分，仅重新生成时才会消耗积分。",
+    },
+    batch_generation: {
+      question: "购买的积分可以一直使用吗？",
+      answer:
+        "是的，所有购买的积分永不过期。我们提供多档套餐：基础套餐70元3000积分起，购买更多积分享受更优惠的价格。企业用户可以联系我们获取定制方案。",
+    },
+    points_expire: {
+      question: "积分可以共享和转让吗？",
+      answer:
+        "个人账号的积分暂不支持转让。企业用户可以开通团队账号，实现成员间的积分共享。所有已购积分均永久有效，可以随时使用。",
+    },
+    points_transfer: {
+      question: "如何获得更多优惠？",
+      answer:
+        "1. 购买更高档次套餐可享受更优惠的积分单价；2. 关注我们的公众号获取限时优惠活动；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可以联系商务获取专属优惠。",
+    },
+    quality_guarantee: {
+      question: "如果生成效果不满意怎么办？",
+      answer:
+        "您可以：1) 调整提示词重新生成；2) 更换场景模板重试；3) 使用编辑功能微调。建议先用免费积分测试效果，满意后再购买积分使用。如遇技术问题，可以联系客服获取帮助。",
+    },
+    commercial_use: {
+      question: "可以用于商业用途吗？",
+      answer:
+        "可以。生成的视频支持商业使用，您拥有完整的版权。对于企业用户，我们提供更灵活的套餐方案和专属服务支持，欢迎联系商务咨询。",
+    },
+    copyright: {
+      question: "视频的知识产权归属问题？",
+      answer:
+        "使用我们服务生成的视频，其知识产权归您所有。您可以自由使用、分享和商用。但请注意：1) 您需要确保上传的素材拥有相应使用权；2) 平台的技术、界面等知识产权归我们所有；3) 请勿侵犯他人知识产权，否则后果自负。",
+    },
+
+    content_safety: {
+      question: "对内容生成有什么限制？",
+      answer:
+        "我们禁止生成任何违法、侵权、色情或暴力内容。如发现违规使用将终止服务且不退还积分。请在使用前阅读服务条款和内容规范。",
+    },
+    api_access: {
+      question: "是否支持API对接？",
+      answer:
+        "支持。企业用户可以获取API接口，实现视频生成流程的完整对接。我们提供专业的技术支持和更高的并发配额，详情请联系商务团队。",
+    },
+    payment_methods: {
+      question: "支持哪些支付方式？",
+      answer:
+        "支持微信支付、支付宝等主流支付方式，支付成功后积分立即到账。企业用户如需对公转账或开具发票，可以联系客服处理。",
+    },
   },
 } as const;

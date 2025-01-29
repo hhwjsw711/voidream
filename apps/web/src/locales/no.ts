@@ -1,507 +1,188 @@
 export default {
   header: {
-    pricing: "Priser",
-    docs: "Dokumentasjon",
-    signIn: "Logg inn",
-    goToApp: "Gå til app",
+    pricing: "定价",
+    signIn: "登录",
   },
   hero: {
-    title: "Ansiktsløse videoer for kanalene dine på få minutter",
-    description:
-      "Forvandle ideene dine til fengslende innhold uten å trenge et abonnement. Betal kun for videoene du lager.",
+    title: "颠覆传统影视，AI一键制片",
+    description: "输入想法，分分钟成片，按次付费，简单实惠",
   },
   getStarted: {
-    heading: "Kom i gang",
-    title: "Automatisert lokalisering for dine applikasjoner",
-    description:
-      "Strømlinjeform din lokaliseringprosess med en AI-drevet CLI og pipeline designet for å automatisere oversettelser for utviklere.",
+    heading: "开始使用",
+    title: "10分钟，从想法到视频",
+    description: "无需专业技能，输入文字即可生成高质量视频",
     button: {
-      startAutomating: "Start automatisering",
-      readDocumentation: "Les dokumentasjon",
+      startAutomating: "开始创作",
+      readDocumentation: "套餐详情",
     },
   },
   companies: {
-    title: "Brukt av",
-    addYourCompany: "+ Legg til ditt selskap",
-  },
-  activity: {
-    title: "Aktivitet",
-    loading: "Laster",
-    loadMore: "Vis mer",
-    noResults: "Ingen resultater for '{search}'",
-    clearSearch: "Tøm søk",
+    title: "他们都在用",
+    addYourCompany: "更多机构正在加入...",
   },
   features: {
-    title: "Funksjoner",
-    fullyOpenSource: "Fullstendig åpen kildekode",
-    fullyOpenSourceDescription:
-      "Vår kode er offentlig tilgjengelig på GitHub, noe som muliggjør åpenhet og bidrag fra fellesskapet.",
-    noVendorLockIn: "Ingen leverandørlås",
-    noVendorLockInDescription:
-      "Vi låser deg ikke til en spesifikk tjeneste, bruk dine egne LLMs.",
-    presetsForExpo: "Forhåndsinnstillinger for Expo",
-    presetsForExpoDescription:
-      "Vi tilbyr forhåndsinnstillinger for Expo, slik at du kan komme i gang raskt.",
-    presetForReactNative: "Forhåndsinnstilling for React Native",
-    presetForReactNativeDescription:
-      "Vi tilbyr en forhåndsinnstilling for React Native, slik at du kan komme i gang raskt.",
-    presetForReactEmail: "React Email-bibliotek",
-    presetForReactEmailDescription:
-      "Vi har laget et i18n-bibliotek for React Email.",
-    readyForI18nLibraries: "Klar for i18n-biblioteker",
-    readyForI18nLibrariesDescription:
-      "Vi støtter alle biblioteker inkludert de mest populære (next-intl, react-i18next, react-intl, etc).",
-  },
-  info: {
-    title: "Håndterer alle aspekter av lokalisering av din app inkludert",
-    smartTranslation: {
-      title: "Smart oversettelse",
-      intelligentTranslation: "Intelligent oversettelse med kontekstbevissthet",
-      brandVoice: "Konsekvent stemme og tone for merkevaren",
-      terminology: "Terminologistyring",
-      linguisticFeatures: "Avanserte lingvistiske funksjoner",
-      realtimeUpdates: "Sanntidsoppdateringer av oversettelser",
-    },
-    implementation: {
-      title: "Implementering",
-      quickSetup: "Rask oppsett og integrasjon",
-      fileFormat: "Håndtering av filformat",
-      contentStructure: "Organisering av innholdsstruktur",
-      assetOrganization: "Organisering av ressurser",
-    },
-    developer: {
-      title: "Utvikleropplevelse",
-      cli: "Kommandolinjegrensesnitt",
-      cicd: "CI/CD-integrasjon",
-      versionControl: "Versjonskontroll",
-      workflow: "Utviklerarbeidsflyt",
-      documentation: "Omfattende dokumentasjon",
-    },
-  },
-  login: {
-    title: "Logg inn",
-    github: "Logg inn med GitHub",
-    google: "Logg inn med Google",
-    footer: "Automatiser din lokalisering.",
-    description:
-      "Logg inn for å starte automatisering av din lokalisering på sekunder.",
-    terms: {
-      text: "Ved å logge inn godtar du våre",
-      termsOfService: "Tjenestevilkår",
-      and: "og",
-      privacyPolicy: "Personvernregler",
-    },
-  },
-  userMenu: {
-    account: "Kontoinnstillinger",
-    signOut: "Logg ut",
-    createTeam: "Opprett team",
-    homepage: "Hjemmeside",
-    team: "Teaminnstillinger",
-  },
-  teamSelector: {
-    addProject: "Opprett prosjekt",
-    createProjectTitle: "Opprett et nytt prosjekt",
-    projectNamePlaceholder: "Prosjektnavn",
-    createProjectButton: "Opprett prosjekt",
-    pro: "Pro",
-    project: "Prosjekt",
-    teams: "Team",
-    createTeam: "Opprett team",
-    createTeamTitle: "Opprett et nytt team",
-    teamNamePlaceholder: "Teamnavn",
-    createTeamButton: "Opprett team",
-  },
-  coming_soon: {
-    title: "Languine er i tidlig tilgang",
-    description: "Vi er for øyeblikket i tidlig tilgang. Kontakt",
-    cta: "på X for å få tidlig tilgang.",
-  },
-  account: {
-    fullName: {
-      title: "Fullt navn",
-      description: "Ditt fulle navn slik det vil vises på plattformen.",
-      placeholder: "Skriv inn ditt fulle navn",
-    },
-    email: {
-      title: "E-postadresse",
-      description: "E-postadressen knyttet til din konto.",
-      placeholder: "Skriv inn din e-postadresse",
-    },
-    apiKey: {
-      title: "API-nøkkel",
-      description:
-        "Din personlige API-nøkkel for å få tilgang til Languine API og fra CLI.",
-    },
-    deleteAccount: {
-      title: "Slett konto",
-      description:
-        "Slett kontoen din og all tilknyttet data permanent. Denne handlingen kan ikke angres.",
-      button: "Slett konto",
-    },
-  },
-  copyInstall: {
-    copied: "Kopiert til utklippstavlen",
-  },
-  dangerZone: {
-    dialog: {
-      title: "Er du helt sikker?",
-      description:
-        "Denne handlingen kan ikke angres. Vennligst skriv DELETE for å bekrefte.",
-      placeholder: "Skriv DELETE for å bekrefte",
-      confirm: "Bekreft sletting",
-      cancel: "Avbryt",
-    },
-  },
-  pipeline: {
-    title: "Arbeidsflyt (CI/CD Pipeline)",
-    pro: "[pro]",
-    description:
-      "Vår oversettelsesmotor integreres sømløst i din eksisterende CI/CD-pipeline, og oversetter automatisk kodebasen din ved hver push. Når kodeendringer pushes, analyserer vi det endrede innholdet, opprettholder din oversettelsesminne, og genererer nøyaktige oversettelser samtidig som vi bevarer din merkevarestemme og terminologi. Oversettelsene sendes deretter som pull-forespørsler, slik at de kan gjennomgås før de flettes inn i hovedgrenen din og distribueres. Denne automatiserte arbeidsflyten sikrer at ditt lokalisert innhold holder tritt med utviklingen.",
-  },
-  settings: {
-    saved: "Innstillinger lagret",
-    savedDescription: "Dine endringer har blitt lagret vellykket",
-    tabs: {
-      project: "Prosjekt",
-      account: "Konto",
-      team: "Team",
-      provider: "Leverandør",
-      billing: "Fakturering",
-    },
-    project: {
-      name: {
-        title: "Prosjektnavn",
-        description: "Navnet på prosjektet ditt",
-        placeholder: "Skriv inn prosjektnavn",
-      },
-      id: {
-        title: "Prosjekt-ID",
-        description: "Din unike prosjektidentifikator",
-        placeholder: "Prosjekt-ID",
-      },
-      delete: {
-        title: "Slett prosjekt",
-        description: "Slett dette prosjektet og all tilknyttet data permanent",
-        button: "Slett prosjekt",
-      },
-    },
-    team: {
-      name: {
-        title: "Teamnavn",
-        description: "Navnet på teamet ditt",
-        placeholder: "Skriv inn teamnavn",
-      },
-      billing: {
-        title: "Faktureringsplan",
-        description: "Administrer teamets faktureringsplan",
-        free: "Gratis",
-        pro: "Pro",
-        unlimited: "Ubegrenset",
-      },
-      apiKey: {
-        title: "Team API-nøkkel",
-        description:
-          "API-nøkkel for teamtilgang, bruk denne fra din CI/CD-pipeline sammen med Prosjekt-ID",
-        placeholder: "Team API-nøkkel",
-      },
-      members: {
-        title: "Medlemmer",
-        pendingInvitations: "Ventende invitasjoner",
-        filterPlaceholder: "Filtrer medlemmer...",
-        allRoles: "Alle roller",
-        date: "Dato",
-        selectAll: "{count} valgt",
-        noPendingInvitations: "Ingen ventende invitasjoner",
-        inviteMembers: "Inviter medlemmer til å samarbeide",
-        roles: {
-          owner: "Eier",
-          admin: "Administrator",
-          member: "Medlem",
-        },
-        dateSort: {
-          newest: "Nyeste",
-          oldest: "Eldste",
-        },
-        leaveTeamConfirm: "Forlat team",
-        leaveTeamDescription: "Er du sikker på at du vil forlate dette teamet?",
-        cancel: "Avbryt",
-        leaveTeam: "Forlat team",
-        invite: "Inviter medlem",
-        removeMember: "Fjern medlem",
-        removeMemberConfirm: "Fjern medlem",
-        removeMemberDescription:
-          "Er du sikker på at du vil fjerne dette medlemmet?",
-        noResults: "Ingen medlemmer funnet",
-        tryDifferentSearch: "Prøv et annet søk",
-        deleteInvite: "Slett invitasjon",
-        deleteInviteDescription: "Slett invitasjonen",
-        invitedBy: "Invitert av {name}",
-        deleteInviteSuccess: "Invitasjon slettet",
-        deleteInviteError: "Kunne ikke slette invitasjon",
-        removeMemberSuccess: "Medlem fjernet",
-        removeMemberError: "Kunne ikke fjerne medlem",
-        removeMemberSuccessDescription: "Medlemmet har blitt fjernet vellykket",
-        removeMemberErrorDescription: "Kunne ikke fjerne medlem",
-      },
-    },
-    badRequest: "Ugyldig forespørsel",
-    badRequestDescription:
-      "Organisasjonen må ha minst én eier. Overfør eierskap til et annet medlem før du fjerner denne eieren.",
-    permissionDenied: "Tilgang nektet",
-    permissionDeniedDescription:
-      "Du må være eier av teamet for å utføre denne handlingen",
-    deleteTeamTitle: "Slett team",
-    deleteTeamDescription:
-      "Kan ikke slette organisasjon når du er det eneste medlemmet, slett i stedet kontoen din",
-    error: "Noe gikk galt",
-    errorDescription: "Vennligst prøv igjen eller kontakt support",
-    addTeam: "Opprett team",
-    apiKey: {
-      updated: "API-nøkkel oppdatert",
-      updatedDescription:
-        "Din API-nøkkel har blitt oppdatert vellykket og kopiert til utklippstavlen din.",
-      title: "Oppdater API-nøkkel",
-      description:
-        "Er du sikker på at du vil generere en ny API-nøkkel? Den gamle nøkkelen vil slutte å fungere umiddelbart.",
-      cancel: "Avbryt",
-      continue: "Fortsett",
-    },
-    provider: {
-      updateSuccess: "Innstillinger oppdatert vellykket",
-      updateError: "Kunne ikke oppdatere innstillinger",
-      translationProvider: {
-        title: "Oversettelsesleverandør",
-        description:
-          "Velg din foretrukne AI-tjeneste for å generere oversettelser. Hver leverandør tilbyr forskjellige funksjoner og priser.",
-        placeholder: "Velg en leverandør",
-      },
-      languageModel: {
-        title: "Språkmodell",
-        description:
-          "Velg AI-modellen som best balanserer kvalitet og hastighet for dine oversettelsesbehov. Kraftigere modeller kan være tregere, men produserer bedre resultater.",
-        placeholder: "Velg en modell",
-      },
-      apiKey: {
-        title: "Leverandørens API-nøkkel",
-        description:
-          "Skriv inn din API-nøkkel for å autentisere med din valgte leverandør. Hold denne nøkkelen sikker - vi krypterer den før lagring.",
-        placeholder: "Skriv inn din API-nøkkel",
-      },
-    },
-    addProject: "Opprett prosjekt",
-    save: "Lagre",
-  },
-  tuning: {
-    general: "Generelt",
-    translationMemory: {
-      title: "Oversettelsesminne",
-      description:
-        "Bruk oversettelsesminne for å forbedre konsistens og effektivitet",
-    },
-    qualityChecks: {
-      title: "Kvalitetssjekker",
-      description: "Aktiver automatiske kvalitetssjekker for oversettelser",
-    },
-    contextDetection: {
-      title: "Kontekstdeteksjon",
-      description: "Automatisk detekter og bevar kontekst i oversettelser",
-    },
-    styleGuide: "Stilguide",
-    lengthControl: {
-      title: "Lengdekontroll",
-      description: "Kontroller lengden på oversatt tekst",
-      options: {
-        flexible: "Fleksibel",
-        strict: "Streng",
-        exact: "Eksakt",
-        loose: "Løs",
-      },
-    },
-    inclusiveLanguage: {
-      title: "Inkluderende språk",
-      description: "Sikre at oversettelser bruker inkluderende språk",
-    },
-    formality: {
-      title: "Formellhet",
-      description: "Kontroller formalitetsnivået på oversettelser",
-    },
-    brandName: {
-      title: "Merkenavn",
-      description: "Sett ditt merkenavn for konsekvent bruk",
-      placeholder: "Skriv inn ditt merkenavn",
-    },
-    brandVoice: {
-      title: "Merkevarestemme",
-      description: "Definer din merkevarestemme og tone",
-      placeholder: "Beskriv din merkevarestemme...",
-    },
-    localization: "Lokalisering",
-    idioms: {
-      title: "Idiomer",
-      description: "Håndter idiomatiske uttrykk på riktig måte",
-    },
-    terminology: {
-      title: "Terminologi",
-      description: "Administrer spesialisert terminologi og ordlister",
-    },
-    culturalAdaptation: {
-      title: "Kulturell tilpasning",
-      description: "Tilpass innhold for kulturell hensiktsmessighet",
-    },
+    title: "核心功能",
+    aiScript: "AI剧本创作",
+    aiScriptDescription: "输入简单文案，AI自动生成专业视频剧本，让创作事半功倍",
+    aiVoice: "智能配音",
+    aiVoiceDescription: "多种专业音色，自动匹配角色，打造自然真实的配音效果",
+    aiVideo: "智能视频生成",
+    aiVideoDescription: "一键将文案转化为精美视频，AI智能分镜，专业级制作",
+    aiSubtitle: "智能字幕",
+    aiSubtitleDescription: "多语言字幕自动生成，完美同步画面，支持多种字幕样式",
+    aiTemplate: "场景模板",
+    aiTemplateDescription: "海量精选模板，涵盖各行各业，一键套用快速出片",
+    aiStyle: "风格定制",
+    aiStyleDescription: "支持品牌色、字体、Logo等个性化定制，打造专属视觉形象",
+    easyShare: "便捷分享",
+    easyShareDescription: "一键分享到各大平台，支持多种格式导出，扩大传播力",
+    fastRender: "快速渲染",
+    fastRenderDescription: "先进云端渲染技术，10分钟内完成视频生成",
   },
   pricing: {
-    title: "Enkel prising",
+    title: "简单定价",
     free: {
-      title: "Gratis (100 nøkler)",
-      price: "Gratis",
-      keys_limit: "Opptil 100 nøkler",
+      title: "免费版",
+      price: "免费",
+      points: "300积分",
+      description: "新用户专享，可生成2-3个完整视频",
       features: {
-        unlimited_projects: "Ubegrensede prosjekter",
-        fine_tuning: "Finjusteringsalternativer",
-        overrides: "Oversettelsesoverstyringer",
-        analytics: "Analytikk",
-        context_memory: "Kontekstminne",
-        community_support: "Fellesskapsstøtte",
+        video_quality: "720P视频清晰度",
+        basic_voice: "2个AI配音音色",
+        basic_template: "10个精选模板",
+        with_watermark: "带水印导出",
+        subtitle: "单语种字幕",
+        basic_bgm: "基础背景音乐",
       },
+      cta: "立即体验",
     },
     pro: {
-      title: "Pro",
-      includes_free: "Alt i Gratis, pluss:",
+      title: "超值套餐",
       features: {
-        github_action: "GitHub Action-integrasjon",
-        latest_features: "Tidlig tilgang til de nyeste funksjonene",
-        priority_support: "Prioritert støtte",
+        point_usage: "包含以下高级功能：",
+        video_quality: "1080P高清视频",
+        all_voice: "20+专业配音音色",
+        all_template: "100+场景模板",
+        no_watermark: "无水印导出",
+        multi_subtitle: "多语种字幕转换",
+        pro_bgm: "版权音乐库",
       },
+      cta: "立即订购",
     },
-    cta: "Start automatisering",
+    points_never_expire:
+      "积分永不过期，可随时使用。购买更多积分享受更多优惠。支持对公转账，可开具发票。",
   },
-  createTeam: {
-    teamName: "Teamnavn",
-    teamNamePlaceholder: "Skriv inn teamnavn",
-    createTeamButton: "Opprett team",
-    cancel: "Avbryt",
-    createTeamDescription:
-      "Opprett et nytt team for å administrere prosjekter og samarbeidspartnere.",
-  },
-  createProject: {
-    createProjectTitle: "Opprett et nytt prosjekt",
-    projectNamePlaceholder: "Skriv inn prosjektnavn",
-    createProjectButton: "Opprett prosjekt",
-    cancel: "Avbryt",
-    createProjectDescription:
-      "Opprett et nytt prosjekt for å starte automatisering av din lokalisering.",
-  },
-  invite: {
-    inviteMember: "Inviter medlem",
-    inviteDescription: "Inviter et medlem til teamet ditt",
-    emailLabel: "E-post",
-    emailPlaceholder: "Skriv inn e-post",
-    cancel: "Avbryt",
-    sendInvite: "Send invitasjon",
-    success: {
-      title: "Invitasjon sendt",
-      description: "Invitasjon sendt til {email}",
-    },
-    error: {
-      title: "Feil",
-      description: "Kunne ikke sende invitasjon. Vennligst prøv igjen.",
-    },
-    validation: {
-      invalidEmail: "Vennligst skriv inn en gyldig e-post",
-    },
-  },
-  months: {
-    "10": "Okt",
-    "11": "Nov",
-    "12": "Des",
-    "01": "Jan",
-    "02": "Feb",
-    "03": "Mar",
-    "04": "Apr",
-    "05": "Mai",
-    "06": "Jun",
-    "07": "Jul",
-    "08": "Aug",
-    "09": "Sep",
-  },
-  onboarding: {
-    steps: {
-      "1": {
-        title: "Sett opp Languine CLI",
-        description:
-          "Installer og konfigurer Languine CLI for å administrere oversettelser",
-      },
-      "2": {
-        title: "Push oversettelser",
-        description: "Venter på at oversettelsene skal bli pushet",
-      },
-      "3": {
-        title: "Dokumentasjon",
-        description:
-          "Sjekk ut vår dokumentasjon for detaljerte guider og beste praksis",
-        link: "dokumentasjon",
-      },
-    },
-    info: {
-      description: "Trenger du hjelp? Sjekk ut vår",
-      link: "dokumentasjon",
-      description_2: "for detaljerte guider og beste praksis.",
-    },
-  },
-  cli: {
-    success: {
-      title: "Languine CLI Login Suksess",
-      description: "Languine CLI ble vellykket autentisert som:",
-      description_2: "Du kan nå lukke denne fanen og gå tilbake til CLI",
-    },
-  },
-  translations: {
-    header: "Oversatte nøkler",
-  },
-  search: {
-    placeholder: "Søk",
-  },
-  periods: {
-    daily: "Daglig",
-    weekly: "Ukentlig",
-    monthly: "Månedlig",
-    selectPeriod: "Velg periode",
-  },
-  welcome: {
-    title: "Velkommen til Languine",
-    description: "Automatiser din lokaliseringprosess med Languine",
-  },
-  button: {
-    update: "Nye oversettelser",
-  },
-  update: {
-    button: "Nye oversettelser",
-  },
-  hero2: {
-    title: "Automatisert lokalisering for dine applikasjoner",
-    description:
-      "Strømlinjeform din lokaliseringprosess med en AI-drevet CLI og pipeline designet for å automatisere oversettelser for utviklere.",
+  pricing_slider: {
+    tier: "套餐 {tier}",
+    points: "基础积分",
+    bonus_points: "赠送积分",
+    period: "永久",
   },
   language: {
-    en: "Engelsk",
-    es: "Spansk",
-    fr: "Fransk",
-    de: "Tysk",
-    it: "Italiensk",
-    pt: "Portugisisk",
-    zh: "Kinesisk",
-    ja: "Japansk",
-    ko: "Koreansk",
-    ar: "Arabisk",
-    hi: "Hindi",
-    tr: "Tyrkisk",
-    nl: "Nederlandsk",
-    pl: "Polsk",
-    no: "Norsk",
-    da: "Dansk",
-    sv: "Svensk",
-    fi: "Finsk",
-    vi: "Vietnamesisk",
+    en: "英语",
+    es: "西班牙语",
+    fr: "法语",
+    de: "德语",
+    it: "意大利语",
+    pt: "葡萄牙语",
+    ja: "日语",
+    ko: "韩语",
+    ar: "阿拉伯语",
+    tr: "土耳其语",
+    nl: "荷兰语",
+    pl: "波兰语",
+    no: "挪威语",
+    da: "丹麦语",
+    sv: "瑞典语",
+    fi: "芬兰语",
+    vi: "越南语",
+    az: "阿塞拜疆语",
+    bg: "保加利亚语",
+    ca: "加泰罗尼亚语",
+    cs: "捷克语",
+    el: "希腊语",
+    et: "爱沙尼亚语",
+    he: "希伯来语",
+    hr: "克罗地亚语",
+    hu: "匈牙利语",
+    id: "印尼语",
+    iw: "希伯来语",
+    km: "高棉语",
+    lv: "拉脱维亚语",
+    "pt-BR": "葡萄牙语（巴西）",
+    ro: "罗马尼亚语",
+    ru: "俄语",
+    "sk-SK": "斯洛伐克语（斯洛伐克）",
+    sk: "斯洛伐克语",
+    sr: "塞尔维亚语",
+    ta: "泰米尔语",
+    th: "泰语",
+    uk: "乌克兰语",
+    "zh-CN": "中文（简体）",
+    "zh-TW": "中文（繁体）",
+  },
+  faq: {
+    title: "常见问题",
+    processing_time: {
+      question: "视频生成需要多长时间？",
+      answer:
+        "一般1分钟视频生成需要3-5分钟，包括AI文案、配音、画面生成和合成的全过程。您可以在生成过程中实时预览每个片段的效果。",
+    },
+    ai_features: {
+      question: "一个视频需要多少积分？",
+      answer:
+        "一个1分钟的标准视频约需100积分。新用户可获得300积分免费体验，足够生成2-3个完整视频。付费用户起步70元可获得3000积分，购买更多积分享受更优惠的价格。您可以在生成前查看预估积分消耗。",
+    },
+    edit_after_generation: {
+      question: "生成后的视频可以编辑吗？",
+      answer:
+        "可以。生成后支持修改字幕、调整配音、更换背景音乐、裁剪画面等编辑功能。编辑已生成的视频不会额外消耗积分，仅重新生成时才会消耗积分。",
+    },
+    batch_generation: {
+      question: "购买的积分可以一直使用吗？",
+      answer:
+        "是的，所有购买的积分永不过期。我们提供多档套餐：基础套餐70元3000积分起，购买更多积分享受更优惠的价格。企业用户可以联系我们获取定制方案。",
+    },
+    points_expire: {
+      question: "积分可以共享和转让吗？",
+      answer:
+        "个人账号的积分暂不支持转让。企业用户可以开通团队账号，实现成员间的积分共享。所有已购积分均永久有效，可以随时使用。",
+    },
+    points_transfer: {
+      question: "如何获得更多优惠？",
+      answer:
+        "1. 购买更高档次套餐可享受更优惠的积分单价；2. 关注我们的公众号获取限时优惠活动；3. 邀请好友注册双方均可获得奖励积分；4. 企业用户可以联系商务获取专属优惠。",
+    },
+    quality_guarantee: {
+      question: "如果生成效果不满意怎么办？",
+      answer:
+        "您可以：1) 调整提示词重新生成；2) 更换场景模板重试；3) 使用编辑功能微调。建议先用免费积分测试效果，满意后再购买积分使用。如遇技术问题，可以联系客服获取帮助。",
+    },
+    commercial_use: {
+      question: "可以用于商业用途吗？",
+      answer:
+        "可以。生成的视频支持商业使用，您拥有完整的版权。对于企业用户，我们提供更灵活的套餐方案和专属服务支持，欢迎联系商务咨询。",
+    },
+    copyright: {
+      question: "视频的知识产权归属问题？",
+      answer:
+        "使用我们服务生成的视频，其知识产权归您所有。您可以自由使用、分享和商用。但请注意：1) 您需要确保上传的素材拥有相应使用权；2) 平台的技术、界面等知识产权归我们所有；3) 请勿侵犯他人知识产权，否则后果自负。",
+    },
+
+    content_safety: {
+      question: "对内容生成有什么限制？",
+      answer:
+        "我们禁止生成任何违法、侵权、色情或暴力内容。如发现违规使用将终止服务且不退还积分。请在使用前阅读服务条款和内容规范。",
+    },
+    api_access: {
+      question: "是否支持API对接？",
+      answer:
+        "支持。企业用户可以获取API接口，实现视频生成流程的完整对接。我们提供专业的技术支持和更高的并发配额，详情请联系商务团队。",
+    },
+    payment_methods: {
+      question: "支持哪些支付方式？",
+      answer:
+        "支持微信支付、支付宝等主流支付方式，支付成功后积分立即到账。企业用户如需对公转账或开具发票，可以联系客服处理。",
+    },
   },
 } as const;
