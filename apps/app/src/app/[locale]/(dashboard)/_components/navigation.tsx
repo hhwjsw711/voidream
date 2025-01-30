@@ -1,5 +1,6 @@
 "use client";
 
+import { useScopedI18n } from "@/locales/client";
 import { useAuthActions } from "@convex-dev/auth/react";
 import type { api } from "@v1/backend/convex/_generated/api";
 import { Button, buttonVariants } from "@v1/ui/button";
@@ -7,21 +8,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@v1/ui/dropdown-menu";
 import { Logo } from "@v1/ui/logo";
 import { cn } from "@v1/ui/utils";
 import { type Preloaded, usePreloadedQuery } from "convex/react";
-import {
-  Check,
-  ChevronDown,
-  ChevronUp,
-  LogOut,
-  Settings,
-  Slash,
-} from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LanguageSwitcher } from "./language-switcher";
@@ -38,6 +31,7 @@ export function Navigation({
   const isDashboardPath = pathname === "/";
   const isSettingsPath = pathname === "/settings";
   const isBillingPath = pathname === "/settings/billing";
+  const t = useScopedI18n("navigation");
 
   const user = usePreloadedQuery(preloadedUser);
 
@@ -85,7 +79,7 @@ export function Navigation({
                 onClick={() => router.push("/settings")}
               >
                 <span className="text-sm text-primary/60 group-hover:text-primary group-focus:text-primary">
-                  Settings
+                  {t("settings")}
                 </span>
                 <Settings className="h-[18px] w-[18px] stroke-[1.5px] text-primary/60 group-hover:text-primary group-focus:text-primary" />
               </DropdownMenuItem>
@@ -96,7 +90,7 @@ export function Navigation({
                 )}
               >
                 <span className="w-full text-sm text-primary/60 group-hover:text-primary group-focus:text-primary">
-                  Theme
+                  {t("theme")}
                 </span>
                 <ThemeSwitcher />
               </DropdownMenuItem>
@@ -107,7 +101,7 @@ export function Navigation({
                 )}
               >
                 <span className="w-full text-sm text-primary/60 group-hover:text-primary group-focus:text-primary">
-                  Language
+                  {t("language")}
                 </span>
                 <LanguageSwitcher />
               </DropdownMenuItem>
@@ -119,7 +113,7 @@ export function Navigation({
                 onClick={() => signOut()}
               >
                 <span className="text-sm text-primary/60 group-hover:text-primary group-focus:text-primary">
-                  Log Out
+                  {t("logOut")}
                 </span>
                 <LogOut className="h-[18px] w-[18px] stroke-[1.5px] text-primary/60 group-hover:text-primary group-focus:text-primary" />
               </DropdownMenuItem>
@@ -141,7 +135,7 @@ export function Navigation({
               `${buttonVariants({ variant: "ghost", size: "sm" })} text-primary/80`,
             )}
           >
-            Dashboard
+            {t("dashboard")}
           </Link>
         </div>
         <div
@@ -156,7 +150,7 @@ export function Navigation({
               `${buttonVariants({ variant: "ghost", size: "sm" })} text-primary/80`,
             )}
           >
-            Settings
+            {t("settings")}
           </Link>
         </div>
         <div
@@ -171,7 +165,7 @@ export function Navigation({
               `${buttonVariants({ variant: "ghost", size: "sm" })} text-primary/80`,
             )}
           >
-            Billing
+            {t("billing")}
           </Link>
         </div>
       </div>

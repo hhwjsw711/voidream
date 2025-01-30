@@ -1,3 +1,4 @@
+import { useScopedI18n } from "@/locales/client";
 import {
   Select,
   SelectContent,
@@ -7,10 +8,11 @@ import {
 import { cn } from "@v1/ui/utils";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 export function ThemeSwitcher({ triggerClass }: { triggerClass?: string }) {
+  const t = useScopedI18n("theme");
   const { theme: currentTheme, setTheme, themes } = useTheme();
+
   return (
     <Select
       value={currentTheme}
@@ -30,11 +32,9 @@ export function ThemeSwitcher({ triggerClass }: { triggerClass?: string }) {
           ) : (
             <Monitor className="h-[14px] w-[14px]" />
           )}
-          {currentTheme && (
-            <span className="text-xs font-medium">
-              {currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)}
-            </span>
-          )}
+          <span className="text-xs font-medium w-[52px] truncate">
+            {t(currentTheme as "light" | "dark" | "system")}
+          </span>
         </div>
       </SelectTrigger>
       <SelectContent>
@@ -44,7 +44,7 @@ export function ThemeSwitcher({ triggerClass }: { triggerClass?: string }) {
             value={theme}
             className={`text-sm font-medium text-primary/60 ${theme === currentTheme && "text-primary"}`}
           >
-            {theme && theme.charAt(0).toUpperCase() + theme.slice(1)}
+            {t(theme as "light" | "dark" | "system")}
           </SelectItem>
         ))}
       </SelectContent>

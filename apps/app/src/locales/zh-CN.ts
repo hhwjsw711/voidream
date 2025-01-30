@@ -55,4 +55,46 @@ export default {
       privacyPolicy: "隐私政策",
     },
   },
+  navigation: {
+    dashboard: "控制台",
+    settings: "设置",
+    billing: "付费",
+    logOut: "退出登录",
+    theme: "外观",
+    language: "语言",
+  },
+  theme: {
+    light: "浅色",
+    dark: "深色",
+    system: "跟随系统",
+  },
+  carousel: {
+    button: "快速生成",
+  },
+  dashboard: {
+    carouselText1: "文生视频",
+    carouselText2: "图生视频",
+  },
+  generate: {
+    title: "创建视频",
+    steps: {
+      step1: "选择模式",
+      step2: "编写提示",
+      step3: "自定义",
+    },
+    mode: {
+      script: "脚本模式",
+      segment: "分段模式",
+      guided: "引导模式",
+    },
+    guided: {
+      title: "智能引导创作",
+      steps: {
+        step1: "选择模式",
+        step2: "编写提示",
+        step3: "优化调整",
+        step4: "自定义",
+      },
+    },
+  },
 } as const;

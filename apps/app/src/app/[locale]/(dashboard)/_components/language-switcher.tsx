@@ -65,7 +65,9 @@ export function LanguageSwitcher() {
       <SelectTrigger className="h-6 rounded border-primary/20 bg-secondary !px-2 hover:border-primary/40">
         <div className="flex items-start gap-2">
           <Languages className="h-[14px] w-[14px]" />
-          <span className="text-xs font-medium">{formatLanguage(locale)}</span>
+          <span className="text-xs font-medium truncate w-[52px]">
+            {formatLanguage(locale)}
+          </span>
         </div>
       </SelectTrigger>
       <SelectContent>

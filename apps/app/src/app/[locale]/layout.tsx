@@ -10,8 +10,9 @@ import { ThemeProvider } from "next-themes";
 import { ConvexClientProvider } from "../convex-client-provider";
 
 export const metadata: Metadata = {
-  title: "Create v1",
-  description: "Production ready Next.js app",
+  title: "Voidream",
+  description:
+    "Transform your ideas into captivating content without needing a subscription. Pay only for the videos you create.",
 };
 
 export const viewport = {

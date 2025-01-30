@@ -4,22 +4,22 @@ import Link from "next/link";
 import { StepIndicator } from "../_components/step-indicator";
 
 export const metadata = {
-  title: "Dashboard | Voidream",
+  title: "Generate | Voidream",
 };
 
 export default async function Generation() {
   const t = await getScopedI18n("generate");
   const steps = [
-    { number: 1, text: "Select Mode" },
-    { number: 2, text: "Prompt" },
-    { number: 3, text: "Customize" },
+    { number: 1, text: t("steps.step1") },
+    { number: 2, text: t("steps.step2") },
+    { number: 3, text: t("steps.step3") },
   ];
   const currentStep = 1;
 
   return (
     <>
       <h1 className="mt-24 font-medium text-center text-5xl text-primary/80">
-        Craft Your Video
+        {t("title")}
       </h1>
 
       <StepIndicator
@@ -32,7 +32,7 @@ export default async function Generation() {
         <div className="z-10 mx-auto flex h-full w-full max-w-screen-xl gap-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             <Link
-              href="/generate"
+              href="/generate/script"
               className="group flex w-full flex-col rounded-lg border border-border bg-card dark:bg-black transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:border-primary/40 active:scale-[0.98]"
             >
               <div className="flex w-full px-6">
@@ -46,7 +46,7 @@ export default async function Generation() {
                     </div>
                     <div className="flex flex-col items-center gap-2">
                       <p className="text-base font-medium text-primary">
-                        {t("title_1")}
+                        {t("mode.script")}
                       </p>
                     </div>
                   </div>
@@ -70,7 +70,7 @@ export default async function Generation() {
                     </div>
                     <div className="flex flex-col items-center gap-2">
                       <p className="text-base font-medium text-primary">
-                        {t("title_2")}
+                        {t("mode.guided")}
                       </p>
                     </div>
                   </div>
@@ -80,7 +80,7 @@ export default async function Generation() {
               </div>
             </Link>
             <Link
-              href="/generate"
+              href="/generate/segment"
               className="group flex w-full flex-col rounded-lg border border-border bg-card dark:bg-black transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:border-primary/40 active:scale-[0.98]"
             >
               <div className="flex w-full px-6">
@@ -94,7 +94,7 @@ export default async function Generation() {
                     </div>
                     <div className="flex flex-col items-center gap-2">
                       <p className="text-base font-medium text-primary">
-                        {t("title_3")}
+                        {t("mode.segment")}
                       </p>
                     </div>
                   </div>
