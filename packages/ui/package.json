@@ -26,7 +26,6 @@
     "./avatar": "./src/components/avatar.tsx",
     "./button": "./src/components/button.tsx",
     "./card": "./src/components/card.tsx",
-    "./carousel": "./src/components/carousel.tsx",
     "./dropdown-menu": "./src/components/dropdown-menu.tsx",
     "./form": "./src/components/form.tsx",
     "./input": "./src/components/input.tsx",

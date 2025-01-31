@@ -28,7 +28,7 @@ export default async function Generation() {
         className="mt-16"
       />
 
-      <div className="flex h-full w-full bg-secondary px-6 py-8 dark:bg-black">
+      <div className="flex h-full w-full bg-secondary px-6 py-8 dark:bg-card">
         <div className="z-10 mx-auto flex h-full w-full max-w-screen-xl gap-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             <Link

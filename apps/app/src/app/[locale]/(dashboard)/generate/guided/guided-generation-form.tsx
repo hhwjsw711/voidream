@@ -78,14 +78,13 @@ The topic of the script should match a title called: ${form.getValues("title")}`
   return (
     <>
       <div className="flex flex-col space-y-1.5 p-6">
-        <h3 className="tracking-tight flex justify-between items-center text-2xl font-normal text-gray-800 dark:text-gray-100">
+        <h3 className="tracking-tight flex justify-between items-center text-2xl font-bold text-gray-900 dark:text-gray-100">
           Enter a Prompt
           <div className="flex gap-2">
             <Button
               type="button"
-              variant="outline"
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               onClick={fillYTShortTemplate}
-              className="text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
             >
               YT Short (60 seconds)
             </Button>
@@ -100,15 +99,22 @@ The topic of the script should match a title called: ${form.getValues("title")}`
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <FormLabel className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     Title{" "}
-                    <span className="text-xs text-gray-400 dark:text-gray-500">
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
                       (will be used in template)
                     </span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="flex h-9 w-full rounded-md px-3 py-1 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-gray-400 dark:focus-visible:ring-gray-500"
+                      className="h-9 w-full rounded-md px-3 py-2
+                        text-gray-900 dark:text-gray-100 
+                        bg-gray-50 dark:bg-gray-900 
+                        border border-gray-200 dark:border-gray-700
+                        placeholder:text-gray-500 dark:placeholder:text-gray-400
+                        focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 
+                        focus:border-blue-500/50 dark:focus:border-blue-500/50 
+                        focus:outline-none transition-all duration-200"
                       placeholder="Mastering Social Media Algorithms: Your Key to Success 📱"
                       {...field}
                     />
@@ -121,12 +127,19 @@ The topic of the script should match a title called: ${form.getValues("title")}`
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <FormLabel className="text-sm font-medium text-gray-900 dark:text-gray-100">
                     Story Description
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      className="flex min-h-[60px] w-full rounded-md px-3 py-2 text-sm h-64 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus-visible:ring-1 focus-visible:ring-gray-400 dark:focus-visible:ring-gray-500"
+                      className="min-h-[60px] w-full rounded-md px-3 py-2 h-64
+                        text-gray-900 dark:text-gray-100 
+                        bg-gray-50 dark:bg-gray-900 
+                        border border-gray-200 dark:border-gray-700
+                        placeholder:text-gray-500 dark:placeholder:text-gray-400
+                        focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 
+                        focus:border-blue-500/50 dark:focus:border-blue-500/50 
+                        focus:outline-none transition-all duration-200"
                       placeholder={`Generate a 130-word max video script that is five short paragraphs.
 
 Include a catchy hook or intro, a clear main learning point, and actionable advice for the viewer to try.
@@ -141,10 +154,10 @@ The topic of the script should match a title called: Mastering Social Media Algo
             <Button
               type="submit"
               disabled={isPending}
-              className="w-full h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              className="w-full h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             >
-              <Wand2 className="h-4 w-4 mr-2" />
-              Generate Guided Story (1 credits)
+              <Wand2 className="h-4 w-4" />
+              <span>Generate Guided Story (1 credits)</span>
             </Button>
           </form>
         </Form>

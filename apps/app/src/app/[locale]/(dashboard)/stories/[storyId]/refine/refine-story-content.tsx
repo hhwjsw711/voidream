@@ -225,21 +225,16 @@ export function RefineStoryContent() {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
+        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">
           {story.title}
         </h1>
 
         <div className="space-y-2">
-          {" "}
-          {/* 添加一个容器来管理间距 */}
-          {/* 未保存提示 */}
           <div className="h-6">
-            {" "}
-            {/* 固定高度避免布局偏移 */}
             <p
               className={cn(
-                "text-sm text-gray-500 dark:text-gray-400",
+                "text-sm text-gray-600 dark:text-gray-400",
                 "transition-opacity duration-200",
                 isUnsaved ? "opacity-100" : "opacity-0",
               )}
@@ -250,19 +245,24 @@ export function RefineStoryContent() {
           <div className="relative group">
             <textarea
               ref={textareaRef}
-              className="w-full min-h-[400px] p-5 resize-none rounded-lg text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 focus:border-blue-500/50 dark:focus:border-blue-500/50 focus:outline-none transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed font-medium leading-relaxed"
+              className="w-full min-h-[400px] p-5 resize-none rounded-lg 
+                text-gray-900 dark:text-gray-100 
+                bg-gray-50 dark:bg-gray-900 
+                border border-gray-200 dark:border-gray-700 
+                placeholder-gray-500 dark:placeholder-gray-400 
+                focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 
+                focus:border-blue-500/50 dark:focus:border-blue-500/50 
+                focus:outline-none transition-all duration-200 
+                disabled:opacity-60 disabled:cursor-not-allowed 
+                font-medium leading-relaxed"
               defaultValue={story.script}
               onChange={handleScriptChange}
               disabled={story.status === "processing"}
               spellCheck={false}
             />
             {story.status === "processing" && (
-              <div
-                className="absolute inset-0 bg-gray-50/50 dark:bg-gray-900/50 
-            backdrop-blur-[1px] rounded-lg 
-            flex items-center justify-center"
-              >
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+              <div className="absolute inset-0 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   <Loader2 className="h-4 w-4 animate-spin" />
                   <span className="text-sm">Processing...</span>
                 </div>
@@ -270,6 +270,7 @@ export function RefineStoryContent() {
             )}
           </div>
         </div>
+
         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
           <span>
             {videoInfo.wordCount} words / {videoInfo.characterCount} characters
@@ -281,19 +282,17 @@ export function RefineStoryContent() {
 
         <div className="flex justify-between space-x-4 mt-4">
           <Button
-            className="flex-1 px-4 py-2 text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
-            variant="outline"
+            className="flex-1 h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             onClick={() => setOpenDialog(DialogType.Refine)}
           >
-            <Wand2 className="h-4 w-4 mr-2" />
-            Refine Story
+            <Wand2 className="h-4 w-4" />
+            <span>Refine Story</span>
           </Button>
           <Button
-            className="flex-1 px-4 py-2 text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
-            variant="outline"
+            className="flex-1 h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             onClick={() => setOpenDialog(DialogType.GenerateSegments)}
           >
-            Generate Segments
+            <span>Generate Segments</span>
           </Button>
         </div>
       </div>
@@ -302,7 +301,7 @@ export function RefineStoryContent() {
         open={openDialog !== DialogType.None}
         onOpenChange={(open) => !open && setOpenDialog(DialogType.None)}
       >
-        <DialogContent className="sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-800">
+        <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] max-h-[80vh] overflow-y-auto">
           {openDialog === DialogType.Refine && (
             <>
               <DialogHeader>
@@ -320,39 +319,40 @@ export function RefineStoryContent() {
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
                     placeholder="Enter refinement instructions..."
-                    className="col-span-4 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 bg-gray-100 dark:bg-gray-700"
+                    className="col-span-4 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700"
                     disabled={isRefining}
                   />
                 </div>
               </div>
               <DialogFooter className="mt-8">
-                <Button
-                  type="button"
-                  variant="secondary"
-                  className="text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 mr-2"
-                  onClick={() => {
-                    setOpenDialog(DialogType.None);
-                    setInstructions("");
-                  }}
-                  disabled={isRefining}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="button"
-                  onClick={handleRefine}
-                  disabled={isRefining || !instructions.trim()}
-                  className="text-white bg-blue-600 dark:bg-blue-500 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
-                >
-                  Refine (1 credit)
-                </Button>
+                <div className="flex space-x-4">
+                  <Button
+                    type="button"
+                    className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+                    onClick={() => {
+                      setOpenDialog(DialogType.None);
+                      setInstructions("");
+                    }}
+                    disabled={isRefining}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleRefine}
+                    disabled={isRefining || !instructions.trim()}
+                    className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+                  >
+                    Refine (1 credit)
+                  </Button>
+                </div>
               </DialogFooter>
             </>
           )}
           {openDialog === DialogType.GenerateSegments && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-4">
+                <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
                   Choose Video Orientation
                 </DialogTitle>
                 <DialogDescription className="text-gray-900 dark:text-gray-200 space-y-2">
@@ -364,7 +364,7 @@ export function RefineStoryContent() {
                     Horizontal videos are better suited for YouTube and
                     traditional video players.
                   </span>
-                  <span className="block font-bold">
+                  <span className="block font-bold text-gray-900 dark:text-gray-100">
                     Note: Once set, the orientation cannot be changed without
                     regenerating all images, so choose carefully!
                   </span>
@@ -372,40 +372,50 @@ export function RefineStoryContent() {
               </DialogHeader>
               <div className="flex justify-between space-x-4 mt-4">
                 <Button
-                  variant={isVertical ? "default" : "secondary"}
-                  className="flex-1 gap-3"
+                  className={cn(
+                    "w-full h-9 px-3 py-2 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2",
+                    isVertical
+                      ? "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white"
+                      : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200",
+                  )}
                   onClick={() => setIsVertical(true)}
                 >
-                  <Smartphone className="h-5 w-5" />
+                  <Smartphone className="h-4 w-4" />
                   <span>Vertical</span>
                 </Button>
                 <Button
-                  variant={!isVertical ? "default" : "secondary"}
-                  className="flex-1 gap-3"
+                  className={cn(
+                    "w-full h-9 px-3 py-2 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2",
+                    !isVertical
+                      ? "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white"
+                      : "bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200",
+                  )}
                   onClick={() => setIsVertical(false)}
                 >
-                  <Monitor className="h-5 w-5" />
+                  <Monitor className="h-4 w-4" />
                   <span>Horizontal</span>
                 </Button>
               </div>
               <DialogFooter className="mt-8">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => setOpenDialog(DialogType.None)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="button"
-                  variant="default"
-                  onClick={handleGenerateSegments}
-                  disabled={isGenerating}
-                >
-                  {isGenerating
-                    ? "Generating..."
-                    : `Generate (${estimatedCredits} credits)`}
-                </Button>
+                <div className="flex space-x-4">
+                  <Button
+                    type="button"
+                    className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+                    onClick={() => setOpenDialog(DialogType.None)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+                    onClick={handleGenerateSegments}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating
+                      ? "Generating..."
+                      : `Generate (${estimatedCredits} credits)`}
+                  </Button>
+                </div>
               </DialogFooter>
             </>
           )}

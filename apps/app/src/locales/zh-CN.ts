@@ -72,8 +72,14 @@ export default {
     button: "快速生成",
   },
   dashboard: {
-    carouselText1: "文生视频",
-    carouselText2: "图生视频",
+    features: {
+      quickGen: "快速创作",
+      batchGen: "批量创作",
+      content: "素材库",
+      image: "生成图片",
+      video: "生成视频",
+      audio: "配音制作",
+    },
   },
   generate: {
     title: "创建视频",
@@ -89,6 +95,15 @@ export default {
     },
     guided: {
       title: "智能引导创作",
+      steps: {
+        step1: "选择模式",
+        step2: "编写提示",
+        step3: "优化调整",
+        step4: "自定义",
+      },
+    },
+    refine: {
+      title: "智能优化创作",
       steps: {
         step1: "选择模式",
         step2: "编写提示",

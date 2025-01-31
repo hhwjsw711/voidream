@@ -1117,12 +1117,12 @@ function ReviewDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[600px] lg:max-w-[800px]">
+      <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 sm:max-w-[600px] lg:max-w-[800px]">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">
+          <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
             Story Review
           </DialogTitle>
-          <DialogDescription className="text-base text-muted-foreground">
+          <DialogDescription className="text-gray-900 dark:text-gray-200">
             Use AI to review your story and get feedback
           </DialogDescription>
         </DialogHeader>
@@ -1131,37 +1131,37 @@ function ReviewDialog({
           {isProcessing ? (
             <div className="flex flex-col items-center justify-center py-12 space-y-4">
               <div className="relative">
-                <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
+                <Loader2 className="h-12 w-12 animate-spin text-gray-400 dark:text-gray-500" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-primary animate-ping" />
+                  <div className="h-2 w-2 rounded-full bg-blue-600 dark:bg-blue-500 animate-ping" />
                 </div>
               </div>
               <div className="space-y-2 text-center">
-                <h3 className="font-medium text-lg">
+                <h3 className="font-medium text-lg text-gray-900 dark:text-gray-100">
                   {isApplying ? "Applying Revisions" : "Analyzing Your Story"}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
                   {isApplying
                     ? "AI is improving your story based on the review..."
                     : "Our AI reviewer is carefully evaluating your story..."}
                 </p>
-                <div className="text-xs text-muted-foreground/70 animate-pulse">
+                <div className="text-xs text-gray-500 dark:text-gray-500 animate-pulse">
                   This may take a minute
                 </div>
               </div>
             </div>
           ) : review ? (
             <div className="space-y-4 max-h-[400px] overflow-y-auto pr-4">
-              <div className="prose prose-sm dark:prose-invert">
+              <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300">
                 <ReactMarkdown
                   components={{
                     h1: ({ children }) => (
-                      <h1 className="text-2xl font-bold mt-6 mb-4 text-primary">
+                      <h1 className="text-2xl font-bold mt-6 mb-4 text-blue-600 dark:text-blue-500">
                         {children}
                       </h1>
                     ),
                     h2: ({ children }) => (
-                      <h2 className="text-xl font-semibold mt-8 mb-3 border-b border-border pb-2">
+                      <h2 className="text-xl font-semibold mt-8 mb-3 border-b border-gray-200 dark:border-gray-700 pb-2 text-gray-900 dark:text-gray-100">
                         {children}
                       </h2>
                     ),
@@ -1170,12 +1170,17 @@ function ReviewDialog({
                       const hasScore = text.includes("/10");
                       return (
                         <h3
-                          className={`text-lg font-medium mt-6 mb-2 flex items-center gap-2 ${hasScore ? "text-primary" : ""}`}
+                          className={cn(
+                            "text-lg font-medium mt-6 mb-2 flex items-center gap-2",
+                            hasScore
+                              ? "text-blue-600 dark:text-blue-500"
+                              : "text-gray-900 dark:text-gray-100",
+                          )}
                         >
                           {hasScore ? (
                             <>
                               <span>{text.split(" (")[0]}</span>
-                              <span className="text-primary font-bold">
+                              <span className="text-blue-600 dark:text-blue-500 font-bold">
                                 ({text.split(" (")[1]}
                               </span>
                             </>
@@ -1186,13 +1191,15 @@ function ReviewDialog({
                       );
                     },
                     ul: ({ children }) => (
-                      <ul className="space-y-2 my-3">{children}</ul>
+                      <ul className="space-y-2 my-3 text-gray-700 dark:text-gray-300">
+                        {children}
+                      </ul>
                     ),
                     li: ({ children }) => {
                       const text = String(children);
                       if (text.startsWith("✓")) {
                         return (
-                          <li className="flex items-baseline gap-3 text-emerald-500 dark:text-emerald-400">
+                          <li className="flex items-baseline gap-3 text-emerald-600 dark:text-emerald-500">
                             <span className="flex-shrink-0">
                               {text.slice(0, 1)}
                             </span>
@@ -1202,7 +1209,7 @@ function ReviewDialog({
                       }
                       if (text.startsWith("△")) {
                         return (
-                          <li className="flex items-baseline gap-3 text-amber-500 dark:text-amber-400">
+                          <li className="flex items-baseline gap-3 text-amber-600 dark:text-amber-500">
                             <span className="flex-shrink-0">
                               {text.slice(0, 1)}
                             </span>
@@ -1216,7 +1223,7 @@ function ReviewDialog({
                             <span className="flex-shrink-0">
                               {text.slice(0, 1)}
                             </span>
-                            <span className="text-muted-foreground">
+                            <span className="text-gray-600 dark:text-gray-400">
                               {text.slice(1)}
                             </span>
                           </li>
@@ -1224,20 +1231,20 @@ function ReviewDialog({
                       }
                       return (
                         <li className="flex items-baseline gap-3">
-                          <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
-                          <span className="text-muted-foreground">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 mt-2 flex-shrink-0" />
+                          <span className="text-gray-600 dark:text-gray-400">
                             {children}
                           </span>
                         </li>
                       );
                     },
                     ol: ({ children }) => (
-                      <ol className="list-decimal list-inside space-y-3 mt-4">
+                      <ol className="list-decimal list-inside space-y-3 mt-4 text-gray-700 dark:text-gray-300">
                         {children}
                       </ol>
                     ),
                     p: ({ children }) => (
-                      <p className="my-3 text-muted-foreground leading-relaxed">
+                      <p className="my-3 text-gray-600 dark:text-gray-400 leading-relaxed">
                         {children}
                       </p>
                     ),
@@ -1249,45 +1256,48 @@ function ReviewDialog({
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <div className="rounded-full bg-muted p-3 mb-4">
-                <TriangleAlert className="h-6 w-6 text-muted-foreground" />
+              <div className="rounded-full bg-gray-100 dark:bg-gray-700 p-3 mb-4">
+                <TriangleAlert className="h-6 w-6 text-gray-500 dark:text-gray-400" />
               </div>
-              <h3 className="font-medium text-lg mb-1">No Review Available</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-medium text-lg mb-1 text-gray-900 dark:text-gray-100">
+                No Review Available
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Click the "Generate Review" button to generate feedback
               </p>
             </div>
           )}
         </div>
 
-        <DialogFooter className="flex justify-between sm:justify-end gap-2">
-          <Button
-            onClick={() => setIsOpen(false)}
-            variant="outline"
-            disabled={isProcessing}
-          >
-            Close
-          </Button>
-          <div className="flex gap-2">
+        <DialogFooter className="mt-8">
+          <div className="flex space-x-4">
             <Button
-              onClick={handleReview}
+              onClick={() => setIsOpen(false)}
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               disabled={isProcessing}
-              className="min-w-[140px]"
             >
-              <Wand2 className="h-4 w-4 mr-2" />
-              Generate Review
-              <span className="ml-1 text-xs opacity-70">(1 credit)</span>
+              Close
             </Button>
-            <Button
-              onClick={handleApplyRevisions}
-              disabled={isProcessing || !review}
-              className="min-w-[140px]"
-              variant="default"
-            >
-              <Sparkles className="h-4 w-4 mr-2" />
-              Apply Revisions
-              <span className="ml-1 text-xs opacity-70">(10 credits)</span>
-            </Button>
+            <div className="flex space-x-4">
+              <Button
+                onClick={handleReview}
+                disabled={isProcessing}
+                className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
+              >
+                <Wand2 className="h-4 w-4 mr-2" />
+                Generate Review
+                <span className="ml-1 text-xs opacity-70">(1 credit)</span>
+              </Button>
+              <Button
+                onClick={handleApplyRevisions}
+                disabled={isProcessing || !review}
+                className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                Apply Revisions
+                <span className="ml-1 text-xs opacity-70">(10 credits)</span>
+              </Button>
+            </div>
           </div>
         </DialogFooter>
       </DialogContent>
@@ -1341,16 +1351,18 @@ function GrammarDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !isFixing && setIsOpen(open)}>
-      <DialogContent>
+      <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <DialogHeader>
-          <DialogTitle>Quick Grammar Check</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
+            Quick Grammar Check
+          </DialogTitle>
+          <DialogDescription className="text-gray-900 dark:text-gray-200">
             Automatically correct basic spelling and grammar errors in all
             segments.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 text-muted-foreground text-sm">
+        <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
           <p>This quick fix will:</p>
           <ul className="list-disc list-inside space-y-2">
             <li>Fix spelling mistakes</li>
@@ -1358,42 +1370,46 @@ function GrammarDialog({
             <li>Fix punctuation issues</li>
           </ul>
           <div className="text-xs space-y-2">
-            <p className="italic">
+            <p className="italic text-gray-600 dark:text-gray-400">
               Note: For more comprehensive improvements, use the "Review &
               Apply" feature.
             </p>
-            <p className="text-yellow-500">This action requires 2 credits.</p>
+            <p className="text-yellow-600 dark:text-yellow-500">
+              This action requires 2 credits.
+            </p>
           </div>
         </div>
 
-        <DialogFooter className="gap-2">
-          <Button
-            onClick={() => setIsOpen(false)}
-            variant="outline"
-            disabled={isFixing}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleFixGrammar}
-            disabled={isFixing || story?.status === "processing"}
-            className="gap-2"
-          >
-            {isFixing || story?.status === "processing" ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                {story?.status === "processing"
-                  ? "Processing..."
-                  : "Starting..."}
-              </>
-            ) : (
-              <>
-                <SpellCheck className="h-4 w-4" />
-                Quick Fix
-              </>
-            )}
-            <span className="ml-1 text-xs opacity-70">(2 credits)</span>
-          </Button>
+        <DialogFooter className="mt-8">
+          <div className="flex space-x-4">
+            <Button
+              onClick={() => setIsOpen(false)}
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              disabled={isFixing}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleFixGrammar}
+              disabled={isFixing || story?.status === "processing"}
+              className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+            >
+              {isFixing || story?.status === "processing" ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {story?.status === "processing"
+                    ? "Processing..."
+                    : "Starting..."}
+                </>
+              ) : (
+                <>
+                  <SpellCheck className="h-4 w-4" />
+                  Quick Fix
+                </>
+              )}
+              <span className="ml-1 text-xs opacity-70">(2 credits)</span>
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -1434,16 +1450,20 @@ function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className={cn("max-w-4xl", story.isVertical && "sm:max-w-2xl")}
+        className={cn(
+          "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700",
+          "max-w-4xl",
+          story.isVertical && "sm:max-w-2xl",
+        )}
       >
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold">
+          <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
             {story.title}
           </DialogTitle>
         </DialogHeader>
 
         <div className="max-h-[70vh] overflow-y-auto pr-4">
-          <div className="prose prose-sm dark:prose-invert max-w-none">
+          <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
             {segments.map((segment) => (
               <SegmentContent
                 key={segment._id}
@@ -1454,23 +1474,28 @@ function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
           </div>
         </div>
 
-        <DialogFooter className="flex justify-between sm:justify-between gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="gap-2"
-            onClick={handleCopy}
-          >
-            {hasCopied ? (
-              <Check className="h-4 w-4" />
-            ) : (
-              <Copy className="h-4 w-4" />
-            )}
-            {hasCopied ? "Copied!" : "Copy to Clipboard"}
-          </Button>
-          <Button variant="outline" onClick={() => setIsOpen(false)}>
-            Close
-          </Button>
+        <DialogFooter className="mt-8">
+          <div className="flex justify-between w-full">
+            <Button
+              className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              onClick={handleCopy}
+            >
+              {hasCopied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+              {hasCopied ? "Copied!" : "Copy to Clipboard"}
+            </Button>
+          </div>
+          <div className="flex-1 flex justify-end">
+            <Button
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Close
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -1577,17 +1602,17 @@ function CloneDialog({
       open={isOpen}
       onOpenChange={(open) => !isCloning && setIsOpen(open)} // 防止处理中关闭
     >
-      <DialogContent className="sm:max-w-md">
-        {" "}
-        {/* [新增] 限制宽度 */}
+      <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Clone Story</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
+            Clone Story
+          </DialogTitle>
+          <DialogDescription className="text-gray-900 dark:text-gray-200">
             Create a new {isVertical ? "horizontal" : "vertical"} version while
             keeping all content.
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-4 text-muted-foreground text-sm">
+        <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
           <p>This will:</p>
           <ul className="list-disc list-inside space-y-2">
             <li>
@@ -1600,61 +1625,71 @@ function CloneDialog({
             </li>
           </ul>
 
-          {/* [新增] 积分显示优化 */}
-          <div className="mt-4 p-3 bg-muted rounded-md">
+          <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium">Required Credits:</p>
-              <p className="text-sm">{requiredCredits}</p>
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Required Credits:
+              </p>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                {requiredCredits}
+              </p>
             </div>
             <div className="flex items-center justify-between mt-1">
-              <p className="text-sm font-medium">Your Credits:</p>
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Your Credits:
+              </p>
               <p
                 className={cn(
                   "text-sm",
-                  !hasEnoughCredits && "text-destructive",
+                  hasEnoughCredits
+                    ? "text-gray-700 dark:text-gray-300"
+                    : "text-red-600 dark:text-red-500",
                 )}
               >
                 {credits?.remaining || 0}
               </p>
             </div>
             {!hasEnoughCredits && (
-              <p className="text-destructive text-xs mt-2">
+              <p className="text-red-600 dark:text-red-500 text-xs mt-2">
                 Insufficient credits. You need{" "}
                 {requiredCredits - (credits?.remaining || 0)} more credits.
               </p>
             )}
           </div>
         </div>
-        <DialogFooter className="gap-2 sm:gap-0">
-          <Button
-            onClick={() => setIsOpen(false)}
-            variant="outline"
-            disabled={isCloning}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleClone}
-            disabled={isCloning || !hasEnoughCredits} // [修改] 添加积分检查
-            className="gap-2"
-          >
-            {isCloning ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Creating Clone...
-              </>
-            ) : !hasEnoughCredits ? ( // [新增] 积分不足状态
-              <>
-                <AlertCircle className="h-4 w-4" />
-                Insufficient Credits
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" />
-                Clone to {isVertical ? "Horizontal" : "Vertical"}
-              </>
-            )}
-          </Button>
+
+        <DialogFooter className="mt-8">
+          <div className="flex space-x-4">
+            <Button
+              onClick={() => setIsOpen(false)}
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              disabled={isCloning}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleClone}
+              disabled={isCloning || !hasEnoughCredits} // [修改] 添加积分检查
+              className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+            >
+              {isCloning ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Creating Clone...
+                </>
+              ) : !hasEnoughCredits ? ( // [新增] 积分不足状态
+                <>
+                  <AlertCircle className="h-4 w-4" />
+                  Insufficient Credits
+                </>
+              ) : (
+                <>
+                  <Copy className="h-4 w-4" />
+                  Clone to {isVertical ? "Horizontal" : "Vertical"}
+                </>
+              )}
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -1760,25 +1795,36 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="bg-white border-2 border-gray-200 shadow-lg text-black max-h-[90vh] overflow-y-auto rounded-lg">
+      <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Generate Video</DialogTitle>
+          <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
+            Generate Video
+          </DialogTitle>
         </DialogHeader>
+
         <div className="grid gap-4 py-4">
           <div className="flex items-center space-x-2">
             <Select value={voiceId} onValueChange={setVoiceId}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[180px] h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                 <SelectValue placeholder="Select voice" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 {voiceOptions.map((voice) => (
-                  <SelectItem key={voice.id} value={voice.id}>
+                  <SelectItem
+                    key={voice.id}
+                    value={voice.id}
+                    className="text-gray-900 dark:text-gray-100"
+                  >
                     {voice.name}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <Button size="icon" onClick={playAudioPreview}>
+            <Button
+              size="icon"
+              onClick={playAudioPreview}
+              className="h-9 w-9 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200"
+            >
               {isPlaying ? (
                 <PauseIcon className="h-4 w-4" />
               ) : (
@@ -1786,125 +1832,144 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
               )}
             </Button>
           </div>
+
           <audio
             ref={audioRef}
             onEnded={handleAudioEnded}
             style={{ display: "none" }}
           />
 
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="includeWatermark"
-              className="text-sm font-medium leading-none"
-            >
-              Include a watermark to help promote us for 80% off
-            </label>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={includeWatermark}
-              onClick={() => setIncludeWatermark(!includeWatermark)}
-              className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ${
-                includeWatermark ? "bg-blue-500" : "bg-gray-300"
-              }`}
-            >
-              <span
-                className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform ${
-                  includeWatermark ? "translate-x-4" : "translate-x-0"
-                }`}
-              />
-            </button>
-          </div>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Include a watermark to help promote us for 80% off
+              </label>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={includeWatermark}
+                onClick={() => setIncludeWatermark(!includeWatermark)}
+                className={cn(
+                  "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                  includeWatermark
+                    ? "bg-blue-600 dark:bg-blue-500"
+                    : "bg-gray-200 dark:bg-gray-700",
+                )}
+              >
+                <span
+                  className={cn(
+                    "pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform",
+                    includeWatermark ? "translate-x-4" : "translate-x-0",
+                  )}
+                />
+              </button>
+            </div>
 
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="isPublic"
-              className="text-sm font-medium leading-none"
-            >
-              Make video public
-            </label>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={isPublic}
-              onClick={() => setIsPublic(!isPublic)}
-              className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ${
-                isPublic ? "bg-blue-500" : "bg-gray-300"
-              }`}
-            >
-              <span
-                className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform ${
-                  isPublic ? "translate-x-4" : "translate-x-0"
-                }`}
-              />
-            </button>
-          </div>
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Make video public
+              </label>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={isPublic}
+                onClick={() => setIsPublic(!isPublic)}
+                className={cn(
+                  "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                  isPublic
+                    ? "bg-blue-600 dark:bg-blue-500"
+                    : "bg-gray-200 dark:bg-gray-700",
+                )}
+              >
+                <span
+                  className={cn(
+                    "pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform",
+                    isPublic ? "translate-x-4" : "translate-x-0",
+                  )}
+                />
+              </button>
+            </div>
 
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="isLaxSpacing"
-              className="text-sm font-medium leading-none"
-            >
-              Use lax spacing
-            </label>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={isLaxSpacing}
-              onClick={() => setIsLaxSpacing(!isLaxSpacing)}
-              className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ${
-                isLaxSpacing ? "bg-blue-500" : "bg-gray-300"
-              }`}
-            >
-              <span
-                className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform ${
-                  isLaxSpacing ? "translate-x-4" : "translate-x-0"
-                }`}
-              />
-            </button>
-          </div>
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Use lax spacing
+              </label>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={isLaxSpacing}
+                onClick={() => setIsLaxSpacing(!isLaxSpacing)}
+                className={cn(
+                  "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                  isLaxSpacing
+                    ? "bg-blue-600 dark:bg-blue-500"
+                    : "bg-gray-200 dark:bg-gray-700",
+                )}
+              >
+                <span
+                  className={cn(
+                    "pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform",
+                    isLaxSpacing ? "translate-x-4" : "translate-x-0",
+                  )}
+                />
+              </button>
+            </div>
 
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="includeCaptions"
-              className="text-sm font-medium leading-none"
-            >
-              Include captions
-            </label>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={includeCaptions}
-              onClick={() => setIncludeCaptions(!includeCaptions)}
-              className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 ${
-                includeCaptions ? "bg-blue-500" : "bg-gray-300"
-              }`}
-            >
-              <span
-                className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform ${
-                  includeCaptions ? "translate-x-4" : "translate-x-0"
-                }`}
-              />
-            </button>
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Include captions
+              </label>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={includeCaptions}
+                onClick={() => setIncludeCaptions(!includeCaptions)}
+                className={cn(
+                  "inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors",
+                  "focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30",
+                  "disabled:cursor-not-allowed disabled:opacity-50",
+                  includeCaptions
+                    ? "bg-blue-600 dark:bg-blue-500"
+                    : "bg-gray-200 dark:bg-gray-700",
+                )}
+              >
+                <span
+                  className={cn(
+                    "pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform",
+                    includeCaptions ? "translate-x-4" : "translate-x-0",
+                  )}
+                />
+              </button>
+            </div>
           </div>
 
           {includeCaptions && (
             <>
               <div>
-                <label className="text-sm font-medium leading-none mb-2 block">
+                <label className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2 block">
                   Caption Position
                 </label>
                 <Select
                   value={captionPosition}
                   onValueChange={setCaptionPosition}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                     <SelectValue placeholder="Select caption position" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     {["top", "mid upper", "mid lower", "bottom"].map(
                       (position) => (
-                        <SelectItem key={position} value={position}>
+                        <SelectItem
+                          key={position}
+                          value={position}
+                          className="text-gray-900 dark:text-gray-100"
+                        >
                           {position}
                         </SelectItem>
                       ),
@@ -1914,19 +1979,23 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
               </div>
 
               <div>
-                <label className="text-sm font-medium leading-none mb-2 block">
+                <label className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2 block">
                   Highlight Color
                 </label>
                 <Select
                   value={highlightColor}
                   onValueChange={setHighlightColor}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                     <SelectValue placeholder="Select highlight color" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     {["yellow", "blue", "red", "green"].map((color) => (
-                      <SelectItem key={color} value={color}>
+                      <SelectItem
+                        key={color}
+                        value={color}
+                        className="text-gray-900 dark:text-gray-100"
+                      >
                         {color}
                       </SelectItem>
                     ))}
@@ -1936,19 +2005,25 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
             </>
           )}
         </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setIsOpen(false)}>
-            Cancel
-          </Button>
-          <Button
-            onClick={handleGenerateVideo}
-            disabled={isGenerating}
-            className="items-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-blue-500 text-white hover:bg-blue-600 h-9 py-2 flex gap-2 justify-center px-3"
-          >
-            {isGenerating
-              ? "Generating..."
-              : `Generate (${calculateCredits} credits)`}
-          </Button>
+
+        <DialogFooter className="mt-8">
+          <div className="flex space-x-4">
+            <Button
+              className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleGenerateVideo}
+              disabled={isGenerating}
+              className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+            >
+              {isGenerating
+                ? "Generating..."
+                : `Generate (${calculateCredits} credits)`}
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
