@@ -94,12 +94,121 @@ export default {
       guided: "引导模式",
     },
     guided: {
-      title: "智能引导创作",
+      title: "引导创作模式",
       steps: {
         step1: "选择模式",
         step2: "编写提示",
         step3: "优化调整",
         step4: "自定义",
+      },
+    },
+    script: {
+      title: "脚本创作模式",
+      steps: {
+        step1: "选择模式",
+        step2: "编写脚本",
+        step3: "自定义",
+      },
+      form: {
+        enterScript: "输入您的脚本",
+        title: "标题",
+        titlePlaceholder: "输入故事标题",
+        script: "脚本",
+        scriptPlaceholder: "在此编写脚本...",
+        characters: "字符",
+        estimatedLength: "预计视频时长：",
+        seconds: "秒",
+        customContext: {
+          title: "使用自定义图片上下文",
+          description: "切换以提供自定义图片提示上下文",
+          label: "自定义图片上下文",
+          placeholder: "输入自定义图片提示上下文...",
+          note: "如果留空，我们将使用AI自动生成的上下文。",
+          premadeContexts: "预设上下文",
+        },
+        videoFormat: {
+          title: "视频格式",
+          vertical: "竖屏",
+          horizontal: "横屏",
+        },
+        creditEstimate: {
+          title: "预计积分使用：",
+          item: "项目",
+          credits: "积分",
+          imageGeneration: "图片生成",
+          textTokens: "文本处理",
+          total: "总计",
+        },
+        generate: "生成图片并预览",
+        generating: "生成中...",
+        credits: "积分",
+        errors: {
+          validation: "验证失败",
+          checkFields: "请检查输入字段",
+          creditCheckFailed: "积分检查失败",
+          tryAgain: "请稍后重试",
+          insufficientCredits: "积分不足",
+          insufficientCreditsDesc: "您的积分不足以完成此操作",
+          generateFailed: "生成失败",
+        },
+        success: {
+          title: "生成成功",
+          description: "脚本已生成",
+        },
+      },
+      contexts: {
+        labels: {
+          photoRealistic: "照片级真实",
+          scary: "恐怖",
+          fantasy: "奇幻",
+          scifi: "科幻",
+          nature: "自然",
+          urban: "城市",
+          historical: "历史",
+          underwater: "水下",
+          steampunk: "蒸汽朋克",
+          cyberpunk: "赛博朋克",
+          fairytale: "童话",
+          postApocalyptic: "后启示录",
+          space: "太空",
+        },
+        descriptions: {
+          photoRealistic: "高质量、逼真的图像，细节清晰，色彩鲜艳，自然光照",
+          scary:
+            "黑暗阴森的氛围，阴影人物，不祥的光线，雾气，废弃场所，恐怖元素",
+          fantasy: "魔幻景观，神话生物，魔法森林，空中城堡，发光的神器",
+          scifi: "未来都市景观，高科技，外星世界，空间站，全息界面",
+          nature: "茂密森林，宁静湖泊，雄伟山脉，生机勃勃的野生动物，壮丽景观",
+          urban: "繁忙的城市街道，摩天大楼，霓虹灯，多元化人群，城市建筑",
+          historical: "古代文明，历史准确的服装，历史地标，复古美学",
+          underwater:
+            "色彩斑斓的珊瑚礁，奇异海洋生物，沉船，生物发光体，深海海沟",
+          steampunk:
+            "维多利亚时代科技，黄铜和铜制机械，飞艇，发条装置，蒸汽动力发明",
+          cyberpunk:
+            "霓虹街道，机械植入体，虚拟现实，反乌托邦大都市，高科技低生活",
+          fairytale: "奇幻小屋，会说话的动物，魔法物品，魔法森林，童话美学",
+          postApocalyptic:
+            "废墟城市，过度生长的植被，生存装备，临时定居点，荒凉景观",
+          space:
+            "遥远星系，绚丽星云，外星行星，未来宇宙飞船，探索新世界的宇航员",
+        },
+      },
+    },
+    segment: {
+      title: "分段创作模式",
+      steps: {
+        step1: "选择模式",
+        step2: "基础设置",
+        step3: "自定义",
+      },
+      form: {
+        selectFormat: "选择视频格式",
+        vertical: "竖屏模式",
+        horizontal: "横屏模式",
+        verticalRatio: "适用于手机 (9:16)",
+        horizontalRatio: "适用于电脑 (16:9)",
+        startWriting: "开始分段创作",
       },
     },
     refine: {

@@ -353,17 +353,17 @@ export async function generateContext(script: string): Promise<string> {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-    const prompt = `You are a professional story editor. Please generate a brief context summary (100-150 words) for the following story, focusing on:
-1. Key scenes
-2. Main characters
-3. Overall atmosphere
-4. Visual elements
-5. Emotional tone
+    const prompt = `You are a professional visual style analyst. Please generate a concise visual style description (50-100 words) for the following story, focusing on:
+1. Art style and visual aesthetics
+2. Color palette and lighting
+3. Atmosphere and mood
+4. Key visual elements and scenes
+5. Level of detail and quality (always include "high quality, detailed, sharp")
 
 Story:
 ${script}
 
-Return only the context summary without any additional text or explanations.`;
+Return only the visual style description without any additional text or explanations. The description will be used directly for AI image generation.`;
 
     const result = await model.generateContent(prompt);
     const context = result.response.text();

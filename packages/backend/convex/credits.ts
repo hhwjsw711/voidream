@@ -1,5 +1,7 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { useQuery } from "convex/react";
 import { ConvexError } from "convex/values";
+import { api } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 import { query } from "./_generated/server";

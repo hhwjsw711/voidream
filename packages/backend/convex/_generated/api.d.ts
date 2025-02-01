@@ -22,6 +22,7 @@ import type * as guidedStory from "../guidedStory.js";
 import type * as http from "../http.js";
 import type * as init from "../init.js";
 import type * as replicate from "../replicate.js";
+import type * as script from "../script.js";
 import type * as segments from "../segments.js";
 import type * as story from "../story.js";
 import type * as subscriptions from "../subscriptions.js";
@@ -47,6 +48,7 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   init: typeof init;
   replicate: typeof replicate;
+  script: typeof script;
   segments: typeof segments;
   story: typeof story;
   subscriptions: typeof subscriptions;

@@ -72,10 +72,11 @@ Guidelines:
 4. Exclude non-visual elements (sounds, smells, tactile sensations).
 5. Avoid proprietary names or copyrighted content.
 6. No inappropriate or offensive content.
+7. If context is provided, incorporate its style elements naturally into the prompt.
 
 IMPORTANT: Return ONLY the image prompt as plain text, without any JSON formatting or Markdown code blocks. Do not include any explanations or additional text.
 
-Context: ${args.context || "No context provided"}
+Context: ${args.context ? `${args.context}, high quality, detailed, sharp, 4k` : "No context provided"}
 
 Generate an image prompt based on the above and the provided text segment.
 `.trim();
