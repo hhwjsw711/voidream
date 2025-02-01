@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { v } from "convex/values";
-import { internal } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
 import {
   internalAction,
@@ -9,6 +9,7 @@ import {
   mutation,
   query,
 } from "./_generated/server";
+import { generateContext } from "./guidedStory";
 
 const apiKey = process.env.GEMINI_API_KEY!;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -116,6 +117,33 @@ Generate an image prompt based on the above and the provided text segment.
         isGenerating: false,
         prompt,
       });
+
+      // 使用 getSegmentInternal 获取当前段落
+      const currentSegment = await ctx.runQuery(
+        internal.segments.getSegmentInternal,
+        {
+          segmentId: args.segment._id,
+        },
+      );
+
+      // 使用 getSegmentsInternal 获取所有段落
+      const allSegments = await ctx.runQuery(
+        internal.segments.getSegmentsInternal,
+        {
+          storyId: currentSegment.storyId,
+        },
+      );
+
+      // 检查是否所有段落都已完成生成
+      const allCompleted = allSegments.every((seg) => !seg.isGenerating);
+
+      if (allCompleted) {
+        // 如果所有段落都完成了，更新故事状态为 completed
+        await ctx.runMutation(api.story.updateStoryStatus, {
+          storyId: currentSegment.storyId,
+          status: "completed",
+        });
+      }
     } catch (error) {
       console.error("Error in generateSegmentImagePrompt:", error);
 
@@ -124,6 +152,20 @@ Generate an image prompt based on the above and the provided text segment.
         segmentId: args.segment._id,
         isGenerating: false,
         error: error instanceof Error ? error.message : String(error),
+      });
+
+      // 使用 getSegmentInternal 获取段落信息
+      const errorSegment = await ctx.runQuery(
+        internal.segments.getSegmentInternal,
+        {
+          segmentId: args.segment._id,
+        },
+      );
+
+      // 更新故事状态为错误
+      await ctx.runMutation(api.story.updateStoryStatus, {
+        storyId: errorSegment.storyId,
+        status: "error",
       });
 
       throw error;
@@ -432,11 +474,37 @@ export const updateSegmentText = mutation({
   },
   handler: async (ctx, args) => {
     const segment = await ctx.db.get(args.segmentId);
-    if (!segment) throw new Error("段落不存在");
+    if (!segment) throw new Error("Segment not found");
 
+    const story = await ctx.db.get(segment.storyId);
+    if (!story) throw new Error("Story not found");
+
+    // 更新段落文本
     await ctx.db.patch(args.segmentId, {
-      text: args.text,
+      text: args.text.trim(),
     });
+
+    // 如果是第一段，考虑更新 context
+    if (segment.order === 0 && args.text.trim()) {
+      // 获取所有段落
+      const segments = await ctx.db
+        .query("segments")
+        .filter((q) => q.eq(q.field("storyId"), segment.storyId))
+        .order("asc")
+        .collect();
+
+      // 检查是否需要更新 context
+      const shouldUpdateContext =
+        !story.context || // 没有 context
+        (segments.length === 1 && segments[0]._id === args.segmentId); // 只有一个段落且是当前段落
+
+      if (shouldUpdateContext) {
+        await ctx.runMutation(internal.story.regenerateStoryContextInternal, {
+          storyId: segment.storyId,
+          forceRegenerate: true,
+        });
+      }
+    }
 
     return { success: true };
   },
@@ -565,6 +633,14 @@ export const generateImage = mutation({
       isGenerating: true,
       error: undefined,
     });
+
+    // 如果是草稿状态，更新为处理中
+    if (story.status === "draft") {
+      await ctx.runMutation(api.story.updateStoryStatus, {
+        storyId: segment.storyId,
+        status: "processing",
+      });
+    }
 
     // 使用现有的 generateSegmentImageReplicateInternal
     await ctx.scheduler.runAfter(

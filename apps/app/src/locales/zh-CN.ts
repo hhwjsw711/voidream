@@ -209,7 +209,17 @@ export default {
         verticalRatio: "适用于手机 (9:16)",
         horizontalRatio: "适用于电脑 (16:9)",
         startWriting: "开始分段创作",
+        success: {
+          title: "创建成功",
+          description: "已创建新故事，请开始编写",
+        },
+        error: {
+          title: "创建失败",
+          unknown: "创建故事时发生错误",
+        },
+        creating: "创建中...",
       },
+      defaultTitle: "未命名故事",
     },
     refine: {
       title: "智能优化创作",

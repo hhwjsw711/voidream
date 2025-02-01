@@ -10,6 +10,7 @@ import {
   mutation,
   query,
 } from "./_generated/server";
+import { auth } from "./auth";
 import { consumeCreditsHelper } from "./credits";
 import { generateContext } from "./guidedStory";
 
@@ -55,6 +56,51 @@ export const updateStoryContext = mutation({
   handler: async (ctx, args) => {
     const { storyId, context } = args;
     await ctx.db.patch(storyId, { context });
+    return { success: true };
+  },
+});
+
+// 添加内部版本
+export const regenerateStoryContextInternal = internalMutation({
+  args: {
+    storyId: v.id("story"),
+    forceRegenerate: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const { storyId, forceRegenerate = false } = args;
+
+    const story = await ctx.db.get(storyId);
+    if (!story) throw new Error("Story not found");
+
+    // 获取所有段落
+    const segments = await ctx.db
+      .query("segments")
+      .filter((q) => q.eq(q.field("storyId"), storyId))
+      .order("asc")
+      .collect();
+
+    // 如果没有段落，返回错误
+    if (segments.length === 0) {
+      throw new Error("No segments found");
+    }
+
+    // 如果已有 context 且不强制重新生成，则跳过
+    if (story.context && !forceRegenerate) {
+      return { success: true };
+    }
+
+    // 合并所有段落文本
+    const fullText = segments
+      .map((s) => s.text.trim())
+      .filter(Boolean)
+      .join("\n\n");
+
+    // 生成新的 context
+    const newContext = await generateContext(fullText);
+
+    // 更新故事 context
+    await ctx.db.patch(storyId, { context: newContext });
+
     return { success: true };
   },
 });
@@ -592,5 +638,30 @@ export const updateStoryScript = internalMutation({
     }
 
     return { success: true };
+  },
+});
+
+export const create = mutation({
+  args: {
+    title: v.string(),
+    isVertical: v.boolean(),
+  },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) {
+      throw new Error("User is not logged in");
+    }
+
+    // 创建新故事
+    const storyId = await ctx.db.insert("story", {
+      userId,
+      title: args.title,
+      isVertical: args.isVertical,
+      status: "draft",
+      createdAt: new Date().toISOString(),
+      script: "", // 初始为空
+    });
+
+    return storyId;
   },
 });

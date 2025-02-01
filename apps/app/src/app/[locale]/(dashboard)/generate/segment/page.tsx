@@ -1,10 +1,14 @@
 "use client";
 
 import { useScopedI18n } from "@/locales/client";
+import { api } from "@v1/backend/convex/_generated/api";
 import { Button } from "@v1/ui/button";
+import { toast } from "@v1/ui/use-toast";
 import { cn } from "@v1/ui/utils";
+import { useMutation } from "convex/react";
 import { Monitor, PenLine, Smartphone } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { StepIndicator } from "../../_components/step-indicator";
 
 export default function SegmentBySegment() {
@@ -12,6 +16,10 @@ export default function SegmentBySegment() {
     "vertical" | "horizontal"
   >("vertical");
   const t = useScopedI18n("generate.segment");
+  const router = useRouter();
+  const createStory = useMutation(api.story.create);
+  const addSegment = useMutation(api.segments.addSegment);
+  const [isPending, startTransition] = useTransition();
 
   const steps = [
     { number: 1, text: t("steps.step1") },
@@ -19,6 +27,39 @@ export default function SegmentBySegment() {
     { number: 3, text: t("steps.step3") },
   ];
   const currentStep = 2;
+
+  const handleStartWriting = async () => {
+    startTransition(async () => {
+      try {
+        // 1. 创建新故事
+        const storyId = await createStory({
+          title: t("defaultTitle"), // 可以添加一个默认标题
+          isVertical: selectedOrientation === "vertical",
+        });
+
+        // 2. 添加第一个空段落
+        await addSegment({
+          storyId,
+          insertAfterOrder: -1,
+        });
+
+        // 3. 跳转到故事页面
+        router.push(`/stories/${storyId}`);
+
+        toast({
+          title: t("form.success.title"),
+          description: t("form.success.description"),
+        });
+      } catch (error) {
+        toast({
+          title: t("form.error.title"),
+          description:
+            error instanceof Error ? error.message : t("form.error.unknown"),
+          variant: "destructive",
+        });
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -57,13 +98,14 @@ export default function SegmentBySegment() {
 
                 <div className="pt-4">
                   <Button
-                    type="submit"
+                    onClick={handleStartWriting}
+                    disabled={isPending}
                     className="w-full h-10 bg-blue-600 dark:bg-blue-500 
                       hover:bg-blue-700 dark:hover:bg-blue-600 
                       text-white font-semibold shadow-sm"
                   >
                     <PenLine className="h-4 w-4 mr-2" />
-                    {t("form.startWriting")}
+                    {isPending ? t("form.creating") : t("form.startWriting")}
                   </Button>
                 </div>
               </div>
