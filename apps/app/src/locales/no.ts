@@ -343,6 +343,55 @@ export default {
         },
       },
     },
+    list: {
+      title: "我的故事",
+      description: "管理和编辑您创建的所有故事",
+      collection: {
+        label: "选择集合",
+        placeholder: "选择集合",
+        options: {
+          unassigned: "未分类",
+          all: "全部",
+        },
+        newStory: "新建故事",
+      },
+      workflow: {
+        label: "工作流程",
+        tabs: {
+          draft: "草稿",
+          video: "待发布",
+          published: "已发布",
+        },
+      },
+      empty: {
+        draft: {
+          title: "暂无草稿",
+          description: "创建一个新故事开始创作",
+        },
+        video: {
+          title: "暂无待发布故事",
+          description: "完成故事编辑后将在此显示",
+        },
+        published: {
+          title: "暂无已发布故事",
+          description: "故事发布后将在此显示",
+        },
+        default: {
+          title: "暂无故事",
+          description: "创建你的第一个故事",
+        },
+      },
+      card: {
+        noPreview: "暂无预览",
+        status: {
+          draft: "草稿",
+          video: "待发布",
+          published: "已发布",
+          completed: "已完成",
+        },
+        viewStory: "查看故事",
+      },
+    },
     actions: {
       review: {
         label: "故事审查",

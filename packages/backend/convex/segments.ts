@@ -9,7 +9,6 @@ import {
   mutation,
   query,
 } from "./_generated/server";
-import { generateContext } from "./guidedStory";
 
 const apiKey = process.env.GEMINI_API_KEY!;
 const genAI = new GoogleGenerativeAI(apiKey);
@@ -467,6 +466,7 @@ export const savePrompt = mutation({
   },
 });
 
+// 1. 只更新文本
 export const updateSegmentText = mutation({
   args: {
     segmentId: v.id("segments"),
@@ -476,35 +476,10 @@ export const updateSegmentText = mutation({
     const segment = await ctx.db.get(args.segmentId);
     if (!segment) throw new Error("Segment not found");
 
-    const story = await ctx.db.get(segment.storyId);
-    if (!story) throw new Error("Story not found");
-
-    // 更新段落文本
+    // 只更新文本
     await ctx.db.patch(args.segmentId, {
       text: args.text.trim(),
     });
-
-    // 如果是第一段，考虑更新 context
-    if (segment.order === 0 && args.text.trim()) {
-      // 获取所有段落
-      const segments = await ctx.db
-        .query("segments")
-        .filter((q) => q.eq(q.field("storyId"), segment.storyId))
-        .order("asc")
-        .collect();
-
-      // 检查是否需要更新 context
-      const shouldUpdateContext =
-        !story.context || // 没有 context
-        (segments.length === 1 && segments[0]._id === args.segmentId); // 只有一个段落且是当前段落
-
-      if (shouldUpdateContext) {
-        await ctx.runMutation(internal.story.regenerateStoryContextInternal, {
-          storyId: segment.storyId,
-          forceRegenerate: true,
-        });
-      }
-    }
 
     return { success: true };
   },
