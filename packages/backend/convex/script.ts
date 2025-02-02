@@ -30,12 +30,21 @@ export const generateScriptMutation = mutation({
       createdAt: new Date().toISOString(),
     });
 
-    // 计算并扣除积分
+    // 计算段落数量
+    const segments = args.script.split(/\n{2,}/);
+    const imageCredits = segments.length * 10; // 每张图片 10 积分
+
+    // 计算文本积分
     const CHARS_PER_CREDIT = 100;
-    const requiredCredits = Math.max(
-      Math.ceil(args.script.length / CHARS_PER_CREDIT) + 10, // 10 for images
+    const textCredits = Math.max(
+      Math.ceil(args.script.length / CHARS_PER_CREDIT),
       1,
     );
+
+    // 总积分
+    const requiredCredits = textCredits + imageCredits;
+
+    // 扣除积分
     await consumeCreditsHelper(ctx, userId, requiredCredits);
 
     // 调度生成任务

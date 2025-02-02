@@ -29,10 +29,20 @@ function useCheckCredits() {
   };
 }
 
-function calculateCredits(scriptLength: number) {
+function calculateCredits(script: string) {
+  // 计算段落数量
+  const segments = script.split(/\n{2,}/);
+  const imageCredits = segments.length * 10; // 每个段落 10 积分
+
+  // 计算文本积分
+  const textCredits = Math.max(
+    Math.ceil(script.length / 100), // 每 100 字符 1 积分
+    1,
+  );
+
   return {
-    imageCredits: 10,
-    textCredits: Math.ceil(scriptLength / 100),
+    imageCredits,
+    textCredits,
     get totalCredits() {
       return this.imageCredits + this.textCredits;
     },
@@ -98,7 +108,7 @@ export default function ScriptGeneration() {
 
     setIsPending(true);
     try {
-      const { totalCredits } = calculateCredits(script.length);
+      const { totalCredits } = calculateCredits(script); // 传入完整文本
       if (!checkCredits(totalCredits)) {
         toast({
           title: t("form.errors.insufficientCredits"),
@@ -332,7 +342,7 @@ export default function ScriptGeneration() {
                   )}
                   <span>
                     {isPending ? t("form.generating") : t("form.generate")} (
-                    {calculateCredits(script.length).totalCredits}{" "}
+                    {calculateCredits(script).totalCredits} {/* 传入完整文本 */}
                     {t("form.credits")})
                   </span>
                 </button>
@@ -381,9 +391,7 @@ function InputField({ label, value, onChange, placeholder }: InputFieldProps) {
 
 function CreditUsageEstimate({ script }: { script: string }) {
   const t = useScopedI18n("generate.script");
-  const { imageCredits, textCredits, totalCredits } = calculateCredits(
-    script.length,
-  );
+  const { imageCredits, textCredits, totalCredits } = calculateCredits(script); // 传入完整文本，而不是长度
 
   return (
     <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">

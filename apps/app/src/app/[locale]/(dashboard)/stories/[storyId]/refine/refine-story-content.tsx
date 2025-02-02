@@ -1,5 +1,6 @@
 "use client";
 
+import { useScopedI18n } from "@/locales/client";
 import { debounce } from "@/utils/debounce";
 import { api } from "@v1/backend/convex/_generated/api";
 import type { Id } from "@v1/backend/convex/_generated/dataModel";
@@ -129,6 +130,11 @@ export function RefineStoryContent() {
   const [isRefining, setIsRefining] = useState(false);
   const refineStory = useMutation(api.guidedStory.refineStoryMutation);
 
+  const t = useScopedI18n("generate.refine");
+  const st = useScopedI18n("generate.status");
+  const segt = useScopedI18n("generate.segment");
+  const ct = useScopedI18n("generate.creditEstimate");
+
   const handleRefine = async () => {
     setIsRefining(true);
     try {
@@ -138,9 +144,8 @@ export function RefineStoryContent() {
       });
 
       toast({
-        title: "Starting Story Refinement",
-        description:
-          "Optimizing story content based on your instructions, please wait...",
+        title: t("toast.start.title"), // 修改
+        description: t("toast.start.description"), // 修改
       });
 
       setOpenDialog(DialogType.None);
@@ -148,9 +153,8 @@ export function RefineStoryContent() {
     } catch (error) {
       console.error("Refinement failed:", error);
       toast({
-        title: "Refinement Failed",
-        description:
-          error instanceof Error ? error.message : "Please try again later",
+        title: t("toast.error.title"), // 修改
+        description: t("toast.error.description"), // 修改
         variant: "destructive",
       });
     } finally {
@@ -218,7 +222,7 @@ export function RefineStoryContent() {
     return (
       <div className="flex flex-col items-center justify-center gap-4">
         <Loader2 className="h-5 w-5 animate-spin" />
-        <span className="ml-2">Loading story...</span>
+        <span className="ml-2">{st("loading")}</span>
       </div>
     );
   }
@@ -239,7 +243,7 @@ export function RefineStoryContent() {
                 isUnsaved ? "opacity-100" : "opacity-0",
               )}
             >
-              Unsaved changes
+              {st("unsaved")} {/* 修改 */}
             </p>
           </div>
           <div className="relative group">
@@ -264,7 +268,7 @@ export function RefineStoryContent() {
               <div className="absolute inset-0 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
                 <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span className="text-sm">Processing...</span>
+                  <span className="text-sm">{st("processing")}</span>
                 </div>
               </div>
             )}
@@ -273,10 +277,13 @@ export function RefineStoryContent() {
 
         <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-4">
           <span>
-            {videoInfo.wordCount} words / {videoInfo.characterCount} characters
+            {videoInfo.wordCount} {st("stats.words")} /{" "}
+            {videoInfo.characterCount} {st("stats.characters")} {/* 修改 */}
           </span>
           <div className="flex items-center gap-2">
-            <span>Estimated video length: {videoInfo.length}</span>
+            <span>
+              {st("stats.estimatedLength")} {videoInfo.length}
+            </span>
           </div>
         </div>
 
@@ -286,13 +293,13 @@ export function RefineStoryContent() {
             onClick={() => setOpenDialog(DialogType.Refine)}
           >
             <Wand2 className="h-4 w-4" />
-            <span>Refine Story</span>
+            <span>{t("buttons.refineStory")}</span>
           </Button>
           <Button
             className="flex-1 h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             onClick={() => setOpenDialog(DialogType.GenerateSegments)}
           >
-            <span>Generate Segments</span>
+            <span>{segt("buttons.generateSegments")}</span>
           </Button>
         </div>
       </div>
@@ -306,10 +313,10 @@ export function RefineStoryContent() {
             <>
               <DialogHeader>
                 <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-                  Refine Your Story
+                  {t("title")}
                 </DialogTitle>
                 <DialogDescription className="text-gray-900 dark:text-gray-200">
-                  Enter your refinement instructions. This will cost 1 credit.
+                  {t("description")}
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
@@ -318,7 +325,7 @@ export function RefineStoryContent() {
                     id="refine-instructions"
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
-                    placeholder="Enter refinement instructions..."
+                    placeholder={t("instructions.placeholder")}
                     className="col-span-4 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700"
                     disabled={isRefining}
                   />
@@ -335,7 +342,7 @@ export function RefineStoryContent() {
                     }}
                     disabled={isRefining}
                   >
-                    Cancel
+                    {t("buttons.cancel")}
                   </Button>
                   <Button
                     type="button"
@@ -343,7 +350,7 @@ export function RefineStoryContent() {
                     disabled={isRefining || !instructions.trim()}
                     className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
                   >
-                    Refine (1 credit)
+                    {t("buttons.refine")}
                   </Button>
                 </div>
               </DialogFooter>
@@ -353,20 +360,15 @@ export function RefineStoryContent() {
             <>
               <DialogHeader>
                 <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-                  Choose Video Orientation
+                  {segt("title")}
                 </DialogTitle>
                 <DialogDescription className="text-gray-900 dark:text-gray-200 space-y-2">
+                  <span className="block">{segt("description.vertical")}</span>
                   <span className="block">
-                    Vertical videos are ideal for platforms like TikTok and
-                    Instagram Reels.
-                  </span>
-                  <span className="block">
-                    Horizontal videos are better suited for YouTube and
-                    traditional video players.
+                    {segt("description.horizontal")}
                   </span>
                   <span className="block font-bold text-gray-900 dark:text-gray-100">
-                    Note: Once set, the orientation cannot be changed without
-                    regenerating all images, so choose carefully!
+                    {segt("description.note")}
                   </span>
                 </DialogDescription>
               </DialogHeader>
@@ -381,7 +383,7 @@ export function RefineStoryContent() {
                   onClick={() => setIsVertical(true)}
                 >
                   <Smartphone className="h-4 w-4" />
-                  <span>Vertical</span>
+                  <span>{segt("buttons.vertical")}</span>
                 </Button>
                 <Button
                   className={cn(
@@ -393,7 +395,7 @@ export function RefineStoryContent() {
                   onClick={() => setIsVertical(false)}
                 >
                   <Monitor className="h-4 w-4" />
-                  <span>Horizontal</span>
+                  <span>{segt("buttons.horizontal")}</span>
                 </Button>
               </div>
               <DialogFooter className="mt-8">
@@ -403,7 +405,7 @@ export function RefineStoryContent() {
                     className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
                     onClick={() => setOpenDialog(DialogType.None)}
                   >
-                    Cancel
+                    {segt("buttons.cancel")}
                   </Button>
                   <Button
                     type="button"
@@ -412,8 +414,8 @@ export function RefineStoryContent() {
                     disabled={isGenerating}
                   >
                     {isGenerating
-                      ? "Generating..."
-                      : `Generate (${estimatedCredits} credits)`}
+                      ? segt("buttons.generating")
+                      : `${segt("buttons.generate")} (${estimatedCredits} ${ct("credits")})`}
                   </Button>
                 </div>
               </DialogFooter>

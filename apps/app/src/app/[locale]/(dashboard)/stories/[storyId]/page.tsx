@@ -1,5 +1,6 @@
 "use client";
 
+import { useScopedI18n } from "@/locales/client";
 import { debounce } from "@/utils/debounce";
 import { api } from "@v1/backend/convex/_generated/api";
 import type { Id } from "@v1/backend/convex/_generated/dataModel";
@@ -30,7 +31,7 @@ import {
   SelectValue,
 } from "@v1/ui/select";
 import { Textarea } from "@v1/ui/textarea";
-import { toast } from "@v1/ui/use-toast";
+import { toast, useToast } from "@v1/ui/use-toast";
 import { cn } from "@v1/ui/utils";
 import { useAction, useMutation, useQuery } from "convex/react";
 import {
@@ -47,6 +48,7 @@ import {
   Pencil,
   PlayIcon,
   Plus,
+  Save,
   Smartphone,
   Sparkles,
   SpellCheck,
@@ -91,6 +93,7 @@ interface EditImagePromptFormProps {
 }
 
 export default function StoryOverview() {
+  const t = useScopedI18n("story.overview");
   const params = useParams();
   const router = useRouter();
   const storyId = params.storyId as Id<"story">;
@@ -112,10 +115,10 @@ export default function StoryOverview() {
   };
 
   const steps = [
-    { number: 1, text: "Select Mode" },
-    { number: 2, text: "Prompt" },
-    { number: 3, text: "Refine" },
-    { number: 4, text: "Customize" },
+    { number: 1, text: t("steps.step1") },
+    { number: 2, text: t("steps.step2") },
+    { number: 3, text: t("steps.step3") },
+    { number: 4, text: t("steps.step4") },
   ];
   const currentStep = 4;
 
@@ -124,7 +127,7 @@ export default function StoryOverview() {
   }
 
   if (story === null) {
-    return <div>Story not found</div>;
+    return <div>{t("notFound")}</div>;
   }
 
   const isVertical = story.isVertical ?? false;
@@ -133,7 +136,7 @@ export default function StoryOverview() {
     <div className="min-h-screen flex flex-col">
       <div className="pt-8 sm:pt-12 pb-6 space-y-6 sm:space-y-8 px-4">
         <h1 className="font-medium text-center text-3xl sm:text-4xl lg:text-5xl text-primary/80">
-          Customize Your Story
+          {t("title")}
         </h1>
 
         <StepIndicator steps={steps} currentStep={currentStep} />
@@ -150,7 +153,7 @@ export default function StoryOverview() {
                   className="gap-2 text-primary/60 hover:text-primary hover:bg-primary/5"
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  Back to Your Stories
+                  {t("backToStories")}
                 </Button>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -193,6 +196,7 @@ export default function StoryOverview() {
 }
 
 function LoadingState() {
+  const t = useScopedI18n("story.overview");
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="flex flex-col items-center gap-3 text-primary/60">
@@ -200,13 +204,15 @@ function LoadingState() {
           <div className="absolute inset-0 rounded-full border-2 border-primary/20" />
           <div className="absolute inset-0 rounded-full border-2 border-primary/60 border-t-transparent animate-spin" />
         </div>
-        <p className="text-sm font-medium animate-pulse">Loading story...</p>
+        <p className="text-sm font-medium animate-pulse">{t("loading")}</p>
       </div>
     </div>
   );
 }
 
 function StoryTitle({ title, storyId }: StoryTitleProps) {
+  const t = useScopedI18n("story.overview.storyTitle");
+  const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
   const updateStory = useMutation(api.story.updateStory);
@@ -215,7 +221,20 @@ function StoryTitle({ title, storyId }: StoryTitleProps) {
   const handleSave = async () => {
     const trimmedTitle = newTitle.trim();
     if (trimmedTitle && trimmedTitle !== title) {
-      await updateStory({ storyId, title: trimmedTitle });
+      try {
+        await updateStory({ storyId, title: trimmedTitle });
+        toast({
+          title: t("toast.success.title"),
+          description: t("toast.success.description"),
+        });
+      } catch (error) {
+        toast({
+          title: t("toast.error.title"),
+          description: t("toast.error.description"),
+          variant: "destructive",
+        });
+        setNewTitle(title); // 恢复原标题
+      }
     }
     setIsEditing(false);
   };
@@ -243,13 +262,15 @@ function StoryTitle({ title, storyId }: StoryTitleProps) {
             }
           }}
           className="min-w-[200px] h-9 text-2xl font-bold bg-transparent border-none px-0 hover:bg-gray-50/50"
-          placeholder="Please enter a title"
+          placeholder={t("placeholder")}
+          aria-label={t("edit")}
         />
       ) : (
         <button
           type="button"
           onClick={() => setIsEditing(true)}
           className="text-2xl font-bold hover:text-primary/80 flex items-center gap-2"
+          aria-label={t("edit")}
         >
           <span>{title}</span>
           <Pencil className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -260,6 +281,8 @@ function StoryTitle({ title, storyId }: StoryTitleProps) {
 }
 
 function OrientationBadge({ isVertical }: { isVertical: boolean }) {
+  const t = useScopedI18n("story.orientation");
+
   return (
     <span className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium bg-purple-700/50 text-purple-200">
       {isVertical ? (
@@ -267,12 +290,13 @@ function OrientationBadge({ isVertical }: { isVertical: boolean }) {
       ) : (
         <Monitor className="h-3 w-3" />
       )}
-      {isVertical ? "Vertical" : "Horizontal"}
+      {isVertical ? t("vertical") : t("horizontal")}
     </span>
   );
 }
 
 function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
+  const t = useScopedI18n("story.imageContext");
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [editedContext, setEditedContext] = useState(context);
@@ -284,8 +308,8 @@ function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
       try {
         await onContextUpdate(editedContext);
         toast({
-          title: "Success",
-          description: "Image context updated successfully",
+          title: t("toast.success.title"),
+          description: t("toast.success.description"),
           variant: "default",
           className:
             "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100",
@@ -293,9 +317,11 @@ function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
         setIsOpen(false);
       } catch (error) {
         toast({
-          title: "Error",
+          title: t("toast.error.title"),
           description:
-            error instanceof Error ? error.message : "Failed to update context",
+            error instanceof Error
+              ? error.message
+              : t("toast.error.description"),
           variant: "destructive",
           className:
             "bg-red-50 dark:bg-red-900 border-red-200 dark:border-red-800 text-red-900 dark:text-red-100",
@@ -312,18 +338,17 @@ function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
         className="w-full sm:w-auto bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
       >
         <Pencil className="h-4 w-4 mr-2" />
-        <span>Edit Image Context</span>
+        <span>{t("button")}</span>
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[600px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Edit Image Generation Context
+              {t("dialog.title")}
             </DialogTitle>
             <DialogDescription className="text-sm text-gray-500 dark:text-gray-400">
-              This context helps guide the AI in generating images that match
-              your story's atmosphere and style.
+              {t("dialog.description")}
             </DialogDescription>
           </DialogHeader>
 
@@ -333,46 +358,49 @@ function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
                 htmlFor="context"
                 className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Context
+                {t("dialog.label")}
               </Label>
               <Textarea
                 id="context"
                 value={editedContext}
                 onChange={(e) => setEditedContext(e.target.value)}
-                placeholder="Enter context for image generation..."
+                placeholder={t("dialog.placeholder")}
                 className="min-h-[200px] resize-none bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20 placeholder:text-gray-400 dark:placeholder:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isPending}
               />
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                The context includes key scenes, main characters, overall
-                atmosphere, visual elements, and emotional tone of your story.
+                {t("dialog.help")}
               </p>
             </div>
           </div>
 
-          <DialogFooter className="sm:flex-row gap-2 mt-6">
-            <Button
-              variant="outline"
-              onClick={() => setIsOpen(false)}
-              disabled={isPending}
-              className="w-full sm:w-auto bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 transition-colors"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSave}
-              disabled={isPending || editedContext === context}
-              className="w-full sm:w-auto bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white disabled:opacity-50 transition-colors"
-            >
-              {isPending ? (
-                <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                "Save Changes"
-              )}
-            </Button>
+          <DialogFooter className="mt-8">
+            <div className="flex space-x-4">
+              <Button
+                onClick={() => setIsOpen(false)}
+                disabled={isPending}
+                className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+              >
+                {t("dialog.buttons.cancel")}
+              </Button>
+              <Button
+                onClick={handleSave}
+                disabled={isPending || editedContext === context}
+                className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
+              >
+                {isPending ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    {t("dialog.buttons.saving")}
+                  </>
+                ) : (
+                  <>
+                    <Save className="h-4 w-4 mr-2" />
+                    {t("dialog.buttons.save")}
+                  </>
+                )}
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -381,11 +409,11 @@ function EditImageContext({ context, onContextUpdate }: EditImageContextProps) {
 }
 
 function SegmentCard({ segment, isVertical }: SegmentCardProps) {
+  const t = useScopedI18n("story.segment.card");
   const [isSaving, setIsSaving] = useState(false);
   const [currentText, setCurrentText] = useState(segment.text);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const updateSegment = useMutation(api.segments.updateSegmentText);
-
   const generateImage = useMutation(api.segments.generateImage);
 
   const handleGenerateImage = useCallback(async () => {
@@ -394,13 +422,16 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
         segmentId: segment._id,
       });
       toast({
-        title: "开始生成",
-        description: "AI 正在为您生成图片",
+        title: t("image.generate.toast.start.title"),
+        description: t("image.generate.toast.start.description"),
       });
     } catch (error) {
       toast({
-        title: "错误",
-        description: error instanceof Error ? error.message : "生成图片失败",
+        title: t("image.generate.toast.error.title"),
+        description:
+          error instanceof Error
+            ? error.message
+            : t("image.generate.toast.error.description"),
         variant: "destructive",
       });
     }
@@ -433,8 +464,11 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
         });
       } catch (error) {
         toast({
-          title: "错误",
-          description: error instanceof Error ? error.message : "保存失败",
+          title: t("text.toast.error.title"),
+          description:
+            error instanceof Error
+              ? error.message
+              : t("text.toast.error.description"),
           variant: "destructive",
           duration: 3000,
         });
@@ -447,7 +481,7 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
         setIsSaving(false);
       }
     }, 500),
-    [segment._id, segment.text, updateSegment],
+    [segment._id, segment.text, updateSegment, t],
   );
 
   useEffect(() => {
@@ -462,9 +496,15 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
       if (text.length <= 750) {
         setCurrentText(text); // 立即更新当前文本
         debouncedUpdate(text); // 触发延迟保存
+      } else {
+        toast({
+          title: t("text.toast.error.title"),
+          description: t("text.maxLength"),
+          variant: "destructive",
+        });
       }
     },
-    [debouncedUpdate],
+    [debouncedUpdate, t],
   );
 
   return (
@@ -473,14 +513,14 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
         <div className="absolute inset-0 bg-gray-900/10 dark:bg-gray-900/20 backdrop-blur-[1px] rounded-xl z-10 flex items-center justify-center">
           <div className="flex flex-col items-center gap-2 text-gray-900 dark:text-gray-100">
             <Loader2 className="h-6 w-6 animate-spin" />
-            <span className="text-sm font-medium">AI is generating...</span>
+            <span className="text-sm font-medium">{t("generating")}</span>
           </div>
         </div>
       )}
 
       <div className="flex items-center justify-between px-4 py-2 bg-gray-50/80 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700 rounded-t-xl">
         <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-          Segment {segment.order + 1}
+          {t("title", { order: segment.order + 1 })}
         </h3>
         <SegmentOptionsMenu
           segmentId={segment._id}
@@ -504,7 +544,7 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
             >
               <Image
                 src={previewImageUrl}
-                alt={`Segment ${segment.order + 1} image`}
+                alt={t("image.alt", { order: segment.order + 1 })}
                 fill
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -512,7 +552,9 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
               />
             </div>
             <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/50 dark:bg-white/20 rounded text-white dark:text-gray-100 text-xs">
-              {isVertical ? "9:16" : "16:9"}
+              {isVertical
+                ? t("aspectRatio.vertical")
+                : t("aspectRatio.horizontal")}
             </div>
           </div>
         ) : (
@@ -530,23 +572,23 @@ function SegmentCard({ segment, isVertical }: SegmentCardProps) {
             className="w-full h-44 p-4 text-sm bg-transparent border rounded-lg resize-none text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50"
             defaultValue={segment.text}
             onChange={handleTextChange}
-            placeholder="输入段落内容..."
+            placeholder={t("placeholder")}
           />
           <div className="absolute bottom-2 right-2 flex items-center gap-2 text-xs">
             {isSaving && (
               <span className="text-blue-500 dark:text-blue-400 flex items-center">
                 <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                保存中...
+                {t("saving")}
               </span>
             )}
             <span
-              className={`${
+              className={cn(
                 currentWordCount > 750
                   ? "text-red-500"
-                  : "text-gray-500 dark:text-gray-400"
-              }`}
+                  : "text-gray-500 dark:text-gray-400",
+              )}
             >
-              {currentWordCount} / 750
+              {t("wordCount", { count: currentWordCount })}
             </span>
           </div>
         </div>
@@ -571,6 +613,7 @@ function ImageGeneratingState({
   onGenerate?: () => void;
   disabled?: boolean;
 }) {
+  const t = useScopedI18n("story.segment.imageGeneration");
   // 如果没有 onGenerate，说明是生成中状态
   const isGenerating = !onGenerate;
 
@@ -585,12 +628,12 @@ function ImageGeneratingState({
         {isGenerating ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span>正在生成图片...</span>
+            <span>{t("button.generating")}</span>
           </>
         ) : (
           <>
             <ImageIcon className="h-4 w-4" />
-            <span>Generate Image (10 credits)</span>
+            <span>{t("button.generate")}</span>
           </>
         )}
       </Button>
@@ -604,6 +647,7 @@ interface SegmentOptionsMenuProps {
 }
 
 function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
+  const t = useScopedI18n("story.segment.menu");
   const [isPending, startTransition] = useTransition();
   const [isPromptDialogOpen, setIsPromptDialogOpen] = useState(false);
 
@@ -616,14 +660,16 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
       try {
         await refineText({ segmentId });
         toast({
-          title: "Success",
-          description: "Refine Text Success",
+          title: t("items.refineText.toast.success.title"),
+          description: t("items.refineText.toast.success.description"),
         });
       } catch (error) {
         toast({
-          title: "Error",
+          title: t("items.refineText.toast.error.title"),
           description:
-            error instanceof Error ? error.message : "Refine Text Failed",
+            error instanceof Error
+              ? error.message
+              : t("items.refineText.toast.error.description"),
           variant: "destructive",
         });
       }
@@ -635,14 +681,16 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
       try {
         await regenerateImage({ segmentId });
         toast({
-          title: "Success",
-          description: "Image Regenerate Request Sent",
+          title: t("items.regenerateImage.toast.success.title"),
+          description: t("items.regenerateImage.toast.success.description"),
         });
       } catch (error) {
         toast({
-          title: "Error",
+          title: t("items.regenerateImage.toast.error.title"),
           description:
-            error instanceof Error ? error.message : "Image Regenerate Failed",
+            error instanceof Error
+              ? error.message
+              : t("items.regenerateImage.toast.error.description"),
           variant: "destructive",
         });
       }
@@ -654,14 +702,16 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
       try {
         await deleteSegment({ segmentId });
         toast({
-          title: "Success",
-          description: "Segment Deleted",
+          title: t("items.delete.toast.success.title"),
+          description: t("items.delete.toast.success.description"),
         });
       } catch (error) {
         toast({
-          title: "Error",
+          title: t("items.delete.toast.error.title"),
           description:
-            error instanceof Error ? error.message : "Delete Segment Failed",
+            error instanceof Error
+              ? error.message
+              : t("items.delete.toast.error.description"),
           variant: "destructive",
         });
       }
@@ -676,7 +726,7 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
             variant="ghost"
             size="icon"
             disabled={isPending}
-            aria-label="Segment Options"
+            aria-label={t("trigger.label")}
             className="h-8 w-8 p-0 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             <MoreVertical className="h-4 w-4" />
@@ -692,7 +742,7 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
             disabled={isPending}
           >
             <Pencil className="h-4 w-4 flex-shrink-0" />
-            <span className="truncate">Refine Text</span>
+            <span className="truncate">{t("items.refineText.label")}</span>
           </DropdownMenuItem>
 
           {hasImage && (
@@ -704,7 +754,7 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
               >
                 <Wand2 className="h-4 w-4 flex-shrink-0" />
                 <span className="truncate">
-                  Auto Regenerate Image (10 credits)
+                  {t("items.regenerateImage.label")}
                 </span>
               </DropdownMenuItem>
 
@@ -714,7 +764,9 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
                 disabled={isPending}
               >
                 <ImageIcon className="h-4 w-4 flex-shrink-0" />
-                <span className="truncate">Change Image Prompt</span>
+                <span className="truncate">
+                  {t("items.changePrompt.label")}
+                </span>
               </DropdownMenuItem>
             </>
           )}
@@ -726,7 +778,7 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
             disabled={isPending}
           >
             <Trash className="h-4 w-4 flex-shrink-0" />
-            <span className="truncate">Delete Segment</span>
+            <span className="truncate">{t("items.delete.label")}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -734,9 +786,9 @@ function SegmentOptionsMenu({ segmentId, hasImage }: SegmentOptionsMenuProps) {
       <Dialog open={isPromptDialogOpen} onOpenChange={setIsPromptDialogOpen}>
         <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
           <DialogHeader>
-            <DialogTitle>Change Prompt</DialogTitle>
+            <DialogTitle>{t("items.changePrompt.dialog.title")}</DialogTitle>
             <DialogDescription className="text-gray-500 dark:text-gray-400">
-              Modify the prompt used for generating your segment image.
+              {t("items.changePrompt.dialog.description")}
             </DialogDescription>
           </DialogHeader>
           <EditImagePromptForm
@@ -753,6 +805,7 @@ function EditImagePromptForm({
   segmentId,
   onSuccess,
 }: EditImagePromptFormProps) {
+  const t = useScopedI18n("story.segment.promptForm");
   const [isPending, startTransition] = useTransition();
   const [isSaving, setIsSaving] = useState(false);
   const savePrompt = useMutation(api.segments.savePrompt);
@@ -766,22 +819,24 @@ function EditImagePromptForm({
           segmentId,
         });
         toast({
-          title: "成功",
-          description: "正在重新生成图片",
+          title: t("toast.regenerate.success.title"),
+          description: t("toast.regenerate.success.description"),
           duration: 3000,
         });
         onSuccess?.();
       } catch (error) {
         toast({
-          title: "错误",
+          title: t("toast.regenerate.error.title"),
           description:
-            error instanceof Error ? error.message : "重新生成图片失败",
+            error instanceof Error
+              ? error.message
+              : t("toast.regenerate.error.description"),
           variant: "destructive",
           duration: 5000,
         });
       }
     });
-  }, [regenerateImage, segmentId, onSuccess]);
+  }, [regenerateImage, segmentId, onSuccess, t]);
 
   const debouncedUpdate = useCallback(
     debounce(async (value: string) => {
@@ -794,8 +849,8 @@ function EditImagePromptForm({
         });
       } catch (error) {
         toast({
-          title: "错误",
-          description: "提示词保存失败，请重试",
+          title: t("toast.save.error.title"),
+          description: t("toast.save.error.description"),
           variant: "destructive",
           duration: 3000,
         });
@@ -803,7 +858,7 @@ function EditImagePromptForm({
         setIsSaving(false);
       }
     }, 800),
-    [segmentId, savePrompt, segment?.prompt],
+    [segmentId, savePrompt, segment?.prompt, t],
   );
 
   useEffect(() => {
@@ -828,16 +883,16 @@ function EditImagePromptForm({
               htmlFor="prompt"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
             >
-              Prompt
+              {t("label")}
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              描述你想要生成的图片内容和风格
+              {t("description")}
             </p>
           </div>
           {isSaving && (
             <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
               <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-              保存中...
+              {t("saving")}
             </span>
           )}
         </div>
@@ -854,32 +909,38 @@ function EditImagePromptForm({
         />
       </div>
 
-      <DialogFooter className="sm:flex-row gap-2">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => onSuccess?.()}
-          disabled={isPending}
-        >
-          Cancel
-        </Button>
-        <Button
-          type="button"
-          onClick={handleRegenerate}
-          disabled={isPending || !segment?.prompt || isSaving}
-        >
-          {isPending ? (
-            <>
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Regenerating...
-            </>
-          ) : (
-            <>
-              <Wand2 className="h-4 w-4 mr-2" />
-              Regenerate (10 credits)
-            </>
-          )}
-        </Button>
+      <DialogFooter className="mt-8">
+        <div className="flex space-x-4">
+          <Button
+            type="button"
+            onClick={() => onSuccess?.()}
+            disabled={isPending}
+            className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
+          >
+            {t("buttons.cancel")}
+          </Button>
+          <Button
+            type="button"
+            onClick={handleRegenerate}
+            disabled={isPending || !segment?.prompt || isSaving}
+            className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                {t("buttons.regenerate.pending")}
+              </>
+            ) : (
+              <>
+                <Wand2 className="h-4 w-4 mr-2" />
+                {t("buttons.regenerate.default")}
+                <span className="ml-1 text-xs opacity-70">
+                  (10 {t("buttons.regenerate.credits")})
+                </span>
+              </>
+            )}
+          </Button>
+        </div>
       </DialogFooter>
     </form>
   );
@@ -892,6 +953,7 @@ function AddSegmentButton({
   storyId: Id<"story">;
   insertAfterOrder: number;
 }) {
+  const t = useScopedI18n("story.segment.addButton");
   const addSegment = useMutation(api.segments.addSegment);
   const [isPending, startTransition] = useTransition();
 
@@ -903,13 +965,16 @@ function AddSegmentButton({
           insertAfterOrder, // 传入顺序
         });
         toast({
-          title: "成功",
-          description: "已添加新段落，请输入内容",
+          title: t("toast.success.title"),
+          description: t("toast.success.description"),
         });
       } catch (error) {
         toast({
-          title: "错误",
-          description: error instanceof Error ? error.message : "添加段落失败",
+          title: t("toast.error.title"),
+          description:
+            error instanceof Error
+              ? error.message
+              : t("toast.error.description"),
           variant: "destructive",
         });
       }
@@ -927,7 +992,7 @@ function AddSegmentButton({
         shadow-sm hover:shadow-md
         transition-all duration-200
         border border-white dark:border-gray-800"
-      aria-label="添加新段落"
+      aria-label={t("label")}
     >
       <Plus className="h-4 w-4" />
     </Button>
@@ -941,6 +1006,7 @@ function ActionButtons({
   storyId: Id<"story">;
   isVertical: boolean;
 }) {
+  const t = useScopedI18n("story.actions");
   const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
   const [isGrammarDialogOpen, setIsGrammarDialogOpen] = useState(false);
   const [isReadDialogOpen, setIsReadDialogOpen] = useState(false);
@@ -966,7 +1032,7 @@ function ActionButtons({
             className={buttonBaseClass}
           >
             <Wand2 className="w-4 h-4 mr-2" />
-            Review Story
+            {t("review.label")}
           </Button>
           <Button
             onClick={() => setIsGrammarDialogOpen(true)}
@@ -974,7 +1040,7 @@ function ActionButtons({
             className={buttonBaseClass}
           >
             <SpellCheck className="w-4 h-4 mr-2" />
-            Quick Grammar Check
+            {t("grammar.label")}
           </Button>
           <Button
             onClick={() => setIsReadDialogOpen(true)}
@@ -982,7 +1048,7 @@ function ActionButtons({
             className={buttonBaseClass}
           >
             <BookOpen className="w-4 h-4 mr-2" />
-            Read Full Story
+            {t("read.label")}
           </Button>
           <Button
             onClick={() => setIsCloneDialogOpen(true)}
@@ -990,7 +1056,9 @@ function ActionButtons({
             className={buttonBaseClass}
           >
             <Copy className="w-4 h-4 mr-2" />
-            Clone to {isVertical ? "Horizontal" : "Vertical"}
+            {isVertical
+              ? t("clone.label.toHorizontal")
+              : t("clone.label.toVertical")}
           </Button>
           <Button
             onClick={() => setIsVideoDialogOpen(true)}
@@ -998,7 +1066,7 @@ function ActionButtons({
             className="bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white border-transparent"
           >
             <Video className="w-4 h-4 mr-2" />
-            Generate Video
+            {t("video.label")}
           </Button>
         </div>
       </div>
@@ -1041,6 +1109,7 @@ function ReviewDialog({
   setIsOpen: (isOpen: boolean) => void;
   storyId: Id<"story">;
 }) {
+  const t = useScopedI18n("story.actions.review.dialog");
   const story = useQuery(api.story.getStory, { storyId });
   const review = useQuery(api.story.getReview, { storyId });
   const [isReviewing, setIsReviewing] = useState(false);
@@ -1057,9 +1126,11 @@ function ReviewDialog({
       await reviewStory({ storyId });
     } catch (error) {
       toast({
-        title: "Generation Failed",
+        title: t("toast.generate.error.title"),
         description:
-          error instanceof Error ? error.message : "Please try again",
+          error instanceof Error
+            ? error.message
+            : t("toast.generate.error.description"),
         variant: "destructive",
       });
       setIsReviewing(false);
@@ -1073,14 +1144,16 @@ function ReviewDialog({
     try {
       await applyRevisions({ storyId });
       toast({
-        title: "Applying Revisions",
-        description: "AI is improving your story based on the review...",
+        title: t("toast.apply.start.title"),
+        description: t("toast.apply.start.description"),
       });
     } catch (error) {
       toast({
-        title: "Failed to Apply Revisions",
+        title: t("toast.apply.error.title"),
         description:
-          error instanceof Error ? error.message : "Please try again",
+          error instanceof Error
+            ? error.message
+            : t("toast.apply.error.description"),
         variant: "destructive",
       });
       setIsApplying(false);
@@ -1096,8 +1169,8 @@ function ReviewDialog({
       // 根据之前的状态显示对应的成功提示
       if (isApplying) {
         toast({
-          title: "Revisions Applied",
-          description: "Your story has been successfully updated",
+          title: t("toast.apply.success.title"),
+          description: t("toast.apply.success.description"),
         });
       }
     }
@@ -1106,12 +1179,12 @@ function ReviewDialog({
       setIsReviewing(false);
       setIsApplying(false);
       toast({
-        title: "Error",
-        description: "Failed to process the story",
+        title: t("toast.process.error.title"),
+        description: t("toast.process.error.description"),
         variant: "destructive",
       });
     }
-  }, [story?.status]);
+  }, [story?.status, isApplying, t]);
 
   if (!story) return null;
 
@@ -1120,10 +1193,10 @@ function ReviewDialog({
       <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 sm:max-w-[600px] lg:max-w-[800px]">
         <DialogHeader>
           <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-            Story Review
+            {t("title")}
           </DialogTitle>
           <DialogDescription className="text-gray-900 dark:text-gray-200">
-            Use AI to review your story and get feedback
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -1138,15 +1211,17 @@ function ReviewDialog({
               </div>
               <div className="space-y-2 text-center">
                 <h3 className="font-medium text-lg text-gray-900 dark:text-gray-100">
-                  {isApplying ? "Applying Revisions" : "Analyzing Your Story"}
+                  {isApplying
+                    ? t("loading.applying.title")
+                    : t("loading.analyzing.title")}
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   {isApplying
-                    ? "AI is improving your story based on the review..."
-                    : "Our AI reviewer is carefully evaluating your story..."}
+                    ? t("loading.applying.description")
+                    : t("loading.analyzing.description")}
                 </p>
                 <div className="text-xs text-gray-500 dark:text-gray-500 animate-pulse">
-                  This may take a minute
+                  {t("loading.wait")}
                 </div>
               </div>
             </div>
@@ -1260,10 +1335,10 @@ function ReviewDialog({
                 <TriangleAlert className="h-6 w-6 text-gray-500 dark:text-gray-400" />
               </div>
               <h3 className="font-medium text-lg mb-1 text-gray-900 dark:text-gray-100">
-                No Review Available
+                {t("empty.title")}
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Click the "Generate Review" button to generate feedback
+                {t("empty.description")}
               </p>
             </div>
           )}
@@ -1276,7 +1351,7 @@ function ReviewDialog({
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               disabled={isProcessing}
             >
-              Close
+              {t("buttons.close")}
             </Button>
             <div className="flex space-x-4">
               <Button
@@ -1285,8 +1360,10 @@ function ReviewDialog({
                 className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
               >
                 <Wand2 className="h-4 w-4 mr-2" />
-                Generate Review
-                <span className="ml-1 text-xs opacity-70">(1 credit)</span>
+                {t("buttons.generate.label")}
+                <span className="ml-1 text-xs opacity-70">
+                  (1 {t("buttons.generate.credits")})
+                </span>
               </Button>
               <Button
                 onClick={handleApplyRevisions}
@@ -1294,8 +1371,10 @@ function ReviewDialog({
                 className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2 min-w-[140px]"
               >
                 <Sparkles className="h-4 w-4 mr-2" />
-                Apply Revisions
-                <span className="ml-1 text-xs opacity-70">(10 credits)</span>
+                {t("buttons.apply.label")}
+                <span className="ml-1 text-xs opacity-70">
+                  (10 {t("buttons.apply.credits")})
+                </span>
               </Button>
             </div>
           </div>
@@ -1314,6 +1393,7 @@ function GrammarDialog({
   setIsOpen: (isOpen: boolean) => void;
   storyId: Id<"story">;
 }) {
+  const t = useScopedI18n("story.actions.grammar.dialog");
   const [isFixing, setIsFixing] = useState(false);
   const fixGrammar = useMutation(api.story.fixGrammar);
   const story = useQuery(api.story.getStory, { storyId });
@@ -1324,16 +1404,16 @@ function GrammarDialog({
       setIsFixing(false);
       setIsOpen(false);
       toast({
-        description: "Grammar and spelling have been corrected",
+        description: t("toast.success.description"),
       });
     } else if (story?.status === "error" && isFixing) {
       setIsFixing(false);
       toast({
-        description: "Failed to fix grammar and spelling",
+        description: t("toast.error.process.description"),
         variant: "destructive",
       });
     }
-  }, [story?.status, isFixing]);
+  }, [story?.status, isFixing, t]);
 
   const handleFixGrammar = async () => {
     try {
@@ -1343,7 +1423,7 @@ function GrammarDialog({
     } catch (error) {
       setIsFixing(false);
       toast({
-        description: "Failed to start grammar check",
+        description: t("toast.error.start.description"),
         variant: "destructive",
       });
     }
@@ -1354,28 +1434,26 @@ function GrammarDialog({
       <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <DialogHeader>
           <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-            Quick Grammar Check
+            {t("title")}
           </DialogTitle>
           <DialogDescription className="text-gray-900 dark:text-gray-200">
-            Automatically correct basic spelling and grammar errors in all
-            segments.
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
-          <p>This quick fix will:</p>
+          <p>{t("content.intro")}</p>
           <ul className="list-disc list-inside space-y-2">
-            <li>Fix spelling mistakes</li>
-            <li>Correct basic grammar errors</li>
-            <li>Fix punctuation issues</li>
+            <li>{t("content.items.spelling")}</li>
+            <li>{t("content.items.grammar")}</li>
+            <li>{t("content.items.punctuation")}</li>
           </ul>
           <div className="text-xs space-y-2">
             <p className="italic text-gray-600 dark:text-gray-400">
-              Note: For more comprehensive improvements, use the "Review &
-              Apply" feature.
+              {t("content.note")}
             </p>
             <p className="text-yellow-600 dark:text-yellow-500">
-              This action requires 2 credits.
+              {t("content.credits")}
             </p>
           </div>
         </div>
@@ -1387,7 +1465,7 @@ function GrammarDialog({
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               disabled={isFixing}
             >
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               onClick={handleFixGrammar}
@@ -1398,16 +1476,18 @@ function GrammarDialog({
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
                   {story?.status === "processing"
-                    ? "Processing..."
-                    : "Starting..."}
+                    ? t("buttons.fix.processing")
+                    : t("buttons.fix.starting")}
                 </>
               ) : (
                 <>
                   <SpellCheck className="h-4 w-4" />
-                  Quick Fix
+                  {t("buttons.fix.default")}
                 </>
               )}
-              <span className="ml-1 text-xs opacity-70">(2 credits)</span>
+              <span className="ml-1 text-xs opacity-70">
+                (2 {t("buttons.fix.credits")})
+              </span>
             </Button>
           </div>
         </DialogFooter>
@@ -1423,6 +1503,7 @@ interface ReadDialogProps {
 }
 
 function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
+  const t = useScopedI18n("story.actions.read.dialog");
   const story = useQuery(api.story.getStory, { storyId });
   const segments = useQuery(api.segments.getSegments, { storyId }) || [];
   const [hasCopied, setHasCopied] = useState(false);
@@ -1433,13 +1514,13 @@ function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
       await navigator.clipboard.writeText(text);
       setHasCopied(true);
       toast({
-        description: "Content copied to clipboard",
+        description: t("toast.copy.success.description"),
       });
       // 短暂显示成功状态后重置
       setTimeout(() => setHasCopied(false), 1000);
     } catch (error) {
       toast({
-        description: "Failed to copy content",
+        description: t("toast.copy.error.description"),
         variant: "destructive",
       });
     }
@@ -1485,7 +1566,7 @@ function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
               ) : (
                 <Copy className="h-4 w-4" />
               )}
-              {hasCopied ? "Copied!" : "Copy to Clipboard"}
+              {hasCopied ? t("buttons.copy.copied") : t("buttons.copy.default")}
             </Button>
           </div>
           <div className="flex-1 flex justify-end">
@@ -1493,7 +1574,7 @@ function ReadDialog({ isOpen, setIsOpen, storyId }: ReadDialogProps) {
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               onClick={() => setIsOpen(false)}
             >
-              Close
+              {t("buttons.close")}
             </Button>
           </div>
         </DialogFooter>
@@ -1526,7 +1607,7 @@ function SegmentContent({
         >
           <Image
             src={imageUrl}
-            alt={segment.text.slice(0, 50)}
+            alt={`Segment ${segment.order + 1} image`}
             width={isVertical ? 450 : 800}
             height={isVertical ? 800 : 450}
             className={cn(
@@ -1551,6 +1632,7 @@ function CloneDialog({
   storyId: Id<"story">;
   isVertical: boolean;
 }) {
+  const t = useScopedI18n("story.actions.clone.dialog");
   const [isCloning, setIsCloning] = useState(false);
   const cloneStory = useMutation(api.story.cloneStory);
   const segments = useQuery(api.segments.getSegments, { storyId });
@@ -1565,7 +1647,7 @@ function CloneDialog({
     if (!hasEnoughCredits) {
       // [新增] 积分检查
       toast({
-        description: "Insufficient credits",
+        description: t("toast.error.credits.description"),
         variant: "destructive",
       });
       return;
@@ -1580,8 +1662,7 @@ function CloneDialog({
 
       // [新增] 成功提示更详细
       toast({
-        description:
-          "Story cloned successfully! Redirecting to the new story...",
+        description: t("toast.success.description"),
       });
 
       setIsOpen(false);
@@ -1589,7 +1670,9 @@ function CloneDialog({
     } catch (error) {
       toast({
         description:
-          error instanceof Error ? error.message : "Failed to clone story",
+          error instanceof Error
+            ? error.message
+            : t("toast.error.clone.description"),
         variant: "destructive",
       });
     } finally {
@@ -1605,30 +1688,34 @@ function CloneDialog({
       <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-            Clone Story
+            {t("title")}
           </DialogTitle>
           <DialogDescription className="text-gray-900 dark:text-gray-200">
-            Create a new {isVertical ? "horizontal" : "vertical"} version while
-            keeping all content.
+            {isVertical
+              ? t("description.toHorizontal")
+              : t("description.toVertical")}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm">
-          <p>This will:</p>
+          <p>{t("content.intro")}</p>
           <ul className="list-disc list-inside space-y-2">
             <li>
-              Create a new story with {isVertical ? "16:9" : "9:16"} ratio
+              {isVertical
+                ? t("content.items.ratio.toHorizontal")
+                : t("content.items.ratio.toVertical")}
             </li>
-            <li>Copy all text content</li>
+            <li>{t("content.items.text")}</li>
             <li>
-              Generate new images optimized for{" "}
-              {isVertical ? "horizontal" : "vertical"} layout
+              {isVertical
+                ? t("content.items.images.toHorizontal")
+                : t("content.items.images.toVertical")}
             </li>
           </ul>
 
           <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Required Credits:
+                {t("content.credits.required")}
               </p>
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {requiredCredits}
@@ -1636,7 +1723,7 @@ function CloneDialog({
             </div>
             <div className="flex items-center justify-between mt-1">
               <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Your Credits:
+                {t("content.credits.available")}
               </p>
               <p
                 className={cn(
@@ -1651,8 +1738,11 @@ function CloneDialog({
             </div>
             {!hasEnoughCredits && (
               <p className="text-red-600 dark:text-red-500 text-xs mt-2">
-                Insufficient credits. You need{" "}
-                {requiredCredits - (credits?.remaining || 0)} more credits.
+                {t("content.credits.insufficient.notice")}{" "}
+                {t("content.credits.insufficient.detail").replace(
+                  "{amount}",
+                  String(requiredCredits - (credits?.remaining || 0)),
+                )}
               </p>
             )}
           </div>
@@ -1665,7 +1755,7 @@ function CloneDialog({
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               disabled={isCloning}
             >
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               onClick={handleClone}
@@ -1675,17 +1765,19 @@ function CloneDialog({
               {isCloning ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Creating Clone...
+                  {t("buttons.clone.creating")}
                 </>
               ) : !hasEnoughCredits ? ( // [新增] 积分不足状态
                 <>
                   <AlertCircle className="h-4 w-4" />
-                  Insufficient Credits
+                  {t("buttons.clone.insufficient")}
                 </>
               ) : (
                 <>
                   <Copy className="h-4 w-4" />
-                  Clone to {isVertical ? "Horizontal" : "Vertical"}
+                  {isVertical
+                    ? t("buttons.clone.default.toHorizontal")
+                    : t("buttons.clone.default.toVertical")}
                 </>
               )}
             </Button>
@@ -1726,6 +1818,7 @@ interface VideoDialogProps {
 }
 
 export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
+  const t = useScopedI18n("story.actions.video.dialog");
   const [isGenerating, setIsGenerating] = useState(false);
   const [voiceId, setVoiceId] = useState(voiceOptions[0]?.id || "");
   const [includeWatermark, setIncludeWatermark] = useState(false);
@@ -1798,7 +1891,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
       <DialogContent className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-md font-bold text-gray-900 dark:text-gray-100 mb-8">
-            Generate Video
+            {t("title")}
           </DialogTitle>
         </DialogHeader>
 
@@ -1806,7 +1899,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
           <div className="flex items-center space-x-2">
             <Select value={voiceId} onValueChange={setVoiceId}>
               <SelectTrigger className="w-[180px] h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                <SelectValue placeholder="Select voice" />
+                <SelectValue placeholder={t("voice.label")} />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 {voiceOptions.map((voice) => (
@@ -1826,9 +1919,12 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
               className="h-9 w-9 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200"
             >
               {isPlaying ? (
-                <PauseIcon className="h-4 w-4" />
+                <PauseIcon
+                  className="h-4 w-4"
+                  title={t("voice.preview.pause")}
+                />
               ) : (
-                <PlayIcon className="h-4 w-4" />
+                <PlayIcon className="h-4 w-4" title={t("voice.preview.play")} />
               )}
             </Button>
           </div>
@@ -1842,7 +1938,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Include a watermark to help promote us for 80% off
+                {t("options.watermark.label")}
               </label>
               <button
                 type="button"
@@ -1869,7 +1965,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
 
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Make video public
+                {t("options.public.label")}
               </label>
               <button
                 type="button"
@@ -1896,7 +1992,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
 
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Use lax spacing
+                {t("options.spacing.label")}
               </label>
               <button
                 type="button"
@@ -1923,7 +2019,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
 
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                Include captions
+                {t("options.captions.label")}
               </label>
               <button
                 type="button"
@@ -1953,14 +2049,16 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
             <>
               <div>
                 <label className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2 block">
-                  Caption Position
+                  {t("options.captions.position.label")}
                 </label>
                 <Select
                   value={captionPosition}
                   onValueChange={setCaptionPosition}
                 >
                   <SelectTrigger className="w-full h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                    <SelectValue placeholder="Select caption position" />
+                    <SelectValue
+                      placeholder={t("options.captions.position.label")}
+                    />
                   </SelectTrigger>
                   <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     {["top", "mid upper", "mid lower", "bottom"].map(
@@ -1970,7 +2068,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
                           value={position}
                           className="text-gray-900 dark:text-gray-100"
                         >
-                          {position}
+                          {t(`options.captions.position.options.${position}`)}
                         </SelectItem>
                       ),
                     )}
@@ -1980,14 +2078,16 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
 
               <div>
                 <label className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-2 block">
-                  Highlight Color
+                  {t("options.captions.highlight.label")}
                 </label>
                 <Select
                   value={highlightColor}
                   onValueChange={setHighlightColor}
                 >
                   <SelectTrigger className="w-full h-9 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                    <SelectValue placeholder="Select highlight color" />
+                    <SelectValue
+                      placeholder={t("options.captions.highlight.label")}
+                    />
                   </SelectTrigger>
                   <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     {["yellow", "blue", "red", "green"].map((color) => (
@@ -1996,7 +2096,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
                         value={color}
                         className="text-gray-900 dark:text-gray-100"
                       >
-                        {color}
+                        {t(`options.captions.highlight.options.${color}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -2012,7 +2112,7 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               onClick={() => setIsOpen(false)}
             >
-              Cancel
+              {t("buttons.cancel")}
             </Button>
             <Button
               onClick={handleGenerateVideo}
@@ -2020,8 +2120,8 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
               className="h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             >
               {isGenerating
-                ? "Generating..."
-                : `Generate (${calculateCredits} credits)`}
+                ? t("buttons.generate.generating")
+                : `${t("buttons.generate.default")} (${calculateCredits} ${t("buttons.generate.credits")})`}
             </Button>
           </div>
         </DialogFooter>

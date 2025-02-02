@@ -1,5 +1,6 @@
 "use client";
 
+import { useScopedI18n } from "@/locales/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@v1/backend/convex/_generated/api";
 import { Button } from "@v1/ui/button";
@@ -14,16 +15,16 @@ import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
-const guidedGenerationSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z
-    .string()
-    .min(50, "Description must be at least 50 characters long"),
-});
-
-type FormValues = z.infer<typeof guidedGenerationSchema>;
-
 export function GuidedGenerationForm() {
+  const t = useScopedI18n("generate.guided.form");
+
+  const guidedGenerationSchema = z.object({
+    title: z.string().min(1, t("validation.titleRequired")),
+    description: z.string().min(50, t("validation.descriptionLength")),
+  });
+
+  type FormValues = z.infer<typeof guidedGenerationSchema>;
+
   const generateGuidedStory = useMutation(
     api.guidedStory.generateGuidedStoryMutation,
   );
@@ -45,17 +46,16 @@ export function GuidedGenerationForm() {
       .then((newStoryId) => {
         router.push(`/stories/${newStoryId}/refine`);
         toast({
-          title: "Story created",
-          description:
-            "Your guided story is being generated. You'll be able to refine it soon.",
+          title: t("toast.success.title"),
+          description: t("toast.success.description"),
         });
         form.reset();
       })
       .catch((error) => {
         console.error(error);
         toast({
-          title: "Failed to create your guided story",
-          description: "Please try again.",
+          title: t("toast.error.title"),
+          description: t("toast.error.description"),
           variant: "destructive",
         });
       })
@@ -65,13 +65,14 @@ export function GuidedGenerationForm() {
   };
 
   const fillYTShortTemplate = () => {
+    const title = form.getValues("title");
     form.setValue(
       "description",
-      `Generate a 130-word max video script that is five short paragraphs.
+      `生成一个最多130字的视频脚本，分为五个简短段落。
 
-Include a catchy hook or intro, a clear main learning point, and actionable advice for the viewer to try.
+包含一个吸引人的开场白，一个清晰的主要观点，以及给观众的实用建议。
 
-The topic of the script should match a title called: ${form.getValues("title")}`,
+脚本主题应该匹配标题：${title}`,
     );
   };
 
@@ -79,14 +80,14 @@ The topic of the script should match a title called: ${form.getValues("title")}`
     <>
       <div className="flex flex-col space-y-1.5 p-6">
         <h3 className="tracking-tight flex justify-between items-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-          Enter a Prompt
+          {t("title")}
           <div className="flex gap-2">
             <Button
               type="button"
               className="h-9 px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
               onClick={fillYTShortTemplate}
             >
-              YT Short (60 seconds)
+              {t("buttons.ytShort")}
             </Button>
           </div>
         </h3>
@@ -100,9 +101,9 @@ The topic of the script should match a title called: ${form.getValues("title")}`
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                    Title{" "}
+                    {t("titleLabel")}{" "}
                     <span className="text-xs text-gray-600 dark:text-gray-400">
-                      (will be used in template)
+                      {t("titleNote")}
                     </span>
                   </FormLabel>
                   <FormControl>
@@ -115,7 +116,7 @@ The topic of the script should match a title called: ${form.getValues("title")}`
                         focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 
                         focus:border-blue-500/50 dark:focus:border-blue-500/50 
                         focus:outline-none transition-all duration-200"
-                      placeholder="Mastering Social Media Algorithms: Your Key to Success 📱"
+                      placeholder={t("titlePlaceholder")}
                       {...field}
                     />
                   </FormControl>
@@ -128,7 +129,7 @@ The topic of the script should match a title called: ${form.getValues("title")}`
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                    Story Description
+                    {t("descriptionLabel")}
                   </FormLabel>
                   <FormControl>
                     <Textarea
@@ -140,11 +141,7 @@ The topic of the script should match a title called: ${form.getValues("title")}`
                         focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30 
                         focus:border-blue-500/50 dark:focus:border-blue-500/50 
                         focus:outline-none transition-all duration-200"
-                      placeholder={`Generate a 130-word max video script that is five short paragraphs.
-
-Include a catchy hook or intro, a clear main learning point, and actionable advice for the viewer to try.
-
-The topic of the script should match a title called: Mastering Social Media Algorithms: Your Key to Success`}
+                      placeholder={t("descriptionPlaceholder")}
                       {...field}
                     />
                   </FormControl>
@@ -157,7 +154,8 @@ The topic of the script should match a title called: Mastering Social Media Algo
               className="w-full h-9 px-3 py-2 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white hover:text-white font-semibold rounded-md shadow transition-colors duration-300 flex items-center justify-center gap-2"
             >
               <Wand2 className="h-4 w-4" />
-              <span>Generate Guided Story (1 credits)</span>
+              {isPending ? t("buttons.generating") : t("buttons.generate")} (1{" "}
+              {t("credits")}) )
             </Button>
           </form>
         </Form>
