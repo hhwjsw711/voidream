@@ -48,6 +48,7 @@ import {
   Pencil,
   PlayIcon,
   Plus,
+  RotateCcw,
   Save,
   Smartphone,
   Sparkles,
@@ -1790,24 +1791,14 @@ function CloneDialog({
 
 const voiceOptions = [
   {
-    id: "male-qn-qingse",
-    name: "青涩青年音色",
-    samplePath: "/audio-samples/male-qn-qingse.mp3",
+    id: "Chinese (Mandarin)_Refreshing_Young_Man",
+    name: "舒朗男声",
+    samplePath: "/audio-samples/Chinese (Mandarin)_Refreshing_Young_Man.mp3",
   },
   {
-    id: "male-qn-jingying",
-    name: "精英青年音色",
-    samplePath: "/audio-samples/male-qn-jingying.mp3",
-  },
-  {
-    id: "male-qn-badao",
-    name: "霸道青年音色",
-    samplePath: "/audio-samples/male-qn-badao.mp3",
-  },
-  {
-    id: "male-qn-daxuesheng",
-    name: "青年大学生音色",
-    samplePath: "/audio-samples/male-qn-daxuesheng.mp3",
+    id: "Chinese (Mandarin)_Reliable_Executive",
+    name: "软软女孩",
+    samplePath: "/audio-samples/Chinese (Mandarin)_Reliable_Executive.mp3",
   },
 ];
 
@@ -1828,29 +1819,63 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
   const [captionPosition, setCaptionPosition] = useState("bottom");
   const [highlightColor, setHighlightColor] = useState("yellow");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const playAudioPreview = () => {
+  const playAudioPreview = async () => {
     const selectedVoice = voiceOptions.find((voice) => voice.id === voiceId);
-    if (!selectedVoice) return;
+    if (!selectedVoice || !audioRef.current) return;
 
-    if (isPlaying) {
-      audioRef.current?.pause();
-      setIsPlaying(false);
-    } else {
-      if (audioRef.current) {
-        audioRef.current.src = selectedVoice.samplePath;
-        audioRef.current.play().catch((error) => {
-          console.error("Error playing audio:", error);
-        });
-        setIsPlaying(true);
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        return;
       }
+
+      setIsLoading(true);
+
+      // 检查音频文件是否存在
+      const response = await fetch(selectedVoice.samplePath);
+      if (!response.ok) {
+        throw new Error(`音频文件不存在 (${response.status})`);
+      }
+
+      // 重置音频状态
+      audioRef.current.currentTime = 0;
+      audioRef.current.src = selectedVoice.samplePath;
+
+      // 预加载音频
+      await audioRef.current.load();
+
+      // 播放音频
+      await audioRef.current.play();
+      setIsPlaying(true);
+    } catch (error) {
+      console.error("音频播放失败:", error);
+      toast({
+        title: "音频播放失败",
+        description: "请稍后重试",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleAudioEnded = () => {
     setIsPlaying(false);
   };
+
+  // 组件卸载时清理
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
+    };
+  }, []);
 
   const generateAudioAndTranscription = useAction(
     api.videos.generateAudioAndTranscription,
@@ -1916,9 +1941,12 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
             <Button
               size="icon"
               onClick={playAudioPreview}
+              disabled={isLoading}
               className="h-9 w-9 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200"
             >
-              {isPlaying ? (
+              {isLoading ? (
+                <RotateCcw className="h-4 w-4 animate-spin" />
+              ) : isPlaying ? (
                 <PauseIcon
                   className="h-4 w-4"
                   title={t("voice.preview.pause")}
@@ -1932,6 +1960,17 @@ export function VideoDialog({ isOpen, setIsOpen, storyId }: VideoDialogProps) {
           <audio
             ref={audioRef}
             onEnded={handleAudioEnded}
+            onError={(e) => {
+              console.error("音频加载错误:", e);
+              setIsPlaying(false);
+              setIsLoading(false);
+              toast({
+                title: "音频加载失败",
+                description: "请检查音频文件是否存在",
+                variant: "destructive",
+              });
+            }}
+            preload="none"
             style={{ display: "none" }}
           />
 

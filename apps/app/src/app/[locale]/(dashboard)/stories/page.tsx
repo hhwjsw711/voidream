@@ -20,11 +20,18 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useMemo } from "react";
 
+type WorkflowType = "draft" | "video" | "published";
+type CollectionType = "all" | "unassigned";
+
 export default function StoriesPage() {
   const t = useScopedI18n("story.list");
   const storiesQuery = useQuery(api.story.getAllStories);
-  const [selectedCollection, setSelectedCollection] = useState("unassigned");
-  const [selectedWorkflow, setSelectedWorkflow] = useState("draft");
+  const [selectedCollection, setSelectedCollection] = useState<CollectionType>(
+    "unassigned" as CollectionType,
+  );
+  const [selectedWorkflow, setSelectedWorkflow] = useState<WorkflowType>(
+    "draft" as WorkflowType,
+  );
 
   // 筛选逻辑
   const filteredStories = useMemo(() => {
@@ -35,24 +42,18 @@ export default function StoriesPage() {
       const matchesWorkflow = (() => {
         switch (selectedWorkflow) {
           case "draft":
-            return story.status === "draft";
+            return story.status === "draft" || story.status === "processing";
           case "video":
-            return story.status === "completed" && !story.videoUrl;
+            return story.status === "completed" && !story.isPublic;
           case "published":
-            return (
-              story.status === "published" ||
-              (story.status === "completed" && story.videoUrl)
-            );
+            return story.status === "completed" && story.isPublic === true;
           default:
             return true;
         }
       })();
 
-      // 然后按集合筛选
       const matchesCollection =
-        selectedCollection === "all" ||
-        (selectedCollection === "unassigned" && !story.collectionId) ||
-        story.collectionId === selectedCollection;
+        selectedCollection === "all" || selectedCollection === "unassigned";
 
       return matchesWorkflow && matchesCollection;
     });
@@ -112,7 +113,15 @@ function StoryCardSkeleton() {
   );
 }
 
-function CollectionSelector({ selectedCollection, setSelectedCollection }) {
+interface CollectionSelectorProps {
+  selectedCollection: "all" | "unassigned";
+  setSelectedCollection: (value: "all" | "unassigned") => void;
+}
+
+function CollectionSelector({
+  selectedCollection,
+  setSelectedCollection,
+}: CollectionSelectorProps) {
   const t = useScopedI18n("story.list.collection");
   return (
     <div className="flex flex-col space-y-2">
@@ -157,14 +166,34 @@ function CollectionSelector({ selectedCollection, setSelectedCollection }) {
   );
 }
 
-function WorkflowSelector({ selectedWorkflow, setSelectedWorkflow }) {
+interface WorkflowSelectorProps {
+  selectedWorkflow: WorkflowType;
+  setSelectedWorkflow: (value: WorkflowType) => void;
+}
+
+function WorkflowSelector({
+  selectedWorkflow,
+  setSelectedWorkflow,
+}: WorkflowSelectorProps) {
   const t = useScopedI18n("story.list.workflow");
+
+  // 添加类型转换函数
+  const handleValueChange = (value: string) => {
+    if (value === "draft" || value === "video" || value === "published") {
+      setSelectedWorkflow(value);
+    }
+  };
+
   return (
     <div className="flex flex-col space-y-2">
       <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
         {t("label")}
       </label>
-      <Tabs value={selectedWorkflow} onValueChange={setSelectedWorkflow}>
+      <Tabs
+        value={selectedWorkflow}
+        onValueChange={handleValueChange}
+        className="w-full md:w-auto"
+      >
         <TabsList className="h-9 bg-blue-50/50 dark:bg-blue-900/20 border border-gray-200 dark:border-gray-700">
           <TabsTrigger
             value="draft"
