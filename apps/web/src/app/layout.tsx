@@ -34,12 +34,7 @@ export default function RootLayout({
           "antialiased dark",
         )}
       >
-        <ConvexClientProvider>
-          <Header />
-          {children}
-          <Footer />
-        </ConvexClientProvider>
-
+        <ConvexClientProvider>{children}</ConvexClientProvider>
         <AnalyticsProvider />
       </body>
     </html>
