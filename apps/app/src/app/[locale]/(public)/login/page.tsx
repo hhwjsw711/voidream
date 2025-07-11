@@ -1,8 +1,6 @@
 import { GoogleSignin } from "@/components/google-signin";
 import { Icons } from "@v1/ui/icons";
 import Image from "next/image";
-import backgroundDark from "public/bg-login-dark.jpg";
-import backgroundLight from "public/bg-login.jpg";
 
 export const metadata = {
   title: "Login | Voidream",
@@ -27,14 +25,14 @@ export default function Page() {
         {/* Background Image Section - Hidden on mobile, visible on desktop */}
         <div className="hidden lg:flex lg:w-1/2 relative">
           <Image
-            src={backgroundLight}
+            src="/bg-login.jpg"
             alt="Background"
             className="object-cover dark:hidden"
             priority
             fill
           />
           <Image
-            src={backgroundDark}
+            src="/bg-login-dark.jpg"
             alt="Background"
             className="object-cover hidden dark:block"
             priority
