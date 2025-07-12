@@ -1,8 +1,8 @@
+import { Sidebar } from "@/components/sidebar";
 import { convexAuthNextjsToken } from "@convex-dev/auth/nextjs/server";
 import { api } from "@v1/backend/convex/_generated/api";
 import { fetchQuery, preloadQuery } from "convex/nextjs";
 import { redirect } from "next/navigation";
-import { Navigation } from "./_components/navigation";
 
 export default async function Layout({
   children,
@@ -26,12 +26,11 @@ export default async function Layout({
     { token: await convexAuthNextjsToken() },
   );
   return (
-    <div className="flex min-h-[100vh] w-full flex-col bg-secondary dark:bg-black">
-      <Navigation
-        preloadedUser={preloadedUser}
-        preloadedProducts={preloadedProducts}
-      />
-      {children}
+    <div className="relative">
+      <Sidebar />
+      <div className="md:ml-[70px] pb-8">
+        <div className="px-6">{children}</div>
+      </div>
     </div>
   );
 }

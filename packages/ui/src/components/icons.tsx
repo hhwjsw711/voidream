@@ -1,4 +1,15 @@
-import { Check, Copy, Loader2, LogOut } from "lucide-react";
+import {
+  AudioLines,
+  Check,
+  Copy,
+  Images,
+  LayoutDashboard,
+  Loader2,
+  LogOut,
+  MonitorPlay,
+  RefreshCw,
+  Settings,
+} from "lucide-react";
 
 type SVGIconProps = {
   size?: number;
@@ -53,4 +64,10 @@ export const Icons = {
   Copy,
   Check,
   Loader: Loader2,
+  Images,
+  MonitorPlay,
+  RefreshCw,
+  AudioLines,
+  Settings,
+  LayoutDashboard,
 };
