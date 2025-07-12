@@ -34,7 +34,7 @@ const items = [
   },
   {
     path: "/audio",
-    name: "audio",
+    name: "Audio",
   },
   {
     path: "/settings",
